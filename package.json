@@ -5,12 +5,10 @@
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@react-router/node": "^8.4.0",
-    "@react-router/serve": "^8.4.0",
     "isbot": "^5.1.36",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
@@ -25,5 +23,8 @@
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
     "vite": "^8.0.3"
+  },
+  "engines": {
+    "node": ">=22.22"
   }
 }

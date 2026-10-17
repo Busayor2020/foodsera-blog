@@ -1,13 +1,21 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
-export function meta({}: Route.MetaArgs) {
+export function meta(_: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Foodsera | Nigerian recipes, step by step" },
+    {
+      name: "description",
+      content:
+        "Tested Nigerian recipes with step-by-step photos, from egusi soup to party jollof rice.",
+    },
   ];
 }
 
+// Placeholder until the homepage is built in Phase 4.
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div className="mx-auto max-w-page px-5 py-14">
+      <h1 className="text-display">Foodsera</h1>
+    </div>
+  );
 }
