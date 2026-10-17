@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mobile menu open</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#FBF5EA}</style>
+</helmet>
+<div style="width: 390px; height: 844px; background: #FBF5EA; position: relative; overflow: hidden">
+<dc-import name="Header" current="soups" open-menu="{{true}}" proto-bar="{{false}}" hint-size="390px,844px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

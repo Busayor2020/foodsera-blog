@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Soups and Stews · Foodsera</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FBF5EA}
+*{box-sizing:border-box}
+a{color:#B3390E}a:hover{color:#8A2A08}
+:focus-visible{outline:3px solid #2F6B3A;outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:'Young Serif',Georgia,serif;font-weight:400;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+.fs-skip{position:absolute;left:-9999px}.fs-skip:focus{left:16px;top:8px;z-index:200;background:#22201C;color:#fff;padding:10px 14px}
+@media (max-width:1079px){.fs-side{display:none !important}}
+.fs-btn{cursor:pointer}.fs-btn:hover{filter:brightness(.94)}
+</style>
+</helmet>
+<div style="background: #FBF5EA; color: #22201C; font-family: 'Figtree', 'Segoe UI', system-ui, sans-serif; font-size: 17px; line-height: 1.6">
+<a class="fs-skip" href="#main">Skip to content</a>
+<div style="position: sticky; top: 0; z-index: 50">
+<dc-import name="Header" current="soups" ads="{{ads}}" on-toggle-ads="{{toggleAds}}" hint-size="100%,116px"></dc-import>
+</div>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px 20px 72px; display: flex; flex-direction: column; gap: 28px">
+<nav aria-label="Breadcrumb" style="font-size: 14px; color: #5E574D">
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; gap: 8px">
+<li><a href="Home.dc.html" style="color: #5E574D">Home</a></li><li aria-hidden="true">›</li><li aria-current="page" style="color: #22201C; font-weight: 600">Soups &amp; Stews</li>
+</ol>
+</nav>
+
+<header style="display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: center">
+<div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 12px">
+<h1 style="font-size: clamp(38px, 5vw, 56px); line-height: 1.05">Soups &amp; Stews</h1>
+<p style="font-size: 18px; color: #3F3A33; max-width: 640px">The heart of the Nigerian table. From party egusi to everyday efo riro, these are the pots that go with every swallow and every pot of white rice.</p>
+</div>
+<div style="flex: 0 1 300px; display: flex; gap: 10px" aria-hidden="true">
+<span style="flex: 1"><dc-import name="Photo" tone="efo" alt="" ratio="1 / 1" round="50%" hint-size="100%,140px"></dc-import></span>
+<span style="flex: 1; margin-top: 28px"><dc-import name="Photo" tone="banga" alt="" ratio="1 / 1" round="50%" hint-size="100%,140px"></dc-import></span>
+</div>
+</header>
+
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="leader" variant="3" hint-size="100%,140px"></dc-import>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: stretch">
+<main id="main" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+
+<div style="display: flex; flex-direction: column; gap: 14px; background: #FFFDF8; border: 1px solid #E8DECB; border-radius: 18px; padding: 16px 18px">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between">
+<span style="font-weight: 700">Filter recipes</span>
+<label style="display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600">Sort by
+<select value="{{sort}}" onChange="{{setSort}}" style="min-height: 44px; padding: 0 12px; border: 1.5px solid #B9AC95; border-radius: 10px; font: inherit; background: #FFFFFF; color: #22201C">
+<option value="popular">Most popular</option>
+<option value="rating">Highest rated</option>
+<option value="quick">Quickest first</option>
+<option value="az">A to Z</option>
+</select>
+</label>
+</div>
+<div role="group" aria-label="Cook time, difficulty and diet" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4">
+<button type="button" onClick="{{c.toggle}}" aria-pressed="{{c.on}}" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid {{c.border}}; background: {{c.bg}}; color: {{c.fg}}; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer">{{c.label}}</button>
+</sc-for>
+</div>
+<div role="group" aria-label="Region" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{regionChips}}" as="c" hint-placeholder-count="6">
+<button type="button" onClick="{{c.toggle}}" aria-pressed="{{c.on}}" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid {{c.border}}; background: {{c.bg}}; color: {{c.fg}}; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer">{{c.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px">
+<p aria-live="polite" style="color: #5E574D; font-size: 15px">Showing <strong style="color: #22201C">{{shown}}</strong> of {{total}} recipes</p>
+<sc-if value="{{hasFilters}}" hint-placeholder-val="{{false}}">
+<button type="button" onClick="{{clear}}" style="min-height: 44px; padding: 0 4px; border: 0; background: transparent; font: inherit; font-weight: 700; color: #B3390E; text-decoration: underline; cursor: pointer">Clear filters</button>
+</sc-if>
+</div>
+
+<sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+<div style="background: #FFFDF8; border: 1px dashed #D9CBB0; border-radius: 18px; padding: 32px; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center">
+<h2 style="font-size: 26px">No recipes match these filters</h2>
+<p style="color: #5E574D">Try removing a filter, or browse all soups and stews.</p>
+<button type="button" class="fs-btn" onClick="{{clear}}" style="min-height: 48px; padding: 0 24px; border-radius: 999px; background: #22201C; color: #FFFFFF; border: 0; font: inherit; font-weight: 700">Show all recipes</button>
+</div>
+</sc-if>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{grid}}" as="g" hint-placeholder-count="9">
+<sc-if value="{{g.isAd}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="infeed" variant="{{g.variant}}" hint-size="100%,340px"></dc-import>
+</sc-if>
+<sc-if value="{{g.isCard}}" hint-placeholder-val="{{true}}">
+<dc-import name="Card" item="{{g}}" hint-size="100%,340px"></dc-import>
+</sc-if>
+</sc-for>
+</div>
+
+<sc-if value="{{canMore}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 16px">
+<button type="button" class="fs-btn" onClick="{{more}}" style="min-height: 52px; padding: 0 32px; border-radius: 999px; background: #FFFDF8; color: #22201C; border: 1.5px solid #22201C; font: inherit; font-weight: 700">Load more recipes</button>
+<span style="font-size: 14px; color: #5E574D">{{remaining}} more to see</span>
+</div>
+</sc-if>
+</main>
+
+<aside class="fs-side" aria-label="Sidebar" style="flex: 0 1 320px; min-width: 300px; display: flex; flex-direction: column; gap: 32px">
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="mrec" variant="0" hint-size="320px,290px"></dc-import>
+</sc-if>
+<section aria-labelledby="side-pop" style="display: flex; flex-direction: column; gap: 12px">
+<h2 id="side-pop" style="font-size: 22px">Most cooked this month</h2>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{top}}" as="p" hint-placeholder-count="4">
+<li><a href="Main.dc.html" style="display: flex; gap: 12px; align-items: center; color: #22201C; text-decoration: none; min-height: 64px">
+<span style="width: 64px; flex: none"><dc-import name="Photo" tone="{{p.tone}}" alt="{{p.title}}" ratio="1 / 1" round="12px" hint-size="64px,64px"></dc-import></span>
+<span style="display: flex; flex-direction: column"><span style="font-weight: 700; line-height: 1.3">{{p.title}}</span><span style="font-size: 14px; color: #5E574D">{{p.time}}</span></span>
+</a></li>
+</sc-for>
+</ol>
+</section>
+<section aria-labelledby="side-news" style="background: #2F6B3A; color: #FFFFFF; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<h2 id="side-news" style="font-size: 22px">Get a new Nigerian recipe every week</h2>
+<label for="cat-email" style="font-size: 14px">Email address</label>
+<input id="cat-email" type="email" placeholder="you@example.com" style="min-height: 48px; padding: 0 14px; border: 0; border-radius: 12px; font: inherit; color: #22201C">
+<button type="button" class="fs-btn" style="min-height: 48px; border-radius: 12px; border: 0; background: #F2B632; color: #22201C; font: inherit; font-weight: 700">Subscribe</button>
+</section>
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<div style="position: sticky; top: 124px">
+<dc-import name="Ad" kind="halfpage" variant="2" hint-size="320px,640px"></dc-import>
+</div>
+</sc-if>
+</aside>
+</div>
+</div>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"showAds":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":3000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const ads = s.ads ?? this.props.showAds ?? false;
+    const f = s.f || {};
+    const region = s.region || null;
+    const sort = s.sort || 'popular';
+    const limit = s.limit || (ads ? 8 : 9);
+    const R = [
+      ['Egusi Soup with Ugu', 80, 'Medium', '4.8', 'egusi', 'Yoruba', false, 98],
+      ['Efo Riro', 50, 'Easy', '4.9', 'efo', 'Yoruba', false, 95],
+      ['Ofe Onugbu (Bitterleaf Soup)', 90, 'Medium', '4.7', 'onugbu', 'Igbo', false, 90],
+      ['Banga Soup', 75, 'Medium', '4.8', 'banga', 'Niger Delta', false, 88],
+      ['Goat Meat Pepper Soup', 60, 'Easy', '4.8', 'pepper', 'Igbo', false, 86],
+      ['Catfish Pepper Soup', 30, 'Easy', '4.8', 'pepper', 'Niger Delta', false, 84],
+      ['Ofada Stew (Ayamase)', 90, 'Medium', '4.7', 'ofada', 'Yoruba', false, 83],
+      ['Okra Soup', 35, 'Easy', '4.6', 'okra', 'Igbo', false, 80],
+      ['Afang Soup', 70, 'Medium', '4.8', 'afang', 'Efik / Ibibio', false, 78],
+      ['Edikang Ikong', 70, 'Medium', '4.7', 'afang', 'Efik / Ibibio', false, 76],
+      ['Owo Soup', 60, 'Medium', '4.6', 'banga', 'Edo', false, 70],
+      ['Miyan Kuka', 45, 'Easy', '4.5', 'kuka', 'Hausa / Northern', false, 68],
+      ['Gbegiri (Bean Soup)', 60, 'Easy', '4.6', 'beans', 'Yoruba', true, 66],
+      ['Vegetable Stew with Garden Eggs', 30, 'Easy', '4.5', 'efo', 'Yoruba', true, 64],
+      ['Ewedu Soup', 20, 'Easy', '4.6', 'okra', 'Yoruba', true, 62],
+      ['Nigerian Chicken Stew', 60, 'Easy', '4.8', 'jollof', 'Yoruba', false, 60],
+      ['Black Soup (Omoebe)', 70, 'Medium', '4.6', 'onugbu', 'Edo', false, 55],
+      ['Fisherman Soup', 50, 'Medium', '4.7', 'banga', 'Niger Delta', false, 52]
+    ];
+    const fmtT = (m) => m < 60 ? m + ' min' : Math.floor(m / 60) + ' hr' + (m % 60 ? ' ' + (m % 60) + ' min' : '');
+    let list = R.map((r) => ({ title: r[0], mins: r[1], diff: r[2], rating: r[3], tone: r[4], region: r[5], veg: r[6], pop: r[7], cat: 'Soups & Stews', time: fmtT(r[1]), isCard: true, isAd: false }));
+    if (f.quick) list = list.filter((r) => r.mins <= 30);
+    if (f.hour) list = list.filter((r) => r.mins <= 60);
+    if (f.easy) list = list.filter((r) => r.diff === 'Easy');
+    if (f.veg) list = list.filter((r) => r.veg);
+    if (region) list = list.filter((r) => r.region === region);
+    const sorters = { popular: (a, b) => b.pop - a.pop, rating: (a, b) => parseFloat(b.rating) - parseFloat(a.rating), quick: (a, b) => a.mins - b.mins, az: (a, b) => a.title.localeCompare(b.title) };
+    list.sort(sorters[sort]);
+    const total = list.length;
+    const visible = list.slice(0, limit);
+    const grid = [];
+    visible.forEach((r, i) => { grid.push(r); if (ads && (i + 1) % 6 === 0 && i + 1 < visible.length) grid.push({ isAd: true, isCard: false, variant: String((i / 6) % 4 | 0) }); });
+    const chipStyle = (on) => ({ on, bg: on ? '#22201C' : '#FFFDF8', fg: on ? '#FFFFFF' : '#22201C', border: on ? '#22201C' : '#B9AC95' });
+    const CH = [['quick', 'Under 30 min'], ['hour', 'Under 1 hour'], ['easy', 'Easy'], ['veg', 'Vegetarian']];
+    const REG = ['Yoruba', 'Igbo', 'Hausa / Northern', 'Niger Delta', 'Edo', 'Efik / Ibibio'];
+    const hasFilters = Object.values(f).some(Boolean) || !!region;
+    return {
+      ads, toggleAds: () => this.setState({ ads: !ads }),
+      chips: CH.map((c) => ({ label: c[1], ...chipStyle(!!f[c[0]]), toggle: () => this.setState({ f: { ...f, [c[0]]: !f[c[0]] }, limit: 9 }) })),
+      regionChips: REG.map((r) => ({ label: r, ...chipStyle(region === r), toggle: () => this.setState({ region: region === r ? null : r, limit: 9 }) })),
+      sort, setSort: (e) => this.setState({ sort: e.target.value }),
+      shown: visible.length, total, grid, empty: total === 0, hasFilters,
+      clear: () => this.setState({ f: {}, region: null, limit: 9 }),
+      canMore: visible.length < total, remaining: total - visible.length,
+      more: () => this.setState({ limit: limit + 6 }),
+      top: [
+        { title: 'Egusi Soup with Ugu', time: '1 hr 20 min', tone: 'egusi' },
+        { title: 'Efo Riro', time: '50 min', tone: 'efo' },
+        { title: 'Banga Soup', time: '1 hr 15 min', tone: 'banga' },
+        { title: 'Catfish Pepper Soup', time: '30 min', tone: 'pepper' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

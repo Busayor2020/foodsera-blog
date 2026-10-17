@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ad slot placeholder</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="font-family: 'Figtree', 'Segoe UI', system-ui, sans-serif; color: #233446; line-height: 1.35; width: 100%; height: {{rootH}}">
+
+<sc-if value="{{isBox}}" hint-placeholder-val="{{true}}">
+<aside aria-label="Advertisement" style="width: 100%; background: #F2F1EF; border: 1px solid #DAD8D4; border-radius: 10px; padding: 6px 10px 12px; display: flex; flex-direction: column; align-items: center; gap: 6px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #66645F">Advertisement</span>
+<div style="width: {{cw}}; max-width: 100%; height: {{ch}}px; background: #E7ECF0; border: 1px solid #CBD3DA; position: relative; overflow: hidden; display: flex; flex-direction: {{dir}}; gap: {{cgap}}px; padding: {{cpad}}px; box-sizing: border-box">
+<span aria-hidden="true" style="position: absolute; top: 3px; right: 3px; display: flex; align-items: center; gap: 3px; font-size: 10px; color: #4A5A6A; background: #FFFFFF; border-radius: 3px; padding: 0 4px; line-height: 14px">Ad <svg width="10" height="10" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="#4A5A6A" stroke-width="2.5"></circle><path d="M12 10v7M12 7v.5" stroke="#4A5A6A" stroke-width="2.5" stroke-linecap="round"></path></svg></span>
+<div aria-hidden="true" style="flex: {{imgFlex}}; min-width: 0; min-height: 0; background: repeating-linear-gradient(45deg, #C9D3DC 0 10px, #D3DBE3 10px 20px); border-radius: 4px; display: flex; align-items: center; justify-content: center">
+<svg width="{{iconSize}}" height="{{iconSize}}" viewBox="0 0 24 24" fill="none" stroke="#5D7185" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{icon}}"></path></svg>
+</div>
+<div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: {{tgap}}px">
+<span style="font-size: {{hSize}}px; font-weight: 700; color: #1E2E3D">{{head}}</span>
+<sc-if value="{{showBody}}" hint-placeholder-val="{{true}}"><span style="font-size: {{bSize}}px; color: #3F5163">{{body}}</span></sc-if>
+<sc-if value="{{showSponsor}}" hint-placeholder-val="{{true}}"><span style="font-size: 11px; color: #4A5A6A">Sample Advertiser</span></sc-if>
+</div>
+<span style="align-self: center; flex: none; background: #2E4A62; color: #FFFFFF; font-size: {{ctaSize}}px; font-weight: 700; padding: {{ctaPad}}; border-radius: 4px; white-space: nowrap">{{cta}}</span>
+</div>
+</aside>
+</sc-if>
+
+<sc-if value="{{isInfeed}}" hint-placeholder-val="{{false}}">
+<aside aria-label="Advertisement" style="height: 100%; min-height: 330px; background: #F2F1EF; border: 1px solid #DAD8D4; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #66645F; padding: 6px 12px">Advertisement</span>
+<div aria-hidden="true" style="aspect-ratio: 4 / 3; background: repeating-linear-gradient(45deg, #C9D3DC 0 10px, #D3DBE3 10px 20px); display: flex; align-items: center; justify-content: center">
+<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#5D7185" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{icon}}"></path></svg>
+</div>
+<div style="padding: 12px 14px 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #4A5A6A">Sponsored · Sample Advertiser</span>
+<span style="font-size: 17px; font-weight: 700; color: #1E2E3D">{{head}}</span>
+<span style="font-size: 14px; color: #3F5163">{{body}}</span>
+<span style="font-size: 14px; font-weight: 700; color: #2E4A62">{{cta}} ›</span>
+</div>
+</aside>
+</sc-if>
+
+<sc-if value="{{isMultiplex}}" hint-placeholder-val="{{false}}">
+<aside aria-label="Advertisement" style="background: #F2F1EF; border: 1px solid #DAD8D4; border-radius: 12px; padding: 8px 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #66645F">Advertisement</span>
+<span style="font-size: 12px; color: #4A5A6A">Sponsored content</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat({{cols}}, minmax(0, 1fr)); gap: 12px; height: {{mxH}}px">
+<sc-for list="{{tiles}}" as="t" hint-placeholder-count="6">
+<div style="background: #E7ECF0; border: 1px solid #CBD3DA; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column">
+<div aria-hidden="true" style="height: 100px; background: repeating-linear-gradient(45deg, #C9D3DC 0 10px, #D3DBE3 10px 20px)"></div>
+<div style="padding: 8px 10px; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 14px; font-weight: 700; color: #1E2E3D">{{t.head}}</span>
+<span style="font-size: 11px; color: #4A5A6A">Sample Advertiser</span>
+</div>
+</div>
+</sc-for>
+</div>
+</aside>
+</sc-if>
+
+<sc-if value="{{isAnchor}}" hint-placeholder-val="{{false}}">
+<aside aria-label="Advertisement" style="background: #F2F1EF; border-top: 1px solid #DAD8D4; box-shadow: 0 -4px 14px rgba(0,0,0,.08); padding: 2px 8px 6px; display: flex; flex-direction: column; align-items: center; position: relative">
+<span style="font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #66645F; line-height: 16px">Advertisement</span>
+<div style="width: 320px; max-width: calc(100% - 44px); height: 50px; background: #E7ECF0; border: 1px solid #CBD3DA; display: flex; align-items: center; gap: 8px; padding: 4px 6px; box-sizing: border-box">
+<span aria-hidden="true" style="width: 40px; height: 40px; flex: none; background: repeating-linear-gradient(45deg, #C9D3DC 0 6px, #D3DBE3 6px 12px)"></span>
+<span style="flex: 1; min-width: 0; font-size: 13px; font-weight: 700; color: #1E2E3D; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{head}}</span>
+<span style="background: #2E4A62; color: #FFFFFF; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 3px">{{cta}}</span>
+</div>
+<button type="button" onClick="{{close}}" aria-label="Close ad" style="position: absolute; top: -18px; right: 6px; width: 44px; height: 36px; border: 0; background: transparent; display: flex; align-items: flex-start; justify-content: center; padding: 0; cursor: pointer">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: #FFFFFF; border: 1px solid #B8B5AF; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3C3A36" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></span>
+</button>
+</aside>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"kind":{"editor":"enum","options":["mrec","leader","incontent","halfpage","infeed","multiplex","anchor"],"default":"mrec"},"variant":{"editor":"enum","options":["0","1","2","3"],"default":"0"},"$preview":{"width":360,"height":320}}'>
+class Component extends DCLogic {
+  componentDidMount() { this.onR = () => this.forceUpdate(); window.addEventListener('resize', this.onR); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const s = this.state || {};
+    const kind = this.props.kind ?? 'mrec';
+    const v = parseInt(this.props.variant ?? '0', 10) % 4;
+    const narrow = window.innerWidth < 768;
+    const C = [
+      { head: 'Cookware for every kitchen', body: 'Non-stick pots and pans. Up to 30% off this week.', cta: 'Shop now', icon: 'M4 11h16v3a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6zM2 11h20M9 7c0-2 2-2 2-4M14 7c0-2 2-2 2-4' },
+      { head: 'Send money home in minutes', body: 'Low-fee transfers from the UK, US and Canada.', cta: 'Learn more', icon: 'M3 7h18v10H3zM12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM6 10v4M18 10v4' },
+      { head: 'Fresh groceries, delivered', body: 'African and Caribbean pantry staples to your door.', cta: 'Order now', icon: 'M5 8h14l-1.5 11h-11zM9 8V6a3 3 0 0 1 6 0v2' },
+      { head: 'Learn a new skill from home', body: 'Short online courses. Start with a free lesson.', cta: 'Start free', icon: 'M3 8l9-4 9 4-9 4zM7 10v5c3 2 7 2 10 0v-5' }
+    ];
+    const c = C[v];
+    let cw = '300px', ch = 250, dir = 'column', imgFlex = '1 1 0', layout = 'box';
+    if (kind === 'leader') { if (narrow) { cw = '320px'; ch = 100; } else { cw = '728px'; ch = 90; } dir = 'row'; imgFlex = '0 0 ' + (ch - 16) + 'px'; layout = 'strip'; }
+    if (kind === 'incontent') { if (narrow) { cw = '336px'; ch = 280; } else { cw = '728px'; ch = 250; dir = 'row'; imgFlex = '0 0 46%'; layout = 'split'; } }
+    if (kind === 'halfpage') { cw = '300px'; ch = 600; layout = 'tall'; }
+    const strip = layout === 'strip';
+    const cols = narrow ? 2 : 3;
+    const rows = 6 / cols;
+    const heads = ['Easy meal-prep containers', 'Flights to Lagos this season', 'Kitchen knives, sharpened', 'Spice racks that fit anywhere', 'Online cooking classes', 'Blenders built to last'];
+    return {
+      isBox: ['mrec', 'leader', 'incontent', 'halfpage'].includes(kind),
+      isInfeed: kind === 'infeed', isMultiplex: kind === 'multiplex', isAnchor: kind === 'anchor' && !s.closed,
+      rootH: kind === 'infeed' ? '100%' : 'auto',
+      cw, ch, dir, imgFlex,
+      cgap: strip ? 12 : 12, cpad: strip ? 8 : 14, tgap: strip ? 2 : 6,
+      iconSize: strip ? 30 : layout === 'tall' ? 72 : 52,
+      hSize: strip ? 15 : layout === 'tall' ? 24 : 19, bSize: strip ? 12 : 14,
+      showBody: !(strip && narrow), showSponsor: !strip,
+      ctaSize: strip ? 12 : 14, ctaPad: strip ? '6px 10px' : '9px 16px',
+      head: c.head, body: c.body, cta: c.cta, icon: c.icon,
+      cols, mxH: rows * 150 + (rows - 1) * 12,
+      tiles: heads.map((h) => ({ head: h })),
+      close: () => this.setState({ closed: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

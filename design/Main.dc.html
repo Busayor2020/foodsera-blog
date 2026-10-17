@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Egusi Soup recipe · Foodsera</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FBF5EA}
+*{box-sizing:border-box}
+a{color:#B3390E}a:hover{color:#8A2A08}
+:focus-visible{outline:3px solid #2F6B3A;outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{font-family:'Young Serif',Georgia,serif;font-weight:400;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+ul,ol{margin:0}
+.fs-skip{position:absolute;left:-9999px}.fs-skip:focus{left:16px;top:8px;z-index:200;background:#22201C;color:#fff;padding:10px 14px}
+.fs-mob{display:none}
+@media (max-width:1079px){.fs-side{display:none !important}}
+@media (max-width:767px){.fs-mob{display:block}.fs-desk{display:none !important}}
+.fs-btn{cursor:pointer}.fs-btn:hover{filter:brightness(.94)}
+</style>
+</helmet>
+<div style="background: #FBF5EA; color: #22201C; font-family: 'Figtree', 'Segoe UI', system-ui, sans-serif; font-size: 17px; line-height: 1.65">
+<a class="fs-skip" href="#main">Skip to content</a>
+<div style="position: sticky; top: 0; z-index: 50">
+<dc-import name="Header" current="soups" ads="{{ads}}" on-toggle-ads="{{toggleAds}}" hint-size="100%,116px"></dc-import>
+</div>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px 20px 72px">
+<nav aria-label="Breadcrumb" style="font-size: 14px; color: #5E574D; margin-bottom: 20px">
+<ol style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<li><a href="Home.dc.html" style="color: #5E574D">Home</a></li>
+<li aria-hidden="true">›</li>
+<li><a href="Category.dc.html" style="color: #5E574D">Soups &amp; Stews</a></li>
+<li aria-hidden="true">›</li>
+<li aria-current="page" style="color: #22201C; font-weight: 600">Egusi Soup</li>
+</ol>
+</nav>
+
+<div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: stretch">
+<main id="main" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+
+<header style="display: flex; flex-direction: column; gap: 14px">
+<a href="Category.dc.html" style="align-self: flex-start; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2F6B3A; text-decoration: none">Soups &amp; Stews · Yoruba &amp; Igbo favourite</a>
+<h1 style="font-size: clamp(34px, 5vw, 52px); line-height: 1.1">Egusi Soup with Ugu and Assorted Meat</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; font-size: 15px; color: #5E574D">
+<a href="#reviews" style="display: flex; align-items: center; gap: 8px; color: #22201C; text-decoration: none">
+<span style="display: flex; gap: 2px" aria-hidden="true">
+<sc-for list="{{fiveStars}}" as="st" hint-placeholder-count="5"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" fill="#E0A21B" stroke="#B57F0E" stroke-width="1"></path></svg></sc-for>
+</span>
+<span><strong>4.8</strong> · <span style="text-decoration: underline">126 reviews</span></span>
+</a>
+<span>By <a href="About.dc.html" style="color: #22201C; font-weight: 600">[Author name]</a></span>
+<span>Last updated <time datetime="2026-10-12">12 October 2026</time></span>
+</div>
+</header>
+
+<section aria-label="Quick facts" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(118px, 100%), 1fr)); background: #FFFDF8; border: 1px solid #E8DECB; border-radius: 16px; overflow: hidden">
+<sc-for list="{{facts}}" as="f" hint-placeholder-count="5">
+<div style="padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; border-right: 1px solid #F0E7D6; border-bottom: 1px solid #F0E7D6">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #5E574D">{{f.label}}</span>
+<span style="font-size: 18px; font-weight: 700">{{f.value}}</span>
+</div>
+</sc-for>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#recipe-card" class="fs-btn" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; background: #C2410C; color: #FFFFFF; font-weight: 700; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>Jump to Recipe</a>
+<button type="button" class="fs-btn" onClick="{{print}}" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; background: #FFFDF8; color: #22201C; border: 1.5px solid #22201C; font: inherit; font-weight: 700">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v7H6z"></path></svg>Print Recipe</button>
+</div>
+
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+<dc-import name="Photo" tone="egusi" alt="Top-down view of egusi soup with soft melon seed lumps, ugu leaves and assorted meat in a wide pot" ratio="3 / 2" round="18px" hint-size="100%,520px"></dc-import>
+<figcaption style="font-size: 14px; color: #5E574D">Party-style egusi: soft lumps, bright ugu and plenty of assorted meat.</figcaption>
+</figure>
+
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="leader" variant="0" hint-size="100%,140px"></dc-import>
+</sc-if>
+
+<section style="display: flex; flex-direction: column; gap: 16px; font-size: 18px">
+<p>This is the egusi soup I make when family is coming: rich with palm oil, full of soft melon seed lumps, and finished with fresh ugu so it stays bright green on the plate.</p>
+<p>The secret is patience. Let the egusi fry in the oil without stirring so it sets into lumps, then add your stock a little at a time. Do that and you will never have grainy, watery egusi again.</p>
+<p>New to some of the ingredients, or cooking abroad? Start with the box below. Everything has a substitute.</p>
+</section>
+
+<section aria-labelledby="explained" style="background: #E3EEDF; border: 1px solid #BFD6B8; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 id="explained" style="font-size: 26px">Ingredients explained</h2>
+<p style="font-size: 15px; color: #3D4A3A">Local names, what they are, and what to use if you are cooking outside Nigeria.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px">
+<sc-for list="{{explained}}" as="x" hint-placeholder-count="8">
+<div style="background: #FFFDF8; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.5">
+<span style="font-weight: 700; font-size: 16px">{{x.name}} <span style="font-weight: 500; color: #5E574D">{{x.aka}}</span></span>
+<span>{{x.what}}</span>
+<span style="color: #2F5A34"><strong>Abroad:</strong> {{x.sub}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="incontent" variant="1" hint-size="100%,300px"></dc-import>
+</sc-if>
+
+<section aria-labelledby="method" style="display: flex; flex-direction: column; gap: 32px">
+<h2 id="method" style="font-size: 32px">How to make egusi soup, step by step</h2>
+<sc-for list="{{stepsA}}" as="s" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; gap: 14px; align-items: flex-start">
+<span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #C2410C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-top: 2px">{{s.n}}</span>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="font-size: 23px">{{s.title}}</h3>
+<p>{{s.text}}</p>
+</div>
+</div>
+<sc-if value="{{s.hasPhoto}}" hint-placeholder-val="{{true}}">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+<dc-import name="Photo" tone="{{s.tone}}" alt="{{s.alt}}" ratio="16 / 9" round="14px" hint-size="100%,420px"></dc-import>
+<figcaption style="font-size: 14px; color: #5E574D">{{s.caption}}</figcaption>
+</figure>
+</sc-if>
+</div>
+</sc-for>
+
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="incontent" variant="2" hint-size="100%,300px"></dc-import>
+</sc-if>
+
+<sc-for list="{{stepsB}}" as="s" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; gap: 14px; align-items: flex-start">
+<span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 50%; background: #C2410C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-top: 2px">{{s.n}}</span>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h3 style="font-size: 23px">{{s.title}}</h3>
+<p>{{s.text}}</p>
+</div>
+</div>
+<sc-if value="{{s.hasPhoto}}" hint-placeholder-val="{{true}}">
+<figure style="margin: 0; display: flex; flex-direction: column; gap: 8px">
+<dc-import name="Photo" tone="{{s.tone}}" alt="{{s.alt}}" ratio="16 / 9" round="14px" hint-size="100%,420px"></dc-import>
+<figcaption style="font-size: 14px; color: #5E574D">{{s.caption}}</figcaption>
+</figure>
+</sc-if>
+</div>
+</sc-for>
+</section>
+
+<section aria-labelledby="tips" style="background: #FCEBC0; border: 1px solid #EBCB7A; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 id="tips" style="font-size: 26px">Tips and common mistakes</h2>
+<ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{tips}}" as="t" hint-placeholder-count="6">
+<li style="display: flex; gap: 12px; align-items: flex-start">
+<span aria-hidden="true" style="flex: none; width: 26px; height: 26px; border-radius: 50%; background: {{t.bg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; margin-top: 2px">{{t.mark}}</span>
+<span><strong>{{t.kind}}</strong> {{t.text}}</span>
+</li>
+</sc-for>
+</ul>
+</section>
+
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="incontent" variant="3" hint-size="100%,300px"></dc-import>
+</sc-if>
+
+<section id="recipe-card" aria-labelledby="rc-title" itemscope itemtype="https://schema.org/Recipe" style="background: #FFFDF8; border: 1.5px solid #D9CBB0; border-radius: 22px; overflow: hidden; scroll-margin-top: 110px">
+<meta itemprop="prepTime" content="PT25M">
+<meta itemprop="cookTime" content="PT55M">
+<meta itemprop="totalTime" content="PT1H20M">
+<meta itemprop="recipeCuisine" content="Nigerian">
+<meta itemprop="recipeCategory" content="Soup">
+<div style="background: #F6EBD6; padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center">
+<div style="flex: 0 1 200px; min-width: 160px">
+<dc-import name="Photo" tone="egusi" alt="Bowl of egusi soup" ratio="1 / 1" round="16px" hint-size="100%,200px"></dc-import>
+</div>
+<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2F6B3A">Recipe card</span>
+<h2 id="rc-title" itemprop="name" style="font-size: 34px; line-height: 1.1">Egusi Soup</h2>
+<p itemprop="description" style="font-size: 16px; color: #4A443B">Rich Nigerian melon seed soup with soft lumps, palm oil, assorted meat and fresh ugu leaves.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 15px">
+<span>Prep <strong>25 min</strong></span><span>Cook <strong>55 min</strong></span><span>Total <strong>1 hr 20 min</strong></span><span>Serves <strong itemprop="recipeYield">{{servings}}</strong></span><span>Difficulty <strong>Medium</strong></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px">
+<button type="button" class="fs-btn" onClick="{{print}}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #22201C; color: #FFFFFF; border: 0; font: inherit; font-size: 15px; font-weight: 700">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v7H6z"></path></svg>Print</button>
+<button type="button" class="fs-btn" onClick="{{toggleSave}}" aria-pressed="{{saved}}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #FFFDF8; color: #22201C; border: 1.5px solid #22201C; font: inherit; font-size: 15px; font-weight: 700">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="{{saveFill}}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>{{saveText}}</button>
+<button type="button" class="fs-btn" onClick="{{share}}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #FFFDF8; color: #22201C; border: 1.5px solid #22201C; font: inherit; font-size: 15px; font-weight: 700">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>{{shareText}}</button>
+</div>
+</div>
+</div>
+
+<div style="padding: 28px 24px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between">
+<h3 style="font-size: 26px">Ingredients</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<div style="display: flex; align-items: center; gap: 6px; background: #FBF5EA; border: 1px solid #E8DECB; border-radius: 999px; padding: 3px">
+<button type="button" class="fs-btn" onClick="{{dec}}" aria-label="Fewer servings" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #FFFDF8; color: #22201C; font-size: 22px; font-weight: 700">−</button>
+<span aria-live="polite" style="min-width: 92px; text-align: center; font-size: 15px"><strong>{{servings}}</strong> servings</span>
+<button type="button" class="fs-btn" onClick="{{inc}}" aria-label="More servings" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #FFFDF8; color: #22201C; font-size: 22px; font-weight: 700">+</button>
+</div>
+<div role="group" aria-label="Measurement units" style="display: flex; background: #FBF5EA; border: 1px solid #E8DECB; border-radius: 999px; padding: 3px; gap: 2px">
+<button type="button" onClick="{{useCups}}" aria-pressed="{{isCups}}" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 0; font: inherit; font-size: 14px; font-weight: 700; background: {{cupsBg}}; color: {{cupsFg}}; cursor: pointer">Cups</button>
+<button type="button" onClick="{{useMetric}}" aria-pressed="{{isMetric}}" style="min-height: 44px; padding: 0 16px; border-radius: 999px; border: 0; font: inherit; font-size: 14px; font-weight: 700; background: {{metricBg}}; color: {{metricFg}}; cursor: pointer">Metric</button>
+</div>
+</div>
+</div>
+<p style="font-size: 14px; color: #5E574D">Local measures in green are a rough guide for market shopping. Tick items off as you go.</p>
+<ul style="list-style: none; padding: 0; display: flex; flex-direction: column">
+<sc-for list="{{ing}}" as="i" hint-placeholder-count="15">
+<li itemprop="recipeIngredient" style="border-bottom: 1px dashed #E8DECB">
+<label style="display: flex; gap: 14px; align-items: flex-start; padding: 11px 0; cursor: pointer; min-height: 44px">
+<input type="checkbox" checked="{{i.checked}}" onChange="{{i.toggle}}" style="width: 22px; height: 22px; margin: 2px 0 0; accent-color: #2F6B3A; flex: none">
+<span style="text-decoration: {{i.deco}}; color: {{i.color}}"><strong>{{i.qty}}</strong> {{i.name}}<sc-if value="{{i.hasLocal}}" hint-placeholder-val="{{false}}"> <span style="color: #2F6B3A; font-weight: 600; font-size: 15px">{{i.local}}</span></sc-if><sc-if value="{{i.opt}}" hint-placeholder-val="{{false}}"> <span style="color: #5E574D; font-size: 15px">(optional)</span></sc-if></span>
+</label>
+</li>
+</sc-for>
+</ul>
+
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<div style="padding: 24px 0">
+<dc-import name="Ad" kind="mrec" variant="2" hint-size="100%,290px"></dc-import>
+</div>
+</sc-if>
+
+<h3 style="font-size: 26px; margin-top: 8px">Instructions</h3>
+<ol style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 16px">
+<sc-for list="{{cardSteps}}" as="c" hint-placeholder-count="8">
+<li itemprop="recipeInstructions" style="display: flex; gap: 14px; align-items: flex-start">
+<span aria-hidden="true" style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #22201C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700">{{c.n}}</span>
+<span>{{c.text}}</span>
+</li>
+</sc-for>
+</ol>
+
+<div style="background: #FBF5EA; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+<h4 style="font-size: 20px">Notes</h4>
+<ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 16px">
+<li>No bitterleaf? Leave it out. The soup is still complete with ugu alone.</li>
+<li>Keeps 3 days in the fridge and up to 3 months frozen. Loosen with hot stock when reheating.</li>
+<li>For a lighter soup, use 1/2 cup palm oil and more stock.</li>
+</ul>
+</div>
+
+<div itemprop="nutrition" itemscope itemtype="https://schema.org/NutritionInformation" style="display: flex; flex-direction: column; gap: 10px">
+<h4 style="font-size: 20px">Nutrition <span style="font-family: 'Figtree', sans-serif; font-size: 14px; color: #5E574D">estimated, per serving, soup only</span></h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(110px, 100%), 1fr)); gap: 8px">
+<sc-for list="{{nutrition}}" as="nu" hint-placeholder-count="6">
+<div style="border: 1px solid #E8DECB; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column">
+<span style="font-size: 13px; color: #5E574D">{{nu.label}}</span>
+<span style="font-weight: 700">{{nu.value}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="incontent" variant="0" hint-size="100%,300px"></dc-import>
+</sc-if>
+
+<section aria-labelledby="serve" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="serve" style="font-size: 30px">What to serve it with</h2>
+<p>Egusi needs a swallow. Pick your favourite, or serve with boiled yam or white rice.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 16px">
+<sc-for list="{{serveWith}}" as="w" hint-placeholder-count="4">
+<a href="Category.dc.html" style="display: flex; flex-direction: column; gap: 8px; color: #22201C; text-decoration: none">
+<dc-import name="Photo" tone="{{w.tone}}" alt="{{w.alt}}" ratio="1 / 1" round="14px" hint-size="100%,170px"></dc-import>
+<span style="font-weight: 700">{{w.name}}</span>
+<span style="font-size: 14px; color: #5E574D; margin-top: -6px">{{w.note}}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="faq" style="display: flex; flex-direction: column; gap: 12px">
+<h2 id="faq" style="font-size: 30px; margin-bottom: 4px">Egusi soup questions</h2>
+<sc-for list="{{faqs}}" as="q" hint-placeholder-count="5">
+<div style="background: #FFFDF8; border: 1px solid #E8DECB; border-radius: 14px">
+<h3 style="font-size: inherit; font-family: inherit">
+<button type="button" onClick="{{q.toggle}}" aria-expanded="{{q.open}}" style="width: 100%; min-height: 56px; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 18px; background: transparent; border: 0; font: inherit; font-weight: 700; color: #22201C; text-align: left; cursor: pointer">
+<span>{{q.q}}</span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="flex: none; transform: rotate({{q.rot}}deg); transition: transform .15s"><path d="M6 9l6 6 6-6"></path></svg>
+</button>
+</h3>
+<sc-if value="{{q.open}}" hint-placeholder-val="{{false}}">
+<p style="padding: 0 18px 18px; color: #3F3A33">{{q.a}}</p>
+</sc-if>
+</div>
+</sc-for>
+</section>
+
+<section id="reviews" aria-labelledby="rev" style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px">
+<h2 id="rev" style="font-size: 30px">Reviews</h2>
+<span style="color: #5E574D">4.8 out of 5 · 126 reviews</span>
+</div>
+<form style="background: #FFFDF8; border: 1px solid #E8DECB; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<fieldset style="border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px">
+<legend style="font-weight: 700; padding: 0; margin-bottom: 6px">Your rating</legend>
+<div style="display: flex; gap: 4px">
+<sc-for list="{{rateStars}}" as="r" hint-placeholder-count="5">
+<button type="button" onClick="{{r.pick}}" aria-label="{{r.label}}" aria-pressed="{{r.on}}" style="width: 44px; height: 44px; border: 0; background: transparent; padding: 6px; cursor: pointer">
+<svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" fill="{{r.fill}}" stroke="#B57F0E" stroke-width="1.2"></path></svg>
+</button>
+</sc-for>
+</div>
+</fieldset>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 15px; font-weight: 600">Name<input type="text" autocomplete="name" style="min-height: 48px; padding: 0 14px; border: 1.5px solid #B9AC95; border-radius: 10px; font: inherit; background: #FFFFFF"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 15px; font-weight: 600">Email (not published)<input type="email" autocomplete="email" style="min-height: 48px; padding: 0 14px; border: 1.5px solid #B9AC95; border-radius: 10px; font: inherit; background: #FFFFFF"></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 15px; font-weight: 600">Your comment<textarea rows="4" style="padding: 12px 14px; border: 1.5px solid #B9AC95; border-radius: 10px; font: inherit; background: #FFFFFF; resize: vertical"></textarea></label>
+<button type="button" class="fs-btn" style="align-self: flex-start; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #2F6B3A; color: #FFFFFF; border: 0; font: inherit; font-weight: 700">Post review</button>
+</form>
+<ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px">
+<sc-for list="{{comments}}" as="c" hint-placeholder-count="3">
+<li style="border-bottom: 1px solid #E8DECB; padding-bottom: 16px; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+<span aria-hidden="true" style="width: 38px; height: 38px; border-radius: 50%; background: {{c.bg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700">{{c.initial}}</span>
+<strong>{{c.name}}</strong>
+<span style="font-size: 14px; color: #5E574D">{{c.place}} · {{c.when}}</span>
+<span role="img" aria-label="{{c.ratingLabel}}" style="display: flex; gap: 1px">
+<sc-for list="{{c.stars}}" as="cs" hint-placeholder-count="5"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" fill="{{cs.fill}}" stroke="#B57F0E" stroke-width="1"></path></svg></sc-for>
+</span>
+</div>
+<p style="font-size: 16px">{{c.text}}</p>
+</li>
+</sc-for>
+</ul>
+<button type="button" class="fs-btn" style="align-self: flex-start; min-height: 48px; padding: 0 22px; border-radius: 999px; background: #FFFDF8; color: #22201C; border: 1.5px solid #22201C; font: inherit; font-weight: 700">Show more reviews</button>
+</section>
+
+<section aria-labelledby="related" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="related" style="font-size: 30px">You might also like</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 18px">
+<sc-for list="{{related}}" as="r" hint-placeholder-count="4">
+<dc-import name="Card" item="{{r}}" hint-size="100%,330px"></dc-import>
+</sc-for>
+</div>
+</section>
+
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="multiplex" variant="0" hint-size="100%,520px"></dc-import>
+</sc-if>
+</main>
+
+<aside class="fs-side" aria-label="Sidebar" style="flex: 0 1 320px; min-width: 300px; display: flex; flex-direction: column; gap: 32px">
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="mrec" variant="1" hint-size="320px,290px"></dc-import>
+</sc-if>
+<section aria-label="About the author" style="background: #FFFDF8; border: 1px solid #E8DECB; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
+<div style="display: flex; gap: 14px; align-items: center">
+<span aria-hidden="true" style="width: 64px; height: 64px; border-radius: 50%; background: #F2B632; display: flex; align-items: flex-end; justify-content: center; overflow: hidden">
+<svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="20" r="11" fill="#7A3E1A"></circle><path d="M6 52c2-12 10-18 20-18s18 6 20 18z" fill="#C2410C"></path></svg>
+</span>
+<div><h2 style="font-size: 20px">Hi, I am [Author name]</h2><span style="font-size: 14px; color: #5E574D">Cook and writer, Foodsera</span></div>
+</div>
+<p style="font-size: 15px; line-height: 1.55">I share the Nigerian food I grew up on, tested in a home kitchen and written so anyone can cook it, wherever you live.</p>
+<a href="About.dc.html" style="font-weight: 700; font-size: 15px; min-height: 44px; display: flex; align-items: center">Read my story</a>
+</section>
+<form role="search" style="display: flex; flex-direction: column; gap: 8px">
+<label for="side-q" style="font-weight: 700">Search recipes</label>
+<div style="display: flex; gap: 8px">
+<input id="side-q" type="search" placeholder="e.g. jollof, akara" style="flex: 1; min-width: 0; min-height: 48px; padding: 0 14px; border: 1.5px solid #B9AC95; border-radius: 12px; font: inherit; background: #FFFFFF">
+<a href="Search.dc.html" aria-label="Search" style="width: 48px; height: 48px; flex: none; border-radius: 12px; background: #22201C; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></a>
+</div>
+</form>
+<section aria-labelledby="side-news" style="background: #2F6B3A; color: #FFFFFF; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<h2 id="side-news" style="font-size: 22px">Get a new Nigerian recipe every week</h2>
+<label for="side-email" style="font-size: 14px">Email address</label>
+<input id="side-email" type="email" placeholder="you@example.com" style="min-height: 48px; padding: 0 14px; border: 0; border-radius: 12px; font: inherit; color: #22201C">
+<button type="button" class="fs-btn" style="min-height: 48px; border-radius: 12px; border: 0; background: #F2B632; color: #22201C; font: inherit; font-weight: 700">Subscribe</button>
+</section>
+<section aria-labelledby="side-pop" style="display: flex; flex-direction: column; gap: 12px">
+<h2 id="side-pop" style="font-size: 22px">Popular recipes</h2>
+<ol style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{popular}}" as="p" hint-placeholder-count="5">
+<li><a href="Main.dc.html" style="display: flex; gap: 12px; align-items: center; color: #22201C; text-decoration: none; min-height: 64px">
+<span style="width: 64px; flex: none"><dc-import name="Photo" tone="{{p.tone}}" alt="{{p.title}}" ratio="1 / 1" round="12px" hint-size="64px,64px"></dc-import></span>
+<span style="display: flex; flex-direction: column"><span style="font-weight: 700; line-height: 1.3">{{p.title}}</span><span style="font-size: 14px; color: #5E574D">{{p.time}}</span></span>
+</a></li>
+</sc-for>
+</ol>
+</section>
+<sc-if value="{{ads}}" hint-placeholder-val="{{false}}">
+<div style="position: sticky; top: 124px">
+<dc-import name="Ad" kind="halfpage" variant="3" hint-size="320px,640px"></dc-import>
+</div>
+</sc-if>
+</aside>
+</div>
+</div>
+
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+
+<sc-if value="{{showConsent}}" hint-placeholder-val="{{false}}">
+<div style="position: sticky; bottom: 0; z-index: 60; padding: 12px; display: flex; justify-content: center">
+<dc-import name="CookieBanner" on-decide="{{decide}}" hint-size="100%,220px"></dc-import>
+</div>
+</sc-if>
+<sc-if value="{{showAnchor}}" hint-placeholder-val="{{false}}">
+<div class="fs-mob" style="position: sticky; bottom: 0; z-index: 40">
+<dc-import name="Ad" kind="anchor" variant="1" hint-size="100%,78px"></dc-import>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"showAds":{"editor":"boolean","default":false},"consent":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":7800}}'>
+class Component extends DCLogic {
+  fmt(q, frac) {
+    if (q == null) return '';
+    if (!frac) { return q >= 50 ? String(Math.round(q / 5) * 5) : String(Math.round(q * 10) / 10); }
+    const whole = Math.floor(q + 1e-9); const r = q - whole;
+    const opts = [[0, ''], [0.25, '¼'], [0.333, '⅓'], [0.5, '½'], [0.667, '⅔'], [0.75, '¾'], [1, '']];
+    let best = opts[0];
+    for (const o of opts) { if (Math.abs(r - o[0]) < Math.abs(r - best[0])) best = o; }
+    const w = whole + (best[0] === 1 ? 1 : 0);
+    const s = (w ? String(w) : '') + best[1];
+    return s || '¼';
+  }
+  renderVals() {
+    const s = this.state || {};
+    const ads = s.ads ?? this.props.showAds ?? false;
+    const consented = s.consented ?? this.props.consent ?? false;
+    const servings = s.servings ?? 6;
+    const unit = s.unit ?? 'cups';
+    const checked = s.checked || {};
+    const n = servings / 6;
+    const ING = [
+      { us: [2, 'cups'], m: [250, 'g'], name: 'ground egusi (melon seeds)', local: [1, 'derica'] },
+      { us: [2.2, 'lb'], m: [1, 'kg'], name: 'assorted meat (beef, shaki, ponmo), in chunks' },
+      { us: [2, ''], m: [2, ''], name: 'medium pieces stockfish (okporoko), soaked' },
+      { us: [1, ''], m: [1, ''], name: 'medium dried fish, deboned' },
+      { us: [0.75, 'cup'], m: [180, 'ml'], name: 'palm oil' },
+      { us: [3, 'tbsp'], m: [20, 'g'], name: 'ground crayfish', local: [0.5, 'small milk tin'] },
+      { us: [2, 'tbsp'], m: [25, 'g'], name: 'iru (locust beans), rinsed', opt: true },
+      { us: [4, ''], m: [4, ''], name: 'scotch bonnet peppers (ata rodo); use 2 for mild' },
+      { us: [2, ''], m: [2, ''], name: 'red bell peppers (tatashe)' },
+      { us: [1, ''], m: [1, ''], name: 'large onion, half chopped, half sliced' },
+      { us: [2, ''], m: [2, ''], name: 'seasoning cubes' },
+      { us: [null, ''], m: [null, ''], name: 'Salt, to taste' },
+      { us: [3, 'cups'], m: [150, 'g'], name: 'ugu leaves, sliced', local: [2, 'big handfuls'] },
+      { us: [0.5, 'cup'], m: [30, 'g'], name: 'bitterleaf, washed', opt: true },
+      { us: [4, 'cups'], m: [1, 'litre'], name: 'meat stock, from cooking the meat' }
+    ];
+    const ing = ING.map((g, idx) => {
+      const pair = unit === 'cups' ? g.us : g.m;
+      const frac = !(pair[1] === 'g' || pair[1] === 'ml' || pair[1] === 'lb');
+      const qn = pair[0] == null ? null : pair[0] * n;
+      const qty = qn == null ? '' : this.fmt(qn, frac) + (pair[1] ? ' ' + pair[1] : '');
+      const on = !!checked[idx];
+      return {
+        qty, name: g.name, opt: !!g.opt, hasLocal: !!g.local,
+        local: g.local ? '≈ ' + this.fmt(g.local[0] * n, true) + ' ' + g.local[1] : '',
+        checked: on, deco: on ? 'line-through' : 'none', color: on ? '#8A8275' : '#22201C',
+        toggle: () => this.setState({ checked: { ...checked, [idx]: !on } })
+      };
+    });
+    const STEPS = [
+      { title: 'Cook the meat and make your stock', text: 'Season the washed meat with chopped onion, 1 seasoning cube and salt. Let it steam in its own juices for 10 minutes, then add 3 cups of water and cook until tender, 30 to 40 minutes. Keep every drop of the stock.', tone: 'stock', alt: 'Assorted meat simmering in a pot of seasoned stock', caption: 'Steaming the meat first draws out flavour before you add water.' },
+      { title: 'Prepare the stockfish and dried fish', text: 'Soak the stockfish in hot water until soft, then break into pieces. Debone the dried fish and rinse it in warm salted water to remove sand.' },
+      { title: 'Mix the egusi paste', text: 'In a bowl, mix the ground egusi with the remaining chopped onion and about 1/2 cup of water to make a thick paste. This paste is what gives you soft lumps.', tone: 'paste', alt: 'Thick pale egusi paste in a bowl with a wooden spoon', caption: 'Aim for a paste that holds its shape on a spoon.' },
+      { title: 'Heat the palm oil', text: 'Heat the palm oil over medium heat until hot and slightly clearer, but never smoking. Add the sliced onion and fry for 1 minute.' },
+      { title: 'Fry the egusi into lumps', text: 'Scoop the paste into the oil in spoonfuls. Leave it alone for 3 to 4 minutes, then turn the lumps gently. Fry for 8 to 10 minutes until firm and the oil starts to separate.', tone: 'lumps', alt: 'Egusi lumps frying in red palm oil', caption: 'Do not stir yet. The lumps need time to set.' },
+      { title: 'Add the pepper and stock', text: 'Pour in the blended peppers and cook for 5 minutes. Add the stock a little at a time, cover and simmer on low for 10 minutes.', tone: 'simmer', alt: 'Egusi soup simmering with blended pepper and stock', caption: 'Add stock gradually so the soup stays thick.' },
+      { title: 'Add the proteins and flavour', text: 'Add the meat, stockfish, dried fish, crayfish, iru and the last seasoning cube. Simmer for 5 to 8 minutes, then taste for salt.' },
+      { title: 'Finish with ugu', text: 'Stir in the ugu and bitterleaf. Cook for 2 minutes only so the leaves stay bright green, then turn off the heat and rest for 5 minutes before serving.', tone: 'ugu', alt: 'Finished egusi soup with bright green ugu leaves stirred through', caption: 'Ugu goes in last and cooks for just 2 minutes.' }
+    ].map((st, i) => ({ ...st, n: i + 1, hasPhoto: !!st.tone }));
+    const cardSteps = [
+      'Season and steam the meat for 10 minutes, add 3 cups water and cook until tender. Keep the stock.',
+      'Soak and break up the stockfish. Debone and rinse the dried fish.',
+      'Mix ground egusi, chopped onion and 1/2 cup water into a thick paste.',
+      'Heat palm oil until hot but not smoking. Fry sliced onion for 1 minute.',
+      'Spoon in the paste. Leave 3 to 4 minutes, turn gently, fry 8 to 10 minutes.',
+      'Add blended peppers, cook 5 minutes. Add stock gradually, cover, simmer 10 minutes.',
+      'Add meat, fish, crayfish, iru and seasoning. Simmer 5 to 8 minutes. Taste for salt.',
+      'Stir in ugu and bitterleaf, cook 2 minutes, rest 5 minutes and serve.'
+    ].map((t, i) => ({ n: i + 1, text: t }));
+    const openFaq = s.openFaq ?? 0;
+    const FAQ = [
+      ['Can I make egusi without palm oil?', 'Yes. Use a neutral vegetable oil and add a teaspoon of paprika for colour. It will taste lighter and less traditional, but still delicious.'],
+      ['Why is my egusi not forming lumps?', 'Usually the paste was too thin or it was stirred too early. Make the paste thick, spoon it into hot oil and wait 3 to 4 minutes before turning.'],
+      ['How long does egusi soup keep?', 'Up to 3 days in the fridge and 3 months in the freezer. Cool it fast and store in portions.'],
+      ['Can I use spinach instead of ugu?', 'Yes. Add spinach in the last minute only. Kale also works and holds its texture better.'],
+      ['What is the difference between frying and boiling egusi?', 'Frying the paste in oil gives soft lumps and a richer taste. Boiling (adding egusi to the stock) gives a smoother, grainier soup. This recipe uses frying.']
+    ];
+    const faqs = FAQ.map((f, i) => ({ q: f[0], a: f[1], open: openFaq === i, rot: openFaq === i ? 180 : 0, toggle: () => this.setState({ openFaq: openFaq === i ? -1 : i }) }));
+    const myRating = s.myRating ?? 0;
+    const rateStars = [1, 2, 3, 4, 5].map((k) => ({ label: 'Rate ' + k + ' star' + (k > 1 ? 's' : ''), on: myRating === k, fill: k <= myRating ? '#E0A21B' : '#FFFFFF', pick: () => this.setState({ myRating: k }) }));
+    const starRow = (r) => [1, 2, 3, 4, 5].map((k) => ({ fill: k <= r ? '#E0A21B' : '#FFFFFF' }));
+    const comments = [
+      { name: 'Bisola', place: 'London', when: '2 weeks ago', rating: 5, bg: '#C2410C', text: 'The tip about not stirring is everything. First time my egusi came out in proper lumps. Used spinach and it was still lovely.' },
+      { name: 'Chinedu', place: 'Enugu', when: '1 month ago', rating: 5, bg: '#2F6B3A', text: 'Made it for Sunday lunch with pounded yam. I added a little more crayfish. Clear steps, easy to follow.' },
+      { name: 'Amaka', place: 'Houston', when: '1 month ago', rating: 4, bg: '#A3161B', text: 'Great recipe. I could not find iru so I left it out. Next time I will try a small spoon of miso like you suggested.' }
+    ].map((c) => ({ ...c, initial: c.name[0], stars: starRow(c.rating), ratingLabel: c.rating + ' out of 5 stars' }));
+    return {
+      ads, showConsent: ads && !consented, showAnchor: ads && consented,
+      toggleAds: () => this.setState({ ads: !ads }),
+      decide: () => this.setState({ consented: true }),
+      fiveStars: [1, 2, 3, 4, 5],
+      facts: [
+        { label: 'Prep', value: '25 min' }, { label: 'Cook', value: '55 min' }, { label: 'Total', value: '1 hr 20 min' },
+        { label: 'Serves', value: String(servings) }, { label: 'Difficulty', value: 'Medium' }
+      ],
+      explained: [
+        { name: 'Egusi', aka: '(agushi, ofe egwusi)', what: 'Ground seeds of a melon related to watermelon. Nutty and rich.', sub: 'African or Asian grocers. Ground pumpkin seeds work in a pinch.' },
+        { name: 'Ugu', aka: '(fluted pumpkin leaves)', what: 'Tender, slightly sweet greens used in many Nigerian soups.', sub: 'Spinach, or kale for more bite.' },
+        { name: 'Iru', aka: '(dawadawa, locust beans)', what: 'Fermented locust beans with a deep, savoury aroma.', sub: 'A teaspoon of miso, or leave it out.' },
+        { name: 'Ogiri', aka: '(fermented oil seeds)', what: 'A strong, pungent seasoning some cooks use instead of iru.', sub: 'A dash of fish sauce, or skip it.' },
+        { name: 'Crayfish', aka: '(ground dried crayfish)', what: 'Small dried shrimp ground to a powder. Adds savoury depth.', sub: 'Dried shrimp powder from Asian shops.' },
+        { name: 'Stockfish', aka: '(okporoko)', what: 'Air-dried cod, soaked until soft. Strong flavour.', sub: 'Salted cod or smoked haddock, or skip it.' },
+        { name: 'Ata rodo', aka: '(scotch bonnet)', what: 'Small, very hot, fruity pepper.', sub: 'Habanero peppers.' },
+        { name: 'Shaki and ponmo', aka: '(tripe and cow skin)', what: 'Classic assorted meat for party soups.', sub: 'Beef tripe from a butcher. Ponmo is optional.' }
+      ],
+      stepsA: STEPS.slice(0, 4), stepsB: STEPS.slice(4),
+      tips: [
+        { kind: 'Do:', text: 'leave the egusi alone for 3 to 4 minutes after it goes into the oil so the lumps set.', mark: '✓', bg: '#2F6B3A' },
+        { kind: 'Do:', text: 'add stock gradually. You can always loosen the soup, but you cannot easily thicken it.', mark: '✓', bg: '#2F6B3A' },
+        { kind: 'Do:', text: 'reheat with a splash of hot stock. Egusi thickens as it cools.', mark: '✓', bg: '#2F6B3A' },
+        { kind: 'Avoid:', text: 'letting the palm oil smoke. Burnt oil makes the whole pot bitter.', mark: '!', bg: '#A3161B' },
+        { kind: 'Avoid:', text: 'adding ugu too early. It turns dull and mushy after more than a few minutes.', mark: '!', bg: '#A3161B' },
+        { kind: 'Avoid:', text: 'adding salt before the stockfish and crayfish go in. Both are already salty.', mark: '!', bg: '#A3161B' }
+      ],
+      servings, ing, cardSteps,
+      dec: () => this.setState({ servings: Math.max(1, servings - 1) }),
+      inc: () => this.setState({ servings: Math.min(20, servings + 1) }),
+      isCups: unit === 'cups', isMetric: unit === 'metric',
+      cupsBg: unit === 'cups' ? '#22201C' : 'transparent', cupsFg: unit === 'cups' ? '#FFFFFF' : '#22201C',
+      metricBg: unit === 'metric' ? '#22201C' : 'transparent', metricFg: unit === 'metric' ? '#FFFFFF' : '#22201C',
+      useCups: () => this.setState({ unit: 'cups' }), useMetric: () => this.setState({ unit: 'metric' }),
+      print: () => window.print(),
+      saved: !!s.saved, saveText: s.saved ? 'Saved' : 'Save', saveFill: s.saved ? 'currentColor' : 'none',
+      toggleSave: () => this.setState({ saved: !s.saved }),
+      shareText: s.shared ? 'Link copied' : 'Share',
+      share: () => this.setState({ shared: true }),
+      nutrition: [
+        { label: 'Calories', value: '≈ 610 kcal' }, { label: 'Protein', value: '≈ 38 g' }, { label: 'Fat', value: '≈ 46 g' },
+        { label: 'Carbs', value: '≈ 12 g' }, { label: 'Fibre', value: '≈ 4 g' }, { label: 'Sodium', value: '≈ 980 mg' }
+      ],
+      serveWith: [
+        { name: 'Pounded yam', note: 'The classic pairing', tone: 'poundo', alt: 'Smooth ball of pounded yam' },
+        { name: 'Eba', note: 'Quick, made from garri', tone: 'eba', alt: 'Golden eba on a plate' },
+        { name: 'Fufu', note: 'Soft and slightly sour', tone: 'fufu', alt: 'White fufu wrapped in leaf' },
+        { name: 'Semo', note: 'Light and smooth', tone: 'semo', alt: 'Semolina swallow on a plate' }
+      ],
+      faqs, rateStars, comments,
+      related: [
+        { title: 'Efo Riro', cat: 'Soups & Stews', time: '50 min', diff: 'Easy', rating: '4.9', tone: 'efo' },
+        { title: 'Ofe Onugbu (Bitterleaf Soup)', cat: 'Soups & Stews', time: '1 hr 30 min', diff: 'Medium', rating: '4.7', tone: 'onugbu' },
+        { title: 'Banga Soup', cat: 'Soups & Stews', time: '1 hr 15 min', diff: 'Medium', rating: '4.8', tone: 'banga' },
+        { title: 'Goat Meat Pepper Soup', cat: 'Soups & Stews', time: '1 hr', diff: 'Easy', rating: '4.8', tone: 'pepper' }
+      ],
+      popular: [
+        { title: 'Smoky Party Jollof Rice', time: '1 hr 15 min', tone: 'jollof' },
+        { title: 'Nigerian Fried Rice', time: '1 hr', tone: 'fried' },
+        { title: 'Soft Puff-Puff', time: '1 hr 10 min', tone: 'puff' },
+        { title: 'Moi Moi in Foil', time: '1 hr 30 min', tone: 'moimoi' },
+        { title: 'Beef Suya', time: '45 min', tone: 'suya' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

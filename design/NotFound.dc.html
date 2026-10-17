@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Page not found · Foodsera</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FBF5EA}
+*{box-sizing:border-box}
+a{color:#B3390E}a:hover{color:#8A2A08}
+:focus-visible{outline:3px solid #2F6B3A;outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:'Young Serif',Georgia,serif;font-weight:400;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+</style>
+</helmet>
+<div style="background: #FBF5EA; color: #22201C; font-family: 'Figtree', 'Segoe UI', system-ui, sans-serif; font-size: 17px; line-height: 1.6">
+<div style="position: sticky; top: 0; z-index: 50">
+<dc-import name="Header" current="none" proto-bar="{{false}}" hint-size="100%,76px"></dc-import>
+</div>
+<main id="main" style="max-width: 1100px; margin: 0 auto; padding: 56px 20px 88px; display: flex; flex-direction: column; gap: 48px">
+<section style="display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: center">
+<div aria-hidden="true" style="flex: 0 1 300px; display: flex; justify-content: center">
+<svg width="280" height="220" viewBox="0 0 280 220"><ellipse cx="140" cy="200" rx="110" ry="14" fill="#F0E4CC"></ellipse><path d="M40 90h200l-16 86a16 16 0 0 1-16 13H72a16 16 0 0 1-16-13z" fill="#22201C"></path><rect x="26" y="78" width="228" height="22" rx="11" fill="#3A3630"></rect><rect x="8" y="84" width="30" height="10" rx="5" fill="#3A3630"></rect><rect x="242" y="84" width="30" height="10" rx="5" fill="#3A3630"></rect><text x="140" y="160" text-anchor="middle" font-family="Young Serif, Georgia, serif" font-size="56" fill="#F2B632">404</text><path d="M110 60c-8-12 8-20 0-36M140 60c-8-12 8-20 0-36M170 60c-8-12 8-20 0-36" stroke="#D9CBB0" stroke-width="6" fill="none" stroke-linecap="round"></path></svg>
+</div>
+<div style="flex: 1 1 380px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8A2A08">Error 404</span>
+<h1 style="font-size: clamp(36px, 5vw, 54px); line-height: 1.05">This pot is empty</h1>
+<p style="font-size: 19px; color: #3F3A33">We could not find that page. It may have moved, or the link may be wrong. Search for a recipe, or start from the homepage.</p>
+<form role="search" style="display: flex; gap: 10px; margin-top: 6px">
+<label for="nf-q" style="position: absolute; left: -9999px">Search recipes</label>
+<input id="nf-q" type="search" placeholder="Search recipes" style="flex: 1; min-width: 0; min-height: 54px; padding: 0 18px; border: 1.5px solid #22201C; border-radius: 999px; font: inherit; background: #FFFFFF">
+<a href="Search.dc.html" style="min-height: 54px; padding: 0 24px; border-radius: 999px; background: #C2410C; color: #FFFFFF; display: flex; align-items: center; font-weight: 700; text-decoration: none">Search</a>
+</form>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; font-weight: 700">
+<a href="Home.dc.html" style="min-height: 44px; display: flex; align-items: center">Go to homepage</a>
+<a href="RecipeIndex.dc.html" style="min-height: 44px; display: flex; align-items: center">Browse all recipes</a>
+</div>
+</div>
+</section>
+<section aria-labelledby="pop" style="display: flex; flex-direction: column; gap: 20px">
+<h2 id="pop" style="font-size: 30px">Popular recipes</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{popular}}" as="p" hint-placeholder-count="4">
+<dc-import name="Card" item="{{p}}" hint-size="100%,330px"></dc-import>
+</sc-for>
+</div>
+</section>
+</main>
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      popular: [
+        { title: 'Smoky Party Jollof Rice', cat: 'Rice Dishes', time: '1 hr 15 min', diff: 'Easy', rating: '4.9', tone: 'jollof' },
+        { title: 'Egusi Soup with Ugu', cat: 'Soups & Stews', time: '1 hr 20 min', diff: 'Medium', rating: '4.8', tone: 'egusi' },
+        { title: 'Soft Puff-Puff', cat: 'Small Chops & Snacks', time: '1 hr 10 min', diff: 'Easy', rating: '4.9', tone: 'puff' },
+        { title: 'Zobo Drink', cat: 'Drinks', time: '40 min', diff: 'Easy', rating: '4.7', tone: 'zobo' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

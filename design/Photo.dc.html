@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Food photo placeholder</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>body{margin:0}</style>
+</helmet>
+<div role="img" aria-label="{{alt}}" style="width: 100%; aspect-ratio: {{ratio}}; border-radius: {{round}}; background: {{bg}}; overflow: hidden"></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tone":{"editor":"enum","options":["egusi","jollof","fried","efo","onugbu","banga","poundo","eba","fufu","semo","moimoi","akara","suya","puff","pepper","ofada","chinchin","zobo","dodo","beans","okra","stock","paste","lumps","simmer","ugu","pancake","yam","afang","kuka","rice"],"default":"egusi"},"alt":{"editor":"text","default":"Top-down photo of egusi soup"},"ratio":{"editor":"text","default":"4 / 3"},"round":{"editor":"text","default":"0px"},"$preview":{"width":480,"height":360}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const T = {
+      egusi:   ['#4A2F22', '#EFE6D6', '#D9A33C', '#B8422A', '#2F7A3A', '#8E2B1C'],
+      jollof:  ['#3B2A20', '#F7F1E6', '#D9541E', '#B8401A', '#3E7D3A', '#F2B632'],
+      fried:   ['#2E3B33', '#F7F1E6', '#E3B341', '#C9962B', '#3E8A3E', '#D94A2A'],
+      efo:     ['#3A2C24', '#F3ECDF', '#2F6B3A', '#B8401A', '#D9541E', '#6B3A1E'],
+      onugbu:  ['#33281F', '#EEE6D6', '#6C7F30', '#7A5A22', '#3A5A20', '#C8622A'],
+      banga:   ['#2E241D', '#E9DFCD', '#9C3A17', '#7A2A10', '#2F6B3A', '#E8C9A0'],
+      poundo:  ['#3A3027', '#C9B79C', '#F6F1E4', '#E2D7C0', '#E8DFC9', '#D5C8AE'],
+      eba:     ['#2F3A33', '#EFE7D7', '#EDC96A', '#D6AE4C', '#E3BE5A', '#C99B3C'],
+      fufu:    ['#3E3328', '#3E7D3A', '#F3EEE2', '#E2DACA', '#E8E1D2', '#D9D0BE'],
+      semo:    ['#2E2A35', '#EFE7D7', '#F1E6C6', '#DFD1A8', '#E9DCB6', '#D2C296'],
+      moimoi:  ['#3A2C24', '#F4EDE0', '#E07A4A', '#C8602F', '#F2D27A', '#2F6B3A'],
+      akara:   ['#2D3530', '#F2EADB', '#C7792A', '#9A5419', '#E9A74A', '#6E3E14'],
+      suya:    ['#2A211B', '#7A4E2C', '#8A3A1C', '#5E2410', '#E9C46A', '#3E7D3A'],
+      puff:    ['#3B3026', '#F4ECDD', '#C98A3A', '#A86A22', '#E7B865', '#F6E7C8'],
+      pepper:  ['#2A2E2A', '#EFE7D7', '#B85A2A', '#8E3E18', '#2F6B3A', '#F2D27A'],
+      ofada:   ['#2F3A2C', '#3E7D3A', '#7A2A14', '#4E1A0C', '#E3D8BC', '#C2410C'],
+      chinchin:['#33363A', '#F2EADB', '#D59B47', '#B97C2E', '#E9BE6E', '#A86A22'],
+      zobo:    ['#2E2A26', '#E9E3D8', '#6E1230', '#4E0C20', '#E9A23A', '#3E7D3A'],
+      dodo:    ['#30362F', '#F4ECDD', '#E6A13A', '#B56A1C', '#F2C760', '#8E4A14'],
+      beans:   ['#3A2E26', '#EFE7D7', '#8A4A2A', '#6A3418', '#C2410C', '#E6A13A'],
+      okra:    ['#2C2F28', '#EEE6D6', '#5E8A34', '#3F6A22', '#B8401A', '#C9D98A'],
+      stock:   ['#3A2C24', '#3D3A36', '#8A5A2E', '#6A4220', '#C8622A', '#E9C9A0'],
+      paste:   ['#4A3A2C', '#EFE6D6', '#E7D3A1', '#CDB57C', '#DCC48D', '#F2E4C0'],
+      lumps:   ['#3A2A20', '#3D3A36', '#C8341A', '#9E2410', '#E2B65A', '#EBC671'],
+      simmer:  ['#3A2A20', '#3D3A36', '#C24A1E', '#9E3412', '#E2B65A', '#B8401A'],
+      ugu:     ['#3A2A20', '#3D3A36', '#D9A33C', '#B8422A', '#2F7A3A', '#3E8A3E'],
+      pancake: ['#33363A', '#F2EADB', '#E8B866', '#C98A3A', '#F2D27A', '#B8401A'],
+      yam:     ['#2E3B33', '#F4ECDD', '#F0E2B6', '#D8C487', '#C2410C', '#E6C66A'],
+      afang:   ['#2E241D', '#E9DFCD', '#3F6A22', '#2A4A16', '#C2410C', '#7A9A3A'],
+      kuka:    ['#33281F', '#EEE6D6', '#5A5A34', '#3E3E20', '#8A6A3A', '#C2410C'],
+      rice:    ['#2F3A33', '#F4ECDD', '#F4F0E4', '#E2DACA', '#C2410C', '#E8E1D2']
+    };
+    const c = T[this.props.tone] || T.egusi;
+    const [table, plate, food, edge, g1, g2] = c;
+    const bg = [
+      `radial-gradient(circle at 36% 40%, ${g1} 0 2.6%, transparent 3.1%)`,
+      `radial-gradient(circle at 60% 36%, ${g2} 0 2.1%, transparent 2.6%)`,
+      `radial-gradient(circle at 56% 62%, ${g1} 0 1.9%, transparent 2.4%)`,
+      `radial-gradient(circle at 42% 60%, ${edge} 0 3.2%, transparent 3.7%)`,
+      `radial-gradient(circle at 64% 52%, ${g2} 0 1.6%, transparent 2.1%)`,
+      `radial-gradient(circle at 50% 50%, ${food} 0 24%, ${edge} 25.5%, ${plate} 27% 33.5%, rgba(0,0,0,.28) 34.5%, transparent 37%)`,
+      `radial-gradient(circle at 86% 16%, rgba(255,255,255,.07) 0 9%, transparent 9.5%)`,
+      `radial-gradient(circle at 12% 88%, rgba(255,255,255,.06) 0 11%, transparent 11.5%)`,
+      `linear-gradient(135deg, ${table}, #1E1914)`
+    ].join(', ');
+    return {
+      alt: this.props.alt ?? 'Food photo',
+      ratio: this.props.ratio ?? '4 / 3',
+      round: this.props.round ?? '0px',
+      bg
+    };
+  }
+}
+</script>
+</body>
+</html>

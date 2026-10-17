@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cookie consent</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="font-family: 'Figtree', 'Segoe UI', system-ui, sans-serif; color: #22201C; font-size: 15px; line-height: 1.5; width: 100%; display: flex; justify-content: center">
+<sc-if value="{{open}}" hint-placeholder-val="{{true}}">
+<section role="region" aria-label="Cookie consent" style="width: 100%; max-width: 960px; background: #FFFDF8; border: 1px solid #D9CBB0; border-radius: 18px; box-shadow: 0 12px 36px rgba(34,32,28,.18); padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h2 style="margin: 0; font-family: 'Young Serif', Georgia, serif; font-weight: 400; font-size: 22px">We value your privacy</h2>
+<p style="margin: 0; color: #3F3A33">Foodsera and our advertising partners, including Google, use cookies to show ads, measure how the site is used and remember your settings. Choose what you allow. You can change this anytime from Cookie settings in the footer. <a href="Cookies.dc.html" style="color: #B3390E; font-weight: 600">Read our Cookie Policy</a>.</p>
+</div>
+<sc-if value="{{manage}}" hint-placeholder-val="{{false}}">
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid #E8DECB">
+<sc-for list="{{prefs}}" as="p" hint-placeholder-count="4">
+<li style="border-bottom: 1px solid #E8DECB; padding: 10px 0">
+<label style="display: flex; gap: 14px; align-items: center; justify-content: space-between; min-height: 44px; cursor: pointer">
+<span style="display: flex; flex-direction: column"><strong>{{p.name}}</strong><span style="font-size: 14px; color: #5E574D">{{p.desc}}</span></span>
+<input type="checkbox" checked="{{p.on}}" disabled="{{p.locked}}" onChange="{{p.toggle}}" style="width: 22px; height: 22px; accent-color: #2F6B3A; flex: none">
+</label>
+</li>
+</sc-for>
+</ul>
+</sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 10px">
+<button type="button" onClick="{{reject}}" style="min-height: 48px; border-radius: 999px; border: 1.5px solid #22201C; background: #FFFDF8; color: #22201C; font: inherit; font-weight: 700; cursor: pointer">Reject all</button>
+<button type="button" onClick="{{toggleManage}}" aria-expanded="{{manage}}" style="min-height: 48px; border-radius: 999px; border: 1.5px solid #22201C; background: #FFFDF8; color: #22201C; font: inherit; font-weight: 700; cursor: pointer">{{manageText}}</button>
+<button type="button" onClick="{{accept}}" style="min-height: 48px; border-radius: 999px; border: 1.5px solid #22201C; background: #22201C; color: #FFFFFF; font: inherit; font-weight: 700; cursor: pointer">Accept all</button>
+</div>
+</section>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"onDecide":{"editor":null},"$preview":{"width":1000,"height":520}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const manage = !!s.manage;
+    const p = s.p || { ads: false, measure: false, prefs: true };
+    const done = () => { this.setState({ done: true }); if (this.props.onDecide) this.props.onDecide(); };
+    const mk = (key, name, desc) => ({ name, desc, on: !!p[key], locked: false, toggle: () => this.setState({ p: { ...p, [key]: !p[key] } }) });
+    return {
+      open: !s.done, manage,
+      manageText: manage ? 'Save my choices' : 'Manage options',
+      toggleManage: () => { if (manage) done(); else this.setState({ manage: true }); },
+      reject: done, accept: done,
+      prefs: [
+        { name: 'Strictly necessary', desc: 'Needed for the site to work. Always on.', on: true, locked: true, toggle: () => {} },
+        mk('ads', 'Personalised ads', 'Ads based on your interests, from Google and partners.'),
+        mk('measure', 'Measurement', 'Helps us see which recipes are useful.'),
+        mk('prefs', 'Preferences', 'Remembers units and servings you choose.')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

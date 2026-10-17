@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search recipes · Foodsera</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FBF5EA}
+*{box-sizing:border-box}
+a{color:#B3390E}a:hover{color:#8A2A08}
+:focus-visible{outline:3px solid #2F6B3A;outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:'Young Serif',Georgia,serif;font-weight:400;margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+.fs-btn{cursor:pointer}.fs-btn:hover{filter:brightness(.94)}
+</style>
+</helmet>
+<div style="background: #FBF5EA; color: #22201C; font-family: 'Figtree', 'Segoe UI', system-ui, sans-serif; font-size: 17px; line-height: 1.6">
+<div style="position: sticky; top: 0; z-index: 50">
+<dc-import name="Header" current="none" ads="{{ads}}" on-toggle-ads="{{toggleAds}}" hint-size="100%,116px"></dc-import>
+</div>
+<main id="main" style="max-width: 1200px; margin: 0 auto; padding: 32px 20px 80px; display: flex; flex-direction: column; gap: 28px">
+<section style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+<h1 style="font-size: clamp(34px, 4.6vw, 50px)">Search recipes</h1>
+<form role="search" style="display: flex; gap: 10px">
+<label for="sq" style="position: absolute; left: -9999px">Search recipes</label>
+<input id="sq" type="search" value="{{q}}" onChange="{{setQ}}" placeholder="Try egusi, jollof, akara" style="flex: 1; min-width: 0; min-height: 56px; padding: 0 20px; border: 1.5px solid #22201C; border-radius: 999px; font: inherit; font-size: 18px; background: #FFFFFF">
+<button type="button" class="fs-btn" style="min-height: 56px; padding: 0 24px; border-radius: 999px; border: 0; background: #C2410C; color: #FFFFFF; font: inherit; font-weight: 700; display: flex; align-items: center; gap: 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><span>Search</span></button>
+</form>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 15px">
+<span style="color: #5E574D">Popular searches:</span>
+<sc-for list="{{suggest}}" as="t" hint-placeholder-count="5">
+<button type="button" onClick="{{t.pick}}" style="min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid #D9CBB0; background: #FFFDF8; color: #22201C; font: inherit; font-weight: 600; cursor: pointer">{{t.label}}</button>
+</sc-for>
+</div>
+</section>
+
+<sc-if value="{{hasResults}}" hint-placeholder-val="{{true}}">
+<section aria-labelledby="res" style="display: flex; flex-direction: column; gap: 20px">
+<h2 id="res" aria-live="polite" style="font-size: 26px">{{count}} recipes for “{{qShown}}”</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{grid}}" as="g" hint-placeholder-count="8">
+<sc-if value="{{g.isAd}}" hint-placeholder-val="{{false}}">
+<dc-import name="Ad" kind="infeed" variant="1" hint-size="100%,340px"></dc-import>
+</sc-if>
+<sc-if value="{{g.isCard}}" hint-placeholder-val="{{true}}">
+<dc-import name="Card" item="{{g}}" hint-size="100%,340px"></dc-import>
+</sc-if>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{noResults}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="none" style="display: flex; flex-direction: column; gap: 28px">
+<div style="background: #FFFDF8; border: 1px solid #E8DECB; border-radius: 22px; padding: clamp(24px, 4vw, 40px); display: flex; flex-wrap: wrap; gap: 24px; align-items: center">
+<svg width="120" height="96" viewBox="0 0 120 96" aria-hidden="true" style="flex: none"><ellipse cx="60" cy="84" rx="46" ry="8" fill="#F0E4CC"></ellipse><path d="M16 40h88l-8 36a8 8 0 0 1-8 6H32a8 8 0 0 1-8-6z" fill="#22201C"></path><rect x="10" y="34" width="100" height="10" rx="5" fill="#3A3630"></rect><path d="M46 24c-4-6 4-10 0-18M60 24c-4-6 4-10 0-18M74 24c-4-6 4-10 0-18" stroke="#D9CBB0" stroke-width="4" fill="none" stroke-linecap="round"></path></svg>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 8px">
+<h2 id="none" style="font-size: 30px">No recipes found for “{{qShown}}”</h2>
+<p style="color: #3F3A33">Check the spelling, try a simpler word like <strong>soup</strong> or <strong>rice</strong>, or use the local name, for example <strong>ugu</strong> instead of pumpkin leaves.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+<a href="RecipeIndex.dc.html" class="fs-btn" style="min-height: 48px; padding: 0 22px; border-radius: 999px; background: #22201C; color: #FFFFFF; display: flex; align-items: center; font-weight: 700; text-decoration: none">Browse all recipes A–Z</a>
+<a href="Category.dc.html" style="min-height: 48px; padding: 0 22px; border-radius: 999px; border: 1.5px solid #22201C; color: #22201C; display: flex; align-items: center; font-weight: 700; text-decoration: none">Soups &amp; Stews</a>
+</div>
+</div>
+</div>
+<h2 style="font-size: 28px">Try these instead</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{fallback}}" as="g" hint-placeholder-count="4">
+<dc-import name="Card" item="{{g}}" hint-size="100%,340px"></dc-import>
+</sc-for>
+</div>
+</section>
+</sc-if>
+</main>
+<dc-import name="Footer" hint-size="100%,520px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"query":{"editor":"text","default":"rice"},"showAds":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":2400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const ads = s.ads ?? this.props.showAds ?? false;
+    const q = s.q ?? this.props.query ?? 'rice';
+    const D = [
+      ['Smoky Party Jollof Rice', 'Rice Dishes', '1 hr 15 min', 'Easy', '4.9', 'jollof', 'yoruba party'],
+      ['Nigerian Fried Rice', 'Rice Dishes', '1 hr', 'Easy', '4.8', 'fried', 'party christmas'],
+      ['Ofada Rice and Ayamase', 'Rice Dishes', '1 hr 30 min', 'Medium', '4.7', 'ofada', 'yoruba stew'],
+      ['Coconut Rice', 'Rice Dishes', '50 min', 'Easy', '4.7', 'fried', 'niger delta'],
+      ['Tuwo Shinkafa', 'Swallow', '40 min', 'Easy', '4.5', 'rice', 'hausa northern rice swallow'],
+      ['Concoction Rice (Palm Oil Rice)', 'Rice Dishes', '45 min', 'Easy', '4.6', 'jollof', 'weeknight'],
+      ['Rice and Beans with Plantain', 'Rice Dishes', '1 hr', 'Easy', '4.6', 'beans', 'weeknight lunch box'],
+      ['Jollof Spaghetti', 'Rice Dishes', '35 min', 'Easy', '4.5', 'jollof', 'weeknight lunch box'],
+      ['Egusi Soup with Ugu', 'Soups & Stews', '1 hr 20 min', 'Medium', '4.8', 'egusi', 'soup yoruba igbo'],
+      ['Efo Riro', 'Soups & Stews', '50 min', 'Easy', '4.9', 'efo', 'soup yoruba'],
+      ['Banga Soup', 'Soups & Stews', '1 hr 15 min', 'Medium', '4.8', 'banga', 'soup niger delta'],
+      ['Akara', 'Breakfast', '30 min', 'Easy', '4.8', 'akara', 'beans breakfast'],
+      ['Soft Puff-Puff', 'Small Chops & Snacks', '1 hr 10 min', 'Easy', '4.9', 'puff', 'snack party'],
+      ['Beef Suya', 'Small Chops & Snacks', '45 min', 'Easy', '4.8', 'suya', 'northern grill'],
+      ['Zobo Drink', 'Drinks', '40 min', 'Easy', '4.7', 'zobo', 'drink hibiscus'],
+      ['Crunchy Chin Chin', 'Desserts', '1 hr', 'Easy', '4.8', 'chinchin', 'snack christmas']
+    ].map((d) => ({ title: d[0], cat: d[1], time: d[2], diff: d[3], rating: d[4], tone: d[5], tags: d[6], isCard: true, isAd: false }));
+    const term = q.trim().toLowerCase();
+    const hits = term ? D.filter((d) => (d.title + ' ' + d.cat + ' ' + d.tags).toLowerCase().includes(term)) : [];
+    const grid = [];
+    hits.forEach((h, i) => { grid.push(h); if (ads && i === 5 && hits.length > 6) grid.push({ isAd: true, isCard: false }); });
+    return {
+      ads, toggleAds: () => this.setState({ ads: !ads }),
+      q, qShown: q.trim(), setQ: (e) => this.setState({ q: e.target.value }),
+      suggest: ['Jollof', 'Egusi', 'Puff-puff', 'Soup', 'Zobo'].map((t) => ({ label: t, pick: () => this.setState({ q: t }) })),
+      hasResults: hits.length > 0, noResults: hits.length === 0,
+      count: hits.length, grid,
+      fallback: [D[0], D[8], D[12], D[11]]
+    };
+  }
+}
+</script>
+</body>
+</html>

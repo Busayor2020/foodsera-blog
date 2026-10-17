@@ -1,0 +1,69 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-17T10:00:00Z"},
+  "title": "Foodsera",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "designSystems": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 7800, "title": "Recipe post · Clean · Desktop 1440", "expand": "fill", "is_interactive": true},
+    "RecipeAds.dc.html": {"x": 1520, "y": 0, "w": 1440, "h": 8800, "title": "Recipe post · Ads · Desktop 1440", "expand": "fill", "is_interactive": true},
+    "RecipeTabletAds.dc.html": {"x": 3040, "y": 0, "w": 768, "h": 13500, "title": "Recipe post · Ads · Tablet 768", "is_interactive": true},
+    "RecipeMobile.dc.html": {"x": 3888, "y": 0, "w": 390, "h": 15500, "title": "Recipe post · Clean · Mobile 390", "is_interactive": true},
+    "RecipeMobileAds.dc.html": {"x": 4358, "y": 0, "w": 390, "h": 18500, "title": "Recipe post · Ads · Mobile 390", "is_interactive": true},
+
+    "Home.dc.html": {"x": 0, "y": 19000, "w": 1440, "h": 4600, "title": "Homepage · Clean · Desktop 1440", "expand": "fill", "is_interactive": true},
+    "HomeAds.dc.html": {"x": 1520, "y": 19000, "w": 1440, "h": 5600, "title": "Homepage · Ads · Desktop 1440", "expand": "fill", "is_interactive": true},
+    "HomeTabletAds.dc.html": {"x": 3040, "y": 19000, "w": 768, "h": 8200, "title": "Homepage · Ads · Tablet 768", "is_interactive": true},
+    "HomeMobile.dc.html": {"x": 3888, "y": 19000, "w": 390, "h": 8800, "title": "Homepage · Clean · Mobile 390", "is_interactive": true},
+    "HomeMobileAds.dc.html": {"x": 4358, "y": 19000, "w": 390, "h": 10800, "title": "Homepage · Ads · Mobile 390", "is_interactive": true},
+
+    "Category.dc.html": {"x": 0, "y": 30300, "w": 1440, "h": 3000, "title": "Category · Soups & Stews · Clean", "expand": "fill", "is_interactive": true},
+    "CategoryAds.dc.html": {"x": 1520, "y": 30300, "w": 1440, "h": 3600, "title": "Category · Ads · Desktop 1440", "expand": "fill", "is_interactive": true},
+    "CategoryMobileAds.dc.html": {"x": 3040, "y": 30300, "w": 390, "h": 8200, "title": "Category · Ads · Mobile 390", "is_interactive": true},
+
+    "Search.dc.html": {"x": 0, "y": 39000, "w": 1440, "h": 2400, "title": "Search results", "expand": "fill", "is_interactive": true},
+    "SearchEmpty.dc.html": {"x": 1520, "y": 39000, "w": 1440, "h": 2000, "title": "Search · Empty state", "expand": "fill", "is_interactive": true},
+    "SearchMobileEmpty.dc.html": {"x": 3040, "y": 39000, "w": 390, "h": 3400, "title": "Search · Empty · Mobile 390", "is_interactive": true},
+    "RecipeIndex.dc.html": {"x": 3510, "y": 39000, "w": 1440, "h": 3600, "title": "Recipe index A–Z", "expand": "fill", "is_interactive": true},
+
+    "About.dc.html": {"x": 0, "y": 43100, "w": 1440, "h": 3000, "title": "About", "expand": "fill", "is_interactive": true},
+    "AboutMobile.dc.html": {"x": 1520, "y": 43100, "w": 390, "h": 5200, "title": "About · Mobile 390", "is_interactive": true},
+    "Contact.dc.html": {"x": 1990, "y": 43100, "w": 1440, "h": 1800, "title": "Contact (no ads)", "expand": "fill", "is_interactive": true},
+    "ContactMobile.dc.html": {"x": 3510, "y": 43100, "w": 390, "h": 2600, "title": "Contact · Mobile 390", "is_interactive": true},
+    "NotFound.dc.html": {"x": 3980, "y": 43100, "w": 1440, "h": 1900, "title": "404 (no ads)", "expand": "fill", "is_interactive": true},
+    "NotFoundMobile.dc.html": {"x": 5500, "y": 43100, "w": 390, "h": 3000, "title": "404 · Mobile 390", "is_interactive": true},
+
+    "Legal.dc.html": {"x": 0, "y": 48800, "w": 1440, "h": 3600, "title": "Privacy Policy (no ads)", "expand": "fill", "is_interactive": true},
+    "Cookies.dc.html": {"x": 1520, "y": 48800, "w": 1440, "h": 3400, "title": "Cookie Policy (no ads)", "expand": "fill", "is_interactive": true},
+    "Terms.dc.html": {"x": 3040, "y": 48800, "w": 1440, "h": 3800, "title": "Terms of Use (no ads)", "expand": "fill", "is_interactive": true},
+
+    "Brand.dc.html": {"x": 0, "y": 53100, "w": 1440, "h": 2200, "title": "Brand, favicon & ad slot system"},
+    "Header.dc.html": {"x": 1520, "y": 53100, "w": 1440, "h": 160, "title": "Component · Header", "is_interactive": true},
+    "MegaMenu.dc.html": {"x": 3040, "y": 53100, "w": 1440, "h": 640, "title": "Header · Mega menu open", "is_interactive": true},
+    "MobileMenu.dc.html": {"x": 4560, "y": 53100, "w": 390, "h": 844, "title": "Mobile menu open · 390", "is_interactive": true},
+    "Footer.dc.html": {"x": 5030, "y": 53100, "w": 1440, "h": 640, "title": "Component · Footer", "is_interactive": true},
+    "Ad.dc.html": {"x": 6550, "y": 53100, "w": 360, "h": 320, "title": "Component · Ad slot"},
+    "Card.dc.html": {"x": 6990, "y": 53100, "w": 320, "h": 420, "title": "Component · Recipe card"},
+    "Photo.dc.html": {"x": 7390, "y": 53100, "w": 480, "h": 360, "title": "Component · Photo placeholder"},
+    "CookieBanner.dc.html": {"x": 7950, "y": 53100, "w": 1000, "h": 520, "title": "Cookie consent banner", "is_interactive": true}
+  },
+  "order": [
+    "Main.dc.html", "RecipeAds.dc.html", "RecipeTabletAds.dc.html", "RecipeMobile.dc.html", "RecipeMobileAds.dc.html",
+    "Home.dc.html", "HomeAds.dc.html", "HomeTabletAds.dc.html", "HomeMobile.dc.html", "HomeMobileAds.dc.html",
+    "Category.dc.html", "CategoryAds.dc.html", "CategoryMobileAds.dc.html",
+    "Search.dc.html", "SearchEmpty.dc.html", "SearchMobileEmpty.dc.html", "RecipeIndex.dc.html",
+    "About.dc.html", "AboutMobile.dc.html", "Contact.dc.html", "ContactMobile.dc.html", "NotFound.dc.html", "NotFoundMobile.dc.html",
+    "Legal.dc.html", "Cookies.dc.html", "Terms.dc.html",
+    "Brand.dc.html", "Header.dc.html", "MegaMenu.dc.html", "MobileMenu.dc.html", "Footer.dc.html", "Ad.dc.html", "Card.dc.html", "Photo.dc.html", "CookieBanner.dc.html"
+  ],
+  "notes": {
+    "row1": {"x": 0, "y": -300, "text": "1 · Single recipe post: clean and ad-enabled", "kind": "title1", "maxW": 4748},
+    "row2": {"x": 0, "y": 18700, "text": "2 · Homepage", "kind": "title1", "maxW": 4748},
+    "row3": {"x": 0, "y": 30000, "text": "3 · Category archive", "kind": "title1", "maxW": 3430},
+    "row4": {"x": 0, "y": 38700, "text": "4 · Search and recipe index", "kind": "title1", "maxW": 4950},
+    "row5": {"x": 0, "y": 42800, "text": "5 · About, Contact and 404", "kind": "title1", "maxW": 5890},
+    "row6": {"x": 0, "y": 48500, "text": "6 · Legal pages (required for AdSense)", "kind": "title1", "maxW": 4480},
+    "row7": {"x": 0, "y": 52800, "text": "7 · Brand, components and ad slot system", "kind": "title1", "maxW": 8950}
+  }
+}

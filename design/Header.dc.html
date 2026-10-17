@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Foodsera header</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="font-family: 'Figtree', 'Segoe UI', system-ui, sans-serif; color: #22201C; font-size: 16px; line-height: 1.4">
+<sc-if value="{{protoBar}}" hint-placeholder-val="{{true}}">
+<div style="background: #22201C; color: #FBF5EA; font-size: 13px">
+<div style="max-width: 1280px; margin: 0 auto; padding: 4px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between">
+<span><strong>Prototype</strong> · {{viewLabel}}</span>
+<button type="button" onClick="{{toggleAds}}" aria-pressed="{{ads}}" style="display: flex; align-items: center; gap: 10px; min-height: 36px; padding: 0 8px 0 14px; border-radius: 999px; border: 1px solid #6E665A; background: #2E2B26; color: #FBF5EA; font: inherit; font-weight: 700; cursor: pointer">
+<span>{{toggleText}}</span>
+<span aria-hidden="true" style="width: 38px; height: 22px; border-radius: 999px; background: {{trackBg}}; position: relative; display: block">
+<span style="position: absolute; top: 3px; left: {{knobX}}px; width: 16px; height: 16px; border-radius: 50%; background: #FFFFFF; transition: left .15s"></span>
+</span>
+</button>
+</div>
+</div>
+</sc-if>
+<header style="background: #FBF5EA; border-bottom: 1px solid #E8DECB; position: relative; box-shadow: {{shadow}}">
+<div style="max-width: 1280px; margin: 0 auto; padding: {{padY}}px 16px; display: flex; align-items: center; gap: 16px; transition: padding .2s">
+<a href="Home.dc.html" aria-label="Foodsera home" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #22201C; flex: none">
+<svg width="{{mark}}" height="{{mark}}" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="24" fill="#C2410C"></circle><path d="M10 25h28a14 14 0 0 1-28 0z" fill="#FBF5EA"></path><path d="M19 20c-2-3 2-5 0-9M26 20c-2-3 2-5 0-9" stroke="#F2B632" stroke-width="2.6" fill="none" stroke-linecap="round"></path><path d="M31 19c1-5 6-7 9-6-1 4-5 7-9 6z" fill="#3E8A3E"></path></svg>
+<span style="font-family: 'Young Serif', Georgia, serif; font-size: {{logoSize}}px; letter-spacing: -.01em; line-height: 1">Food<span style="color: #B3390E">sera</span></span>
+</a>
+<sc-if value="{{wide}}" hint-placeholder-val="{{true}}">
+<nav aria-label="Main" style="flex: 1; display: flex; justify-content: center; align-items: center; gap: 2px">
+<a href="Home.dc.html" style="padding: 10px 9px; min-height: 44px; display: flex; align-items: center; color: #22201C; text-decoration: none; font-weight: 600; font-size: 15px; border-bottom: 2px solid {{homeLine}}">Home</a>
+<button type="button" onClick="{{toggleMega}}" aria-expanded="{{megaOpen}}" aria-controls="mega" style="padding: 10px 9px; min-height: 44px; display: flex; align-items: center; gap: 4px; color: #22201C; background: transparent; border: 0; border-bottom: 2px solid {{megaLine}}; font: inherit; font-weight: 600; font-size: 15px; cursor: pointer">Recipes
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true" style="transform: rotate({{megaRot}}deg)"><path d="M6 9l6 6 6-6"></path></svg></button>
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8">
+<a href="{{n.href}}" style="padding: 10px 9px; min-height: 44px; display: flex; align-items: center; color: #22201C; text-decoration: none; font-weight: 600; font-size: 15px; white-space: nowrap; border-bottom: 2px solid {{n.line}}">{{n.label}}</a>
+</sc-for>
+</nav>
+</sc-if>
+<sc-if value="{{narrow}}" hint-placeholder-val="{{false}}"><span style="flex: 1"></span></sc-if>
+<button type="button" onClick="{{toggleSearch}}" aria-label="Search recipes" aria-expanded="{{searchOpen}}" style="width: 44px; height: 44px; flex: none; border-radius: 50%; border: 1.5px solid #22201C; background: #FFFDF8; color: #22201C; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+</button>
+<sc-if value="{{narrow}}" hint-placeholder-val="{{false}}">
+<button type="button" onClick="{{openMobile}}" aria-label="Open menu" aria-expanded="{{mobileOpen}}" style="width: 44px; height: 44px; flex: none; border-radius: 50%; border: 0; background: #22201C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+</button>
+</sc-if>
+</div>
+
+<sc-if value="{{searchOpen}}" hint-placeholder-val="{{false}}">
+<div style="border-top: 1px solid #E8DECB; background: #FFFDF8">
+<form role="search" style="max-width: 760px; margin: 0 auto; padding: 14px 16px; display: flex; gap: 10px; align-items: center">
+<label for="hdr-q" style="position: absolute; left: -9999px">Search recipes</label>
+<input id="hdr-q" type="search" placeholder="Search recipes, e.g. egusi, jollof, puff-puff" style="flex: 1; min-width: 0; min-height: 48px; padding: 0 16px; border: 1.5px solid #B9AC95; border-radius: 999px; font: inherit; background: #FFFFFF">
+<a href="Search.dc.html" style="min-height: 48px; padding: 0 22px; border-radius: 999px; background: #C2410C; color: #FFFFFF; display: flex; align-items: center; font-weight: 700; text-decoration: none">Search</a>
+</form>
+</div>
+</sc-if>
+
+<sc-if value="{{megaOpen}}" hint-placeholder-val="{{false}}">
+<div id="mega" style="position: absolute; left: 0; right: 0; top: 100%; background: #FFFDF8; border-bottom: 1px solid #E8DECB; box-shadow: 0 18px 40px rgba(34,32,28,.14); z-index: 5">
+<div style="max-width: 1280px; margin: 0 auto; padding: 28px 24px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2F6B3A">By category</span>
+<sc-for list="{{megaCats}}" as="m" hint-placeholder-count="8"><a href="{{m.href}}" style="color: #22201C; text-decoration: none; font-weight: 600; min-height: 36px; display: flex; align-items: center">{{m.label}}</a></sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2F6B3A">By region</span>
+<sc-for list="{{regions}}" as="m" hint-placeholder-count="6"><a href="Category.dc.html" style="color: #22201C; text-decoration: none; font-weight: 600; min-height: 36px; display: flex; align-items: center">{{m}}</a></sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2F6B3A">By occasion</span>
+<sc-for list="{{occasions}}" as="m" hint-placeholder-count="5"><a href="Category.dc.html" style="color: #22201C; text-decoration: none; font-weight: 600; min-height: 36px; display: flex; align-items: center">{{m}}</a></sc-for>
+</div>
+<a href="Main.dc.html" style="display: flex; flex-direction: column; gap: 10px; color: #22201C; text-decoration: none; background: #FCEBC0; border-radius: 16px; padding: 14px">
+<dc-import name="Photo" tone="egusi" alt="Egusi soup" ratio="16 / 10" round="12px" hint-size="100%,150px"></dc-import>
+<span style="font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8A2A08">Recipe of the week</span>
+<span style="font-family: 'Young Serif', Georgia, serif; font-size: 20px; line-height: 1.2">Egusi Soup with Ugu and Assorted Meat</span>
+</a>
+</div>
+</div>
+</sc-if>
+</header>
+
+<sc-if value="{{mobileOpen}}" hint-placeholder-val="{{false}}">
+<div role="dialog" aria-modal="true" aria-label="Menu" style="position: fixed; inset: 0; z-index: 100; background: #FBF5EA; overflow-y: auto">
+<div style="max-width: 640px; margin: 0 auto; padding: 12px 16px 40px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 56px">
+<a href="Home.dc.html" style="font-family: 'Young Serif', Georgia, serif; font-size: 26px; color: #22201C; text-decoration: none">Food<span style="color: #B3390E">sera</span></a>
+<button type="button" onClick="{{closeMobile}}" aria-label="Close menu" style="width: 48px; height: 48px; border-radius: 50%; border: 0; background: #22201C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+<form role="search" style="display: flex; gap: 8px">
+<label for="mob-q" style="position: absolute; left: -9999px">Search recipes</label>
+<input id="mob-q" type="search" placeholder="Search recipes" style="flex: 1; min-width: 0; min-height: 52px; padding: 0 16px; border: 1.5px solid #B9AC95; border-radius: 14px; font: inherit; font-size: 17px; background: #FFFFFF">
+<a href="Search.dc.html" aria-label="Search" style="width: 52px; height: 52px; flex: none; border-radius: 14px; background: #C2410C; color: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></a>
+</form>
+<nav aria-label="Main" style="display: flex; flex-direction: column">
+<a href="Home.dc.html" style="min-height: 56px; display: flex; align-items: center; border-bottom: 1px solid #E8DECB; color: #22201C; text-decoration: none; font-family: 'Young Serif', Georgia, serif; font-size: 22px">Home</a>
+<a href="RecipeIndex.dc.html" style="min-height: 56px; display: flex; align-items: center; border-bottom: 1px solid #E8DECB; color: #22201C; text-decoration: none; font-family: 'Young Serif', Georgia, serif; font-size: 22px">All recipes A–Z</a>
+<sc-for list="{{nav}}" as="n" hint-placeholder-count="8">
+<a href="{{n.href}}" style="min-height: 56px; display: flex; align-items: center; border-bottom: 1px solid #E8DECB; color: #22201C; text-decoration: none; font-family: 'Young Serif', Georgia, serif; font-size: 22px">{{n.label}}</a>
+</sc-for>
+</nav>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2F6B3A">By region</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{regions}}" as="m" hint-placeholder-count="6"><a href="Category.dc.html" style="min-height: 44px; padding: 0 16px; display: flex; align-items: center; border-radius: 999px; background: #FFFDF8; border: 1px solid #D9CBB0; color: #22201C; text-decoration: none; font-weight: 600">{{m}}</a></sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #2F6B3A">By occasion</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{occasions}}" as="m" hint-placeholder-count="5"><a href="Category.dc.html" style="min-height: 44px; padding: 0 16px; display: flex; align-items: center; border-radius: 999px; background: #FFFDF8; border: 1px solid #D9CBB0; color: #22201C; text-decoration: none; font-weight: 600">{{m}}</a></sc-for>
+</div>
+</div>
+<div style="display: flex; gap: 20px; font-weight: 600">
+<a href="Contact.dc.html" style="min-height: 44px; display: flex; align-items: center; color: #22201C">Contact</a>
+<a href="Legal.dc.html" style="min-height: 44px; display: flex; align-items: center; color: #22201C">Privacy</a>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"current":{"editor":"enum","options":["home","soups","rice","swallow","snacks","breakfast","drinks","desserts","about","none"],"default":"home"},"ads":{"editor":"boolean","default":false},"protoBar":{"editor":"boolean","default":true},"openMega":{"editor":"boolean","default":false},"openMenu":{"editor":"boolean","default":false},"onToggleAds":{"editor":null},"$preview":{"width":1440,"height":160}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.onScroll = () => {
+      const sc = window.scrollY > 48;
+      if (sc !== !!(this.state && this.state.scrolled)) this.setState({ scrolled: sc });
+    };
+    this.onResize = () => this.forceUpdate();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+  }
+  renderVals() {
+    const s = this.state || {};
+    const cur = this.props.current ?? 'home';
+    const ads = !!this.props.ads;
+    const narrow = window.innerWidth < 1260;
+    const megaOpen = s.mega ?? !!this.props.openMega;
+    const mobileOpen = s.mobile ?? !!this.props.openMenu;
+    const searchOpen = !!s.search;
+    const scrolled = !!s.scrolled;
+    const NAV = [
+      ['soups', 'Soups & Stews', 'Category.dc.html'], ['rice', 'Rice Dishes', 'Category.dc.html'],
+      ['swallow', 'Swallow', 'Category.dc.html'], ['snacks', 'Small Chops & Snacks', 'Category.dc.html'],
+      ['breakfast', 'Breakfast', 'Category.dc.html'], ['drinks', 'Drinks', 'Category.dc.html'],
+      ['desserts', 'Desserts', 'Category.dc.html'], ['about', 'About', 'About.dc.html']
+    ];
+    return {
+      protoBar: this.props.protoBar ?? true,
+      ads, viewLabel: ads ? 'Ad-enabled view' : 'Clean view, no ads',
+      toggleText: ads ? 'Hide ads' : 'Show ads',
+      trackBg: ads ? '#3E8A3E' : '#6E665A', knobX: ads ? 19 : 3,
+      toggleAds: () => { if (this.props.onToggleAds) this.props.onToggleAds(); },
+      wide: !narrow, narrow,
+      padY: scrolled ? 6 : 14, logoSize: scrolled ? 24 : 30, mark: scrolled ? 32 : 40,
+      shadow: scrolled ? '0 4px 16px rgba(34,32,28,.08)' : 'none',
+      homeLine: cur === 'home' ? '#C2410C' : 'transparent',
+      megaLine: megaOpen ? '#C2410C' : 'transparent', megaRot: megaOpen ? 180 : 0,
+      nav: NAV.map((n) => ({ label: n[1], href: n[2], line: cur === n[0] ? '#C2410C' : 'transparent' })),
+      megaOpen, mobileOpen, searchOpen,
+      toggleMega: () => this.setState({ mega: !megaOpen, search: false }),
+      toggleSearch: () => this.setState({ search: !searchOpen, mega: false }),
+      openMobile: () => this.setState({ mobile: true }),
+      closeMobile: () => this.setState({ mobile: false }),
+      megaCats: [
+        { label: 'Soups & Stews', href: 'Category.dc.html' }, { label: 'Rice Dishes', href: 'Category.dc.html' },
+        { label: 'Swallow', href: 'Category.dc.html' }, { label: 'Small Chops & Snacks', href: 'Category.dc.html' },
+        { label: 'Breakfast', href: 'Category.dc.html' }, { label: 'Drinks', href: 'Category.dc.html' },
+        { label: 'Desserts', href: 'Category.dc.html' }, { label: 'All recipes A–Z', href: 'RecipeIndex.dc.html' }
+      ],
+      regions: ['Yoruba', 'Igbo', 'Hausa / Northern', 'Niger Delta', 'Edo', 'Efik / Ibibio'],
+      occasions: ['Owambe and parties', 'Christmas', 'Sallah', 'Weeknight dinners', 'Lunch box']
+    };
+  }
+}
+</script>
+</body>
+</html>
