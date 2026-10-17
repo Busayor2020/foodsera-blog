@@ -213,7 +213,7 @@ Design decisions (these settle conflicts between the prototype and the rules abo
 
 Work through these in order and tick each box here once its checks pass.
 
-- [ ] 1. Foundation: ESLint, Prettier, Vitest scripts; Tailwind tokens from the design; fonts; root layout; Header, MegaMenu, MobileMenu, Footer, Breadcrumbs; 404
+- [x] 1. Foundation: ESLint, Prettier, Vitest scripts; Tailwind tokens from the design; fonts; root layout; Header, MegaMenu, MobileMenu, Footer, Breadcrumbs; 404
 - [ ] 2. Content layer: zod schema, loaders, 3 sample recipes (egusi soup, jollof rice, puff-puff) with placeholder images
 - [ ] 3. Recipe page, complete, with print view, servings adjuster and JSON-LD
 - [ ] 4. Homepage
