@@ -1,0 +1,7 @@
+build/
+.react-router/
+design/
+.agents/
+node_modules/
+package-lock.json
+CLAUDE.md
