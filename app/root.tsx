@@ -8,7 +8,28 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
-import "./app.css";
+import "./styles/app.css";
+
+import figtreeLatin from "./styles/fonts/figtree-latin.woff2?url";
+import youngSerifLatin from "./styles/fonts/young-serif-latin.woff2?url";
+
+export const links: Route.LinksFunction = () => [
+  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+  {
+    rel: "preload",
+    href: figtreeLatin,
+    as: "font",
+    type: "font/woff2",
+    crossOrigin: "anonymous",
+  },
+  {
+    rel: "preload",
+    href: youngSerifLatin,
+    as: "font",
+    type: "font/woff2",
+    crossOrigin: "anonymous",
+  },
+];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -16,6 +37,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#FBF5EA" />
         <Meta />
         <Links />
       </head>

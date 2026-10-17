@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+/* Fonts: self-hosted, see ./fonts/README.md */
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./fonts/figtree-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("./fonts/figtree-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Young Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/young-serif-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Young Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/young-serif-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+/*
+ * Design tokens from the Claude Design handoff (design/Brand.dc.html and the
+ * page-level styles). Tailwind's default palette, radii and type scale are
+ * cleared so only these values exist.
+ */
+@theme {
+  /* Colour */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-palm: #c2410c;
+  --color-palm-text: #b3390e;
+  --color-palm-deep: #8a2a08;
+  --color-plantain: #f2b632;
+  --color-plantain-soft: #fcebc0;
+  --color-plantain-line: #ebcb7a;
+  --color-ugu: #2f6b3a;
+  --color-ugu-deep: #2f5a34;
+  --color-ugu-soft: #e3eedf;
+  --color-ugu-line: #bfd6b8;
+  --color-leaf: #3e8a3e;
+  --color-pepper: #a3161b;
+  --color-cream: #fbf5ea;
+  --color-paper: #fffdf8;
+  --color-sand: #f6ebd6;
+  --color-charcoal: #22201c;
+  --color-ink-soft: #3f3a33;
+  --color-ink-muted: #4a443b;
+  --color-muted: #5e574d;
+  --color-checked: #8a8275;
+  --color-line: #e8decb;
+  --color-line-soft: #f0e7d6;
+  --color-line-dashed: #e2d6bf;
+  --color-line-strong: #d9cbb0;
+  --color-field-line: #b9ac95;
+  --color-footer-text: #f3eadb;
+  --color-footer-muted: #d8cdba;
+  --color-footer-fine: #bfb3a0;
+  --color-footer-rule: #3a3630;
+  --color-star: #e0a21b;
+  --color-star-edge: #b57f0e;
+  --color-ad-bg: #f2f1ef;
+  --color-ad-line: #dad8d4;
+  --color-ad-label: #66645f;
+
+  /* Type */
+  --font-serif: "Young Serif", Georgia, serif;
+  --font-sans: "Figtree", "Segoe UI", system-ui, sans-serif;
+
+  --text-*: initial;
+  --text-2xs: 11px;
+  --text-2xs--line-height: 1.35;
+  --text-xs: 12px;
+  --text-xs--line-height: 1.4;
+  --text-eyebrow: 13px;
+  --text-eyebrow--line-height: 1.4;
+  --text-sm: 14px;
+  --text-sm--line-height: 1.5;
+  --text-md: 15px;
+  --text-md--line-height: 1.5;
+  --text-base: 16px;
+  --text-base--line-height: 1.5;
+  --text-body: 17px;
+  --text-body--line-height: 1.6;
+  --text-lg: 18px;
+  --text-lg--line-height: 1.6;
+  --text-lead: 19px;
+  --text-lead--line-height: 1.6;
+  --text-xl: 20px;
+  --text-xl--line-height: 1.2;
+  --text-h3: 22px;
+  --text-h3--line-height: 1.25;
+  --text-2xl: 26px;
+  --text-2xl--line-height: 1.2;
+  --text-3xl: 30px;
+  --text-3xl--line-height: 1.15;
+  --text-h2: clamp(28px, 3.4vw, 38px);
+  --text-h2--line-height: 1.15;
+  --text-display: clamp(36px, 5vw, 54px);
+  --text-display--line-height: 1.05;
+
+  --tracking-eyebrow: 0.08em;
+  --tracking-label: 0.1em;
+
+  /* Radius (pills and circles use rounded-full) */
+  --radius-*: initial;
+  --radius-xs: 4px;
+  --radius-ad: 10px;
+  --radius-field: 12px;
+  --radius-tile: 14px;
+  --radius-card: 16px;
+  --radius-panel: 18px;
+  --radius-block: 20px;
+  --radius-feature: 22px;
+  --radius-section: 24px;
+  --radius-hero: 28px;
+
+  /* Shadow */
+  --shadow-*: initial;
+  --shadow-header: 0 4px 16px rgb(34 32 28 / 0.08);
+  --shadow-menu: 0 18px 40px rgb(34 32 28 / 0.14);
+  --shadow-banner: 0 12px 36px rgb(34 32 28 / 0.18);
+  --shadow-anchor: 0 -4px 14px rgb(0 0 0 / 0.08);
+
+  /* Layout. Spacing keeps Tailwind's 4px base: 6px = 1.5, 14px = 3.5 etc. */
+  --container-header: 1280px;
+  --container-page: 1200px;
+  --container-narrow: 1100px;
+  --container-prose: 760px;
+  --container-menu: 640px;
+
+  /* Header bar: 44px controls + 14px padding top and bottom + 1px border */
+  --spacing-header: 73px;
+
+  /* md (768) is Tailwind's default. Sidebar shows from lg, full nav from nav. */
+  --breakpoint-lg: 1080px;
+  --breakpoint-nav: 1260px;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: var(--spacing-header);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  a {
+    color: var(--color-palm-text);
+  }
+  a:hover {
+    color: var(--color-palm-deep);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus-ring, var(--color-ugu));
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/*
+ * On dark surfaces the ugu ring is about 2.6:1, under WCAG's 3:1 for focus
+ * indicators, so they switch it to plantain.
+ */
+@utility focus-on-dark {
+  --focus-ring: var(--color-plantain);
+}
+
+/* Small uppercase label above groups ("By category", "Error 404"). */
+@utility eyebrow {
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}

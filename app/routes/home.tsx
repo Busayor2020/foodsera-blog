@@ -14,7 +14,7 @@ export function meta(_: Route.MetaArgs) {
 // Placeholder until the homepage is built in Phase 4.
 export default function Home() {
   return (
-    <div className="max-w-page mx-auto px-5 py-14">
+    <div className="mx-auto max-w-page px-5 py-14">
       <h1 className="text-display">Foodsera</h1>
     </div>
   );
