@@ -196,6 +196,11 @@ Consent and policy:
 - One logical change per commit. Never commit `.env` files or build output.
 - No Claude author, co-author or attribution lines, ever.
 
+### Repository
+
+- Remote: https://github.com/Busayor2020/foodsera-blog (`origin`, default branch `main`).
+- After each build phase passes typecheck, lint, test and build, commit and push to `origin main`. Never force-push.
+
 ## Build phases
 
 Work through these in order and tick each box here once its checks pass.
