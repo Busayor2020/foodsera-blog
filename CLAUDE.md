@@ -43,7 +43,7 @@ A task is done only when typecheck, lint, test and build all pass.
 app/
   root.tsx              html shell, global meta, fonts, AdSense script loader
   routes.ts             route config
-  routes/               home, recipe, category, region, search, recipe-index,
+  routes/               home, recipe, category, region, occasion, search, recipe-index,
                         about, contact, privacy, cookies, terms, 404
   components/
     layout/             Header, MegaMenu, MobileMenu, Footer, Breadcrumbs, Sidebar
@@ -53,7 +53,8 @@ app/
     ads/                AdSlot, InFeedAd, AnchorAd
     ui/                 Button, Chip, Accordion, Input, Badge
   lib/
-    content/            getAllRecipes, getRecipe, getCategories, getRegions
+    content/            getAllRecipes, getRecipe, getCategories, getRegions,
+                        getOccasions
                         (the ONLY module that reads content/)
     seo/                meta helpers, JSON-LD builders (Recipe, BreadcrumbList, Organization)
     ads/                ad config, slot ids, which routes allow ads
@@ -63,6 +64,7 @@ content/
   recipes/<slug>.md
   categories.json
   regions.json
+  occasions.json
   pages/                about, privacy, cookies, terms (Markdown)
 public/
   images/recipes/<slug>/
@@ -124,7 +126,7 @@ The Markdown body is the short intro story. Keep it skimmable.
 ## Page features
 
 - Recipe page: breadcrumbs, quick facts bar, Jump to Recipe (smooth scroll to `#recipe`), Print (print stylesheet shows only the recipe card), Ingredients Explained, step photos, tips, recipe card with servings adjuster (scales quantities, shows friendly fractions like 1½) and ingredient checkboxes, serve-with, FAQ accordion, reviews UI, related recipes, desktop sidebar.
-- Category and region pages: filter chips (time, difficulty, region, vegetarian) and sort, synced to URL search params so filtered views can be shared. Filtering runs on the client over prerendered data.
+- Category, region and occasion pages (occasion slugs: `party`, `christmas`, `sallah`, `weeknight`, `lunch-box`, linked from the menus' "By occasion" group): filter chips (time, difficulty, region, vegetarian) and sort, synced to URL search params so filtered views can be shared. Filtering runs on the client over prerendered data.
 - Search: `/search?q=` using the prebuilt Fuse index, with a helpful empty state.
 - Recipe index: A to Z, grouped by category.
 - Contact form, newsletter and reviews need a backend. Build the UI with one submit handler marked `TODO(backend)`. Do not invent a backend.
@@ -134,7 +136,7 @@ The Markdown body is the short intro story. Keep it skimmable.
 - Every route exports `meta` with a unique title (`Egusi Soup | Foodsera`), description, canonical URL on `https://foodsera.com`, Open Graph and Twitter tags.
 - Recipe pages output JSON-LD `Recipe` schema: name, image, description, author, datePublished, dateModified, prepTime, cookTime, totalTime (ISO 8601 durations), recipeYield, recipeCategory, recipeCuisine "Nigerian", recipeIngredient, recipeInstructions as HowToStep, aggregateRating, nutrition when present. Add `BreadcrumbList` on every page below home.
 - Generate `sitemap.xml` at build time from all routes. `robots.txt` points to it.
-- Clean URLs: `/recipes/<slug>`, `/category/<slug>`, `/region/<slug>`. One canonical form, no trailing-slash duplicates.
+- Clean URLs: `/recipes/<slug>`, `/category/<slug>`, `/region/<slug>`, `/occasion/<slug>`. One canonical form, no trailing-slash duplicates.
 - Images: always set width and height, `loading="lazy"` except the hero (eager, `fetchpriority="high"`), WebP or AVIF with sensible sizes.
 
 ## Ads (Google AdSense)
@@ -177,6 +179,12 @@ Consent and policy:
 - For EEA, UK and Swiss visitors, use Google's certified consent message from AdSense "Privacy & messaging". Do not build a custom consent system for ads. The design's cookie banner is only for non-ad cookies, if any.
 - `public/ads.txt` holds the publisher line once the account is approved.
 
+Design decisions (these settle conflicts between the prototype and the rules above):
+
+- Placeholder ads: `placeholder` mode renders only the design's ad frame: Ad neutral background, its border, 10px radius, the reserved size for the format and the small grey "Advertisement" label, with the format and size in the middle (for example "Leaderboard · 728×90"). Do not build the prototype's sample creatives: no advertiser names, logos, product copy, images or call-to-action buttons.
+- Unfilled slots: every slot always reserves its format's height at each breakpoint. When AdSense marks a slot unfilled (`data-ad-status="unfilled"` on the `<ins>`), collapse it only if the whole slot is below the visible screen at that moment. If it is on screen, or above it, keep the neutral frame and label so nothing jumps. This replaces the prototype's note that unfilled slots always collapse.
+- Cookie banner: Google's consent message from AdSense "Privacy & messaging" handles all ad consent. Build the design's `CookieBanner` component but keep it switched off at launch with a single config flag. It is only for non-ad cookies added later, so when it is turned on its copy and toggles must not mention ads or Google (the prototype's copy does and must be rewritten).
+
 ## Performance budget
 
 - Lighthouse mobile: Performance 90+, Accessibility 95+, SEO 100, CLS under 0.1.
@@ -209,7 +217,7 @@ Work through these in order and tick each box here once its checks pass.
 - [ ] 2. Content layer: zod schema, loaders, 3 sample recipes (egusi soup, jollof rice, puff-puff) with placeholder images
 - [ ] 3. Recipe page, complete, with print view, servings adjuster and JSON-LD
 - [ ] 4. Homepage
-- [ ] 5. Category, region, search and recipe index pages
+- [ ] 5. Category, region, occasion, search and recipe index pages
 - [ ] 6. About, contact, privacy, cookies, terms
 - [ ] 7. Ads system in placeholder mode on every allowed page, matching the ad prototype
 - [ ] 8. SEO: meta on every route, sitemap, robots, rich results check
