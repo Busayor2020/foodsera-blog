@@ -96,7 +96,7 @@ export function Header({ featured }: HeaderProps) {
     <>
       {/* The header is fixed, so this holds its full height in the page.
           Shrinking on scroll then never moves the content below. */}
-      <div aria-hidden="true" className="h-header" />
+      <div aria-hidden="true" className="h-header-height" />
       <header
         className={`fixed inset-x-0 top-0 z-50 border-b border-line bg-cream transition-shadow duration-200 ${scrolled ? "shadow-header" : ""}`}
       >

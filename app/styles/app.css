@@ -158,8 +158,8 @@
   --container-prose: 760px;
   --container-menu: 640px;
 
-  /* Header bar: 44px controls + 14px padding top and bottom + 1px border */
-  --spacing-header: 73px;
+  /* Header bar height (not "header", which would clash with max-w-header): 44px controls + 14px padding top and bottom + 1px border */
+  --spacing-header-height: 73px;
 
   /* md (768) is Tailwind's default. Sidebar shows from lg, full nav from nav. */
   --breakpoint-lg: 1080px;
@@ -168,7 +168,7 @@
 
 @layer base {
   html {
-    scroll-padding-top: var(--spacing-header);
+    scroll-padding-top: var(--spacing-header-height);
     -webkit-text-size-adjust: 100%;
   }
 

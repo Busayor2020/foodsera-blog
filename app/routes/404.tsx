@@ -86,7 +86,7 @@ export default function NotFound() {
         >
           <EmptyPot />
         </div>
-        <div className="flex flex-[1_1_380px] flex-col gap-3.5">
+        <div className="flex min-w-0 flex-[1_1_380px] flex-col gap-3.5">
           <span className="text-eyebrow font-bold tracking-label text-palm-deep uppercase">
             Error 404
           </span>
