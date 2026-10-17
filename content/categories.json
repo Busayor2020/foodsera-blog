@@ -1,0 +1,9 @@
+[
+  { "slug": "soups-and-stews", "name": "Soups & Stews" },
+  { "slug": "rice-dishes", "name": "Rice Dishes" },
+  { "slug": "swallow", "name": "Swallow" },
+  { "slug": "small-chops-and-snacks", "name": "Small Chops & Snacks" },
+  { "slug": "breakfast", "name": "Breakfast" },
+  { "slug": "drinks", "name": "Drinks" },
+  { "slug": "desserts", "name": "Desserts" }
+]

@@ -1,0 +1,8 @@
+[
+  { "slug": "yoruba", "name": "Yoruba" },
+  { "slug": "igbo", "name": "Igbo" },
+  { "slug": "hausa-northern", "name": "Hausa / Northern" },
+  { "slug": "niger-delta", "name": "Niger Delta" },
+  { "slug": "edo", "name": "Edo" },
+  { "slug": "efik-ibibio", "name": "Efik / Ibibio" }
+]

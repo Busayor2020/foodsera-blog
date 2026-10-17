@@ -178,8 +178,10 @@
     line-height: var(--text-body--line-height);
   }
 
+  /* Links are underlined unless a component says otherwise, as in the design. */
   a {
     color: var(--color-palm-text);
+    text-decoration-line: underline;
   }
   a:hover {
     color: var(--color-palm-deep);
@@ -196,6 +198,11 @@
 
   p {
     text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
   }
 
   :focus-visible {

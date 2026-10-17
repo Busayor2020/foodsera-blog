@@ -1,13 +1,8 @@
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 
 import type { Route } from "./+types/root";
+import { Logo } from "./components/layout/Logo";
+import { SiteShell } from "./components/layout/SiteShell";
 import "./styles/app.css";
 
 import figtreeLatin from "./styles/fonts/figtree-latin.woff2?url";
@@ -51,31 +46,32 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <SiteShell>
+      <Outlet />
+    </SiteShell>
+  );
 }
 
+// Unknown URLs are handled by the 404 route, so this only catches real errors.
+// It skips the header and footer in case one of them is what failed.
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
-
-  if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
-  }
+  const stack =
+    import.meta.env.DEV && error instanceof Error ? error.stack : undefined;
 
   return (
-    <main className="container mx-auto p-4 pt-16">
-      <h1>{message}</h1>
-      <p>{details}</p>
+    <main
+      id="main"
+      className="mx-auto flex max-w-narrow flex-col gap-4 px-5 pt-10 pb-22"
+    >
+      <Logo />
+      <h1 className="mt-8 text-display">Something went wrong</h1>
+      <p className="text-lead text-ink-soft">
+        Sorry, this page did not load. Try again, or go back to the{" "}
+        <a href="/">homepage</a>.
+      </p>
       {stack && (
-        <pre className="w-full overflow-x-auto p-4">
+        <pre className="overflow-x-auto text-sm">
           <code>{stack}</code>
         </pre>
       )}
