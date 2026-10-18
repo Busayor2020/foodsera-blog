@@ -2,21 +2,19 @@ import { ChevronDown, Menu, Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Form, Link, useLocation } from "react-router";
 
-import {
-  getCategories,
-  getOccasions,
-  getRegions,
-} from "~/lib/content/taxonomy";
+import type { RecipeSummary, SiteNav } from "~/lib/content/types";
 import { categoryPath, searchPath } from "~/lib/paths";
 
 import { Logo } from "./Logo";
-import { MegaMenu, type FeaturedRecipe } from "./MegaMenu";
+import { MegaMenu } from "./MegaMenu";
 import { MobileMenu } from "./MobileMenu";
 
 type Panel = "mega" | "search" | "mobile";
 
 interface HeaderProps {
-  featured?: FeaturedRecipe;
+  nav: SiteNav;
+  /** "Recipe of the week", shown in the mega menu. */
+  featured?: RecipeSummary;
 }
 
 /** Which main-nav item is underlined for a given URL. */
@@ -34,11 +32,9 @@ function underline(active: boolean) {
   return active ? "border-palm" : "border-transparent";
 }
 
-export function Header({ featured }: HeaderProps) {
+export function Header({ nav, featured }: HeaderProps) {
   const { pathname } = useLocation();
-  const categories = getCategories();
-  const regions = getRegions();
-  const occasions = getOccasions();
+  const { categories, regions, occasions } = nav;
 
   // Panels remember the page they were opened on, so navigating closes them
   // without an effect.

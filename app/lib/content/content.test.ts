@@ -5,8 +5,10 @@ import {
   getAllRecipes,
   getContentPaths,
   getFeaturedRecipe,
+  getOccasions,
   getPopularRecipes,
   getRecipe,
+  getRegions,
   getSampleRecipeSlugs,
   toRecipeSummary,
 } from "./index";
@@ -533,5 +535,28 @@ describe("loaders", () => {
 describe("the real content folder", () => {
   it("is valid", () => {
     expect(() => getAllRecipes()).not.toThrow();
+  });
+});
+
+describe("the real terms", () => {
+  it("match the region values allowed in recipe frontmatter", () => {
+    expect(getRegions().map((r) => r.slug)).toEqual([
+      "yoruba",
+      "igbo",
+      "hausa-northern",
+      "niger-delta",
+      "edo",
+      "efik-ibibio",
+    ]);
+  });
+
+  it("include the occasion slugs listed in CLAUDE.md", () => {
+    expect(getOccasions().map((o) => o.slug)).toEqual([
+      "party",
+      "christmas",
+      "sallah",
+      "weeknight",
+      "lunch-box",
+    ]);
   });
 });

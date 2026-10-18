@@ -132,3 +132,11 @@ export interface SiteNav {
   regions: Term[];
   occasions: Term[];
 }
+
+/** What the root loader gives every page: menus and the recipe highlights. */
+export interface SiteData {
+  nav: SiteNav;
+  /** "Recipe of the week". */
+  featured?: RecipeSummary;
+  popular: RecipeSummary[];
+}

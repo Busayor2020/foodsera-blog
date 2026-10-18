@@ -2,6 +2,7 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
+import { NAV } from "~/test/fixtures";
 import { renderWithRouter } from "~/test/render";
 
 import { Footer } from "./Footer";
@@ -10,6 +11,7 @@ describe("Footer", () => {
   it("hides social icons that have no URL", () => {
     renderWithRouter(
       <Footer
+        categories={NAV.categories}
         socialLinks={[
           {
             network: "instagram",
@@ -29,13 +31,13 @@ describe("Footer", () => {
   });
 
   it("shows no social links when none are configured", () => {
-    renderWithRouter(<Footer socialLinks={[]} />);
+    renderWithRouter(<Footer categories={NAV.categories} socialLinks={[]} />);
     expect(screen.queryByRole("link", { name: /Foodsera on/ })).toBeNull();
   });
 
   it("confirms a newsletter sign-up", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Footer socialLinks={[]} />);
+    renderWithRouter(<Footer categories={NAV.categories} socialLinks={[]} />);
 
     await user.type(screen.getByLabelText("Email address"), "ada@example.com");
     await user.click(screen.getByRole("button", { name: "Subscribe" }));

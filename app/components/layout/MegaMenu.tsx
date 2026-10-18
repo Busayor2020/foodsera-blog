@@ -1,28 +1,23 @@
 import type { Ref } from "react";
 import { Link } from "react-router";
 
-import type { Term } from "~/lib/content/taxonomy";
+import type { RecipeSummary, Term } from "~/lib/content/types";
+import { RECIPE_HERO } from "~/lib/images";
 import {
   categoryPath,
   occasionPath,
   recipeIndexPath,
+  recipePath,
   regionPath,
 } from "~/lib/paths";
-
-export interface FeaturedRecipe {
-  title: string;
-  href: string;
-  imageSrc: string;
-  imageAlt: string;
-}
 
 interface MegaMenuProps {
   id: string;
   categories: Term[];
   regions: Term[];
   occasions: Term[];
-  /** "Recipe of the week". Hidden until the content layer supplies one. */
-  featured?: FeaturedRecipe;
+  /** "Recipe of the week". */
+  featured?: RecipeSummary;
   onNavigate: () => void;
   ref?: Ref<HTMLDivElement>;
 }
@@ -102,15 +97,16 @@ export function MegaMenu({
         />
         {featured && (
           <Link
-            to={featured.href}
+            to={recipePath(featured.slug)}
             className="flex flex-col gap-2.5 rounded-card bg-plantain-soft p-3.5 text-charcoal no-underline hover:text-charcoal"
           >
             <img
-              src={featured.imageSrc}
-              alt={featured.imageAlt}
-              width={320}
-              height={200}
+              src={featured.heroImage}
+              alt={featured.heroImageAlt}
+              width={RECIPE_HERO.width}
+              height={RECIPE_HERO.height}
               loading="lazy"
+              decoding="async"
               className="aspect-16/10 w-full rounded-field object-cover"
             />
             <span className="text-xs font-bold tracking-eyebrow text-palm-deep uppercase">

@@ -2,6 +2,7 @@ import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
+import { NAV, recipeSummary } from "~/test/fixtures";
 import { renderWithRouter } from "~/test/render";
 
 import { getNavSection, Header } from "./Header";
@@ -19,7 +20,7 @@ describe("getNavSection", () => {
 
 describe("Header", () => {
   it("renders both the full nav and the menu button, and CSS picks one", () => {
-    renderWithRouter(<Header />);
+    renderWithRouter(<Header nav={NAV} />);
     const nav = screen.getByRole("navigation", { name: "Main" });
     expect(
       within(nav).getByRole("link", { name: "Soups & Stews" }),
@@ -30,7 +31,7 @@ describe("Header", () => {
   });
 
   it("marks the current category as the current page", () => {
-    renderWithRouter(<Header />, { path: "/category/swallow" });
+    renderWithRouter(<Header nav={NAV} />, { path: "/category/swallow" });
     expect(screen.getByRole("link", { name: "Swallow" })).toHaveAttribute(
       "aria-current",
       "page",
@@ -42,7 +43,7 @@ describe("Header", () => {
 
   it("opens the search panel and focuses its input", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Header />);
+    renderWithRouter(<Header nav={NAV} />);
     const button = screen.getByRole("button", { name: "Search recipes" });
 
     await user.click(button);
@@ -55,7 +56,7 @@ describe("Header", () => {
 
   it("opens the mega menu from the keyboard and closes it with Escape", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Header />);
+    renderWithRouter(<Header nav={NAV} />);
     const button = screen.getByRole("button", { name: "Recipes" });
 
     button.focus();
@@ -76,9 +77,23 @@ describe("Header", () => {
     expect(button).toHaveFocus();
   });
 
+  it("shows the recipe of the week in the mega menu", async () => {
+    const user = userEvent.setup();
+    renderWithRouter(<Header nav={NAV} featured={recipeSummary()} />);
+
+    await user.click(screen.getByRole("button", { name: "Recipes" }));
+
+    const panel = document.getElementById("mega") as HTMLElement;
+    const card = within(panel).getByRole("link", {
+      name: /Recipe of the week/,
+    });
+    expect(card).toHaveAttribute("href", "/recipes/egusi-soup");
+    expect(card).toHaveTextContent("Egusi Soup with Ugu and Assorted Meat");
+  });
+
   it("closes the mega menu on a click outside", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Header />);
+    renderWithRouter(<Header nav={NAV} />);
 
     await user.click(screen.getByRole("button", { name: "Recipes" }));
     expect(document.getElementById("mega")).not.toBeNull();
@@ -89,7 +104,7 @@ describe("Header", () => {
 
   it("shows only one panel at a time", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Header />);
+    renderWithRouter(<Header nav={NAV} />);
 
     await user.click(screen.getByRole("button", { name: "Recipes" }));
     await user.click(screen.getByRole("button", { name: "Search recipes" }));

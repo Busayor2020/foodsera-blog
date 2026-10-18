@@ -1,6 +1,8 @@
 import { Form, Link } from "react-router";
 
+import { RecipeCard } from "~/components/recipe/RecipeCard";
 import { recipeIndexPath, searchPath } from "~/lib/paths";
+import { useSiteData } from "~/lib/site-data";
 
 import type { Route } from "./+types/404";
 
@@ -77,6 +79,7 @@ function EmptyPot() {
 }
 
 export default function NotFound() {
+  const { popular } = useSiteData();
   return (
     <div className="mx-auto flex max-w-narrow flex-col gap-12 px-5 pt-14 pb-22">
       <section className="flex flex-wrap items-center gap-x-14 gap-y-8">
@@ -128,6 +131,20 @@ export default function NotFound() {
           </div>
         </div>
       </section>
+      {popular.length > 0 && (
+        <section aria-labelledby="popular" className="flex flex-col gap-5">
+          <h2 id="popular" className="text-3xl">
+            Popular recipes
+          </h2>
+          <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(230px,100%),1fr))] gap-5">
+            {popular.map((recipe) => (
+              <li key={recipe.slug}>
+                <RecipeCard recipe={recipe} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }

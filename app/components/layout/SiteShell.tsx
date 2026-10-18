@@ -1,10 +1,13 @@
 import type { ReactNode } from "react";
 
+import { useSiteData } from "~/lib/site-data";
+
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 
 /** Skip link, header, the page's single <main>, and footer. */
 export function SiteShell({ children }: { children: ReactNode }) {
+  const { nav, featured } = useSiteData();
   return (
     <>
       <a
@@ -13,11 +16,11 @@ export function SiteShell({ children }: { children: ReactNode }) {
       >
         Skip to content
       </a>
-      <Header />
+      <Header nav={nav} featured={featured} />
       <main id="main" tabIndex={-1} className="outline-none">
         {children}
       </main>
-      <Footer />
+      <Footer categories={nav.categories} />
     </>
   );
 }

@@ -3,6 +3,13 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import type { Route } from "./+types/root";
 import { Logo } from "./components/layout/Logo";
 import { SiteShell } from "./components/layout/SiteShell";
+import {
+  getFeaturedRecipe,
+  getPopularRecipes,
+  getSiteNav,
+  toRecipeSummary,
+} from "./lib/content";
+import type { SiteData } from "./lib/content/types";
 import "./styles/app.css";
 
 import figtreeLatin from "./styles/fonts/figtree-latin.woff2?url";
@@ -25,6 +32,24 @@ export const links: Route.LinksFunction = () => [
     crossOrigin: "anonymous",
   },
 ];
+
+// Runs at build time for every prerendered page; the content code never
+// reaches the browser. Read it with useSiteData().
+export function loader(): SiteData {
+  const featured = getFeaturedRecipe();
+  return {
+    nav: getSiteNav(),
+    featured: featured && toRecipeSummary(featured),
+    popular: getPopularRecipes(4).map(toRecipeSummary),
+  };
+}
+
+// The data is fixed at build time. Never refetch it, so client navigation
+// doesn't request .data files that don't exist (unknown URLs, or search
+// params changing on the same page).
+export function shouldRevalidate() {
+  return false;
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

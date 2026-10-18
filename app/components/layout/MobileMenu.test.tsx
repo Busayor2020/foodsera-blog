@@ -2,6 +2,7 @@ import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
+import { NAV } from "~/test/fixtures";
 import { renderWithRouter } from "~/test/render";
 
 import { Header } from "./Header";
@@ -13,7 +14,7 @@ function getDialog() {
 describe("MobileMenu", () => {
   it("opens as a modal dialog with the menu links", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Header />);
+    renderWithRouter(<Header nav={NAV} />);
     const button = screen.getByRole("button", { name: "Open menu" });
 
     await user.click(button);
@@ -31,7 +32,7 @@ describe("MobileMenu", () => {
 
   it("closes on Escape and returns focus to the menu button", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Header />);
+    renderWithRouter(<Header nav={NAV} />);
     const button = screen.getByRole("button", { name: "Open menu" });
 
     await user.click(button);
@@ -44,7 +45,7 @@ describe("MobileMenu", () => {
 
   it("closes with the close button", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Header />);
+    renderWithRouter(<Header nav={NAV} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
     await user.click(screen.getByRole("button", { name: "Close menu" }));
@@ -54,7 +55,7 @@ describe("MobileMenu", () => {
 
   it("closes when a link is chosen", async () => {
     const user = userEvent.setup();
-    renderWithRouter(<Header />, { path: "/about" });
+    renderWithRouter(<Header nav={NAV} />, { path: "/about" });
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
     await user.click(

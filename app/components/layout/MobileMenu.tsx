@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { Form, Link } from "react-router";
 
 import { Chip } from "~/components/ui/Chip";
-import type { Term } from "~/lib/content/taxonomy";
+import type { Term } from "~/lib/content/types";
 import {
   categoryPath,
   occasionPath,

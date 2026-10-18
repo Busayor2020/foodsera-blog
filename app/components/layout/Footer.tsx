@@ -1,14 +1,15 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router";
 
-import { getCategories } from "~/lib/content/taxonomy";
 import { categoryPath, recipeIndexPath, searchPath } from "~/lib/paths";
+import type { Term } from "~/lib/content/types";
 import { SITE_TAGLINE, SOCIAL_LINKS, type SocialLink } from "~/lib/site";
 
 import { Logo } from "./Logo";
 import { SocialIcon } from "./SocialIcon";
 
 interface FooterProps {
+  categories: Term[];
   /** Defaults to the site config. Only links with a URL are shown. */
   socialLinks?: SocialLink[];
 }
@@ -22,7 +23,10 @@ function ColumnTitle({ children }: { children: string }) {
   return <span className="mb-1.5 eyebrow text-plantain">{children}</span>;
 }
 
-export function Footer({ socialLinks = SOCIAL_LINKS }: FooterProps) {
+export function Footer({
+  categories,
+  socialLinks = SOCIAL_LINKS,
+}: FooterProps) {
   const social = socialLinks.filter((link) => link.href);
   return (
     <footer className="bg-charcoal text-base text-footer-text focus-on-dark">
@@ -50,7 +54,7 @@ export function Footer({ socialLinks = SOCIAL_LINKS }: FooterProps) {
 
         <nav aria-label="Recipe categories" className="flex flex-col gap-1">
           <ColumnTitle>Recipes</ColumnTitle>
-          {getCategories().map((c) => (
+          {categories.map((c) => (
             <Link
               key={c.slug}
               to={categoryPath(c.slug)}
