@@ -5,8 +5,13 @@ import { categoryPath } from "~/lib/paths";
 
 const TILE_IMAGE = { width: 600, height: 600 };
 
+export type CategoryTile = Pick<
+  Category,
+  "slug" | "name" | "image" | "imageAlt"
+>;
+
 /** "Browse by category": a photo tile for each category. */
-export function CategoryTiles({ categories }: { categories: Category[] }) {
+export function CategoryTiles({ categories }: { categories: CategoryTile[] }) {
   return (
     <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(150px,45%),1fr))] gap-4">
       {categories.map((category) => (

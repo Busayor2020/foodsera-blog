@@ -2,31 +2,43 @@
   {
     "slug": "yoruba",
     "name": "Yoruba",
+    "intro": "Food from South West Nigeria: rich pepper stews, efo riro, amala with ewedu and gbegiri, and the party jollof everyone argues about.",
+    "introDraft": true,
     "dishes": "Efo riro, amala and ewedu, ofada stew, gbegiri"
   },
   {
     "slug": "igbo",
     "name": "Igbo",
+    "intro": "Food from South East Nigeria: ofe onugbu, oha soup, abacha and nkwobi, built on bold soups and fresh leaves.",
+    "introDraft": true,
     "dishes": "Ofe onugbu, oha soup, abacha, nkwobi"
   },
   {
     "slug": "hausa-northern",
     "name": "Hausa / Northern",
+    "intro": "Food from Northern Nigeria: suya, tuwo shinkafa, miyan kuka and masa, with plenty of spice, grains and grilled meat.",
+    "introDraft": true,
     "dishes": "Suya, tuwo shinkafa, miyan kuka, masa"
   },
   {
     "slug": "niger-delta",
     "name": "Niger Delta",
+    "intro": "Food from the Niger Delta: banga soup, fisherman soup, starch and pepper soup, full of fresh fish and palm fruit.",
+    "introDraft": true,
     "dishes": "Banga soup, fisherman soup, starch, plantain pottage"
   },
   {
     "slug": "edo",
     "name": "Edo",
+    "intro": "Food from Edo State: owo soup, black soup and groundnut soup, with deep flavours from local spices and leaves.",
+    "introDraft": true,
     "dishes": "Owo soup, black soup, groundnut soup"
   },
   {
     "slug": "efik-ibibio",
     "name": "Efik / Ibibio",
+    "intro": "Food from Cross River and Akwa Ibom: afang, edikang ikong and atama soup, known for generous greens and seafood.",
+    "introDraft": true,
     "dishes": "Afang, edikang ikong, atama soup, ekpang nkukwo"
   }
 ]

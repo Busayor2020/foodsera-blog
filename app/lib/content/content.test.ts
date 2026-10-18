@@ -5,6 +5,7 @@ import {
   getAllRecipes,
   getCategories,
   getContentPaths,
+  getDraftIntroTerms,
   getFeaturedRecipe,
   getOccasions,
   getPopularRecipes,
@@ -692,6 +693,57 @@ describe("category and region fields", () => {
     expect(problems.some((p) => p.startsWith("regions.json [0]: Unrecognized key"))).toBe(true);
   });
 
+  it("requires an intro on every term, with an optional draft flag and seoTitle", () => {
+    const options = makeFixture({
+      recipes: [],
+      terms: {
+        occasions: [
+          { slug: "party", name: "Parties", intro: "Food for a crowd.", introDraft: true, seoTitle: "Party Food | Foodsera" },
+          { slug: "weeknight", name: "Weeknight", intro: "Quick dinners." },
+        ],
+      },
+    });
+    expect(getOccasions(options)).toEqual([
+      { slug: "party", name: "Parties", intro: "Food for a crowd.", introDraft: true, seoTitle: "Party Food | Foodsera" },
+      { slug: "weeknight", name: "Weeknight", intro: "Quick dinners.", introDraft: false },
+    ]);
+
+    const problems = problemsFor({
+      recipes: [],
+      terms: {
+        regions: [{ slug: "yoruba", name: "Yoruba", intro: null }],
+        occasions: [{ slug: "party", name: "Parties", intro: "Food.", seoTitle: "x".repeat(71) }],
+      },
+    });
+    expect(problems).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/^regions.json \[0\].intro: /),
+        "occasions.json [0].seoTitle: must be 70 characters or fewer",
+      ]),
+    );
+  });
+
+  it("lists terms whose intro is still a draft", () => {
+    const options = makeFixture({
+      recipes: [],
+      terms: {
+        categories: [
+          { slug: "soups-and-stews", name: "Soups", intro: "Soup.", introDraft: true },
+          { slug: "rice-dishes", name: "Rice", intro: "Rice." },
+        ],
+        regions: [{ slug: "yoruba", name: "Yoruba", intro: "South West.", introDraft: true }],
+      },
+    });
+    expect(getDraftIntroTerms(options)).toEqual(["category/soups-and-stews", "region/yoruba"]);
+  });
+
+  it("gives recipes only the slug and name of their terms", () => {
+    const recipe = getAllRecipes()[0];
+    expect(Object.keys(recipe.category)).toEqual(["slug", "name"]);
+    expect(Object.keys(recipe.region)).toEqual(["slug", "name"]);
+    expect(recipe.occasions.every((o) => Object.keys(o).join() === "slug,name")).toBe(true);
+  });
+
   it("keeps the menu data to slug and name", () => {
     const nav = getSiteNav();
     expect(Object.keys(nav.categories[0])).toEqual(["slug", "name"]);
@@ -718,5 +770,11 @@ describe("the sample content", () => {
   it("gives every category a tile image and every region its dishes", () => {
     expect(getCategories().every((c) => c.image && c.imageAlt)).toBe(true);
     expect(getRegions().every((r) => r.dishes)).toBe(true);
+  });
+
+  it("keeps term intros short enough for a meta description", () => {
+    for (const term of [...getCategories(), ...getRegions(), ...getOccasions()]) {
+      expect(term.intro.length, term.slug).toBeLessThanOrEqual(160);
+    }
   });
 });

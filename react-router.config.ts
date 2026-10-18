@@ -3,7 +3,11 @@ import { join } from "node:path";
 
 import type { Config } from "@react-router/dev/config";
 
-import { getContentPaths, getSampleRecipeSlugs } from "./app/lib/content";
+import {
+  getContentPaths,
+  getDraftIntroTerms,
+  getSampleRecipeSlugs,
+} from "./app/lib/content";
 import { collectRoutePaths, contentPathsForRoutes } from "./app/lib/prerender";
 import routes from "./app/routes";
 
@@ -29,17 +33,26 @@ export default {
     const client = join(reactRouterConfig.buildDirectory, "client");
     await copyFile(join(client, "404", "index.html"), join(client, "404.html"));
 
+    // Placeholder content that must be replaced before launch.
     const samples = getSampleRecipeSlugs();
+    const drafts = getDraftIntroTerms();
+    const lines: string[] = [];
     if (samples.length > 0) {
-      console.warn(
-        [
-          "",
-          `\x1b[33m⚠ ${samples.length} sample recipe${samples.length === 1 ? " is" : "s are"} still in content/recipes (sample: true):`,
-          ...samples.map((slug) => `    - ${slug}`),
-          "  Replace or delete them before launch.\x1b[0m",
-          "",
-        ].join("\n"),
+      lines.push(
+        `⚠ ${samples.length} sample recipe${samples.length === 1 ? " is" : "s are"} still in content/recipes (sample: true):`,
+        ...samples.map((slug) => `    - ${slug}`),
+        "  Replace or delete them before launch.",
       );
+    }
+    if (drafts.length > 0) {
+      lines.push(
+        `⚠ ${drafts.length} term intro${drafts.length === 1 ? " is" : "s are"} still a draft (introDraft: true):`,
+        ...drafts.map((term) => `    - ${term}`),
+        "  Rewrite them in your own words, then remove introDraft.",
+      );
+    }
+    if (lines.length > 0) {
+      console.warn(["", `\x1b[33m${lines.join("\n")}\x1b[0m`, ""].join("\n"));
     }
   },
 } satisfies Config;

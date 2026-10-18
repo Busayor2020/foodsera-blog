@@ -13,7 +13,7 @@ import {
   termListSchema,
   type RecipeFrontmatter,
 } from "./schema";
-import type { Category, Recipe, Region, Term } from "./types";
+import type { Category, Occasion, Recipe, Region, Term } from "./types";
 
 export interface ContentProblem {
   file: string;
@@ -58,7 +58,7 @@ export interface ContentStore {
   recipes: Recipe[];
   categories: Category[];
   regions: Region[];
-  occasions: Term[];
+  occasions: Occasion[];
 }
 
 /** NFC-normalises every string, so the same word always has the same code points. */
@@ -194,8 +194,10 @@ export function loadContent({
     });
   }
 
-  // Then the checks that need other files.
-  const termIndex = (terms: Term[]) => new Map(terms.map((t) => [t.slug, t]));
+  // Then the checks that need other files. Recipes keep only each term's
+  // slug and name, so the term intros don't travel with every recipe card.
+  const termIndex = (terms: Term[]) =>
+    new Map(terms.map(({ slug, name }) => [slug, { slug, name }]));
   const categoryBySlug = termIndex(categories);
   const regionBySlug = termIndex(regions);
   const occasionBySlug = termIndex(occasions);

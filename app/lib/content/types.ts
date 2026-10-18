@@ -6,16 +6,28 @@ export interface Term {
   name: string;
 }
 
-export interface Category extends Term {
+/** A category, region or occasion, with what its own page needs. */
+export interface TermDetails extends Term {
+  /** The page intro, also used as the meta description. */
+  intro: string;
+  /** The intro is a placeholder still to be rewritten. */
+  introDraft: boolean;
+  /** Overrides the default "{name} Recipes | Foodsera" title tag. */
+  seoTitle?: string;
+}
+
+export interface Category extends TermDetails {
   /** Photo for the homepage "Browse by category" tile. */
   image?: string;
   imageAlt?: string;
 }
 
-export interface Region extends Term {
+export interface Region extends TermDetails {
   /** For example "Efo riro, amala and ewedu, ofada stew". */
   dishes?: string;
 }
+
+export type Occasion = TermDetails;
 
 export type Difficulty = "easy" | "medium" | "hard";
 

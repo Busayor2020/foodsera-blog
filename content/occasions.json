@@ -1,7 +1,35 @@
 [
-  { "slug": "party", "name": "Owambe and parties" },
-  { "slug": "christmas", "name": "Christmas" },
-  { "slug": "sallah", "name": "Sallah" },
-  { "slug": "weeknight", "name": "Weeknight dinners" },
-  { "slug": "lunch-box", "name": "Lunch box" }
+  {
+    "slug": "party",
+    "name": "Owambe and parties",
+    "intro": "Owambe food at home: party jollof, small chops, moi moi and the other dishes that feed a crowd and keep guests happy.",
+    "introDraft": true,
+    "seoTitle": "Nigerian Party Food Recipes | Foodsera"
+  },
+  {
+    "slug": "christmas",
+    "name": "Christmas",
+    "intro": "Christmas cooking, Nigerian style: jollof and fried rice, chicken, chin chin and zobo for the whole family.",
+    "introDraft": true
+  },
+  {
+    "slug": "sallah",
+    "name": "Sallah",
+    "intro": "Food for Sallah celebrations: rich rice dishes, grilled meat, masa and drinks to share with family and neighbours.",
+    "introDraft": true
+  },
+  {
+    "slug": "weeknight",
+    "name": "Weeknight dinners",
+    "intro": "Nigerian dinners for busy evenings: dependable stews, soups and rice dishes that fit around work and school.",
+    "introDraft": true,
+    "seoTitle": "Nigerian Weeknight Dinner Recipes | Foodsera"
+  },
+  {
+    "slug": "lunch-box",
+    "name": "Lunch box",
+    "intro": "Packable Nigerian food for school and work: moi moi, rice dishes and snacks that travel well.",
+    "introDraft": true,
+    "seoTitle": "Nigerian Lunch Box Recipes | Foodsera"
+  }
 ]

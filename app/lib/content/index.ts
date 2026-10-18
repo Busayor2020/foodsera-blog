@@ -3,9 +3,15 @@ import { join } from "node:path";
 import { categoryPath, occasionPath, recipePath, regionPath } from "../paths";
 
 import { loadContent, type ContentStore, type LoadOptions } from "./load";
-import type { Category,
-  Recipe, RecipeSummary, Region,
-  SiteNav, Term } from "./types";
+import type {
+  Category,
+  Occasion,
+  Recipe,
+  RecipeSummary,
+  Region,
+  SiteNav,
+  Term,
+} from "./types";
 
 // The only module that knows where content comes from. Everything else asks
 // these functions, so the source can later become a headless CMS.
@@ -55,7 +61,7 @@ export function getRegions(options?: LoadOptions): Region[] {
   return getContent(options).regions;
 }
 
-export function getOccasions(options?: LoadOptions): Term[] {
+export function getOccasions(options?: LoadOptions): Occasion[] {
   return getContent(options).occasions;
 }
 
@@ -156,6 +162,18 @@ export function getSampleRecipeSlugs(options?: LoadOptions): string[] {
   return getAllRecipes(options)
     .filter((r) => r.sample)
     .map((r) => r.slug);
+}
+
+/** Terms whose intro is still a draft (`introDraft: true`), as "category/swallow". */
+export function getDraftIntroTerms(options?: LoadOptions): string[] {
+  const { categories, regions, occasions } = getContent(options);
+  const drafts = (kind: string, terms: Occasion[]) =>
+    terms.filter((t) => t.introDraft).map((t) => `${kind}/${t.slug}`);
+  return [
+    ...drafts("category", categories),
+    ...drafts("region", regions),
+    ...drafts("occasion", occasions),
+  ];
 }
 
 /**

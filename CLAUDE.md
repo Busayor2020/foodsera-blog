@@ -151,7 +151,7 @@ nutritionNote: estimated, per serving, soup only   # optional
 nutrition: { calories: 610, protein: 38g, fat: 46g, carbs: 12g, fibre: 4g, sodium: 980mg }   # optional, every field optional
 ```
 
-`content/categories.json` entries are `{ slug, name, image?, imageAlt? }` (the image is the homepage tile photo and must exist in `public/`). `content/regions.json` entries are `{ slug, name, dishes? }` (dishes is the list on the homepage region tile). `content/occasions.json` entries are `{ slug, name }`.
+Every entry in `content/categories.json`, `content/regions.json` and `content/occasions.json` has `{ slug, name, intro, introDraft?, seoTitle? }`. `intro` is the term page intro and its meta description. `seoTitle` (max 70 chars) replaces the default `{name} Recipes | Foodsera` title tag. `introDraft: true` marks a placeholder intro written for layout: the production build lists every draft intro in its warning, next to the sample recipes, so each one is rewritten in Victor's own voice and the flag removed before launch. Categories add `image?, imageAlt?` (the homepage tile photo, which must exist in `public/`). Regions add `dishes?` (the list on the homepage region tile).
 
 The Markdown body is the short intro story. Keep it skimmable. It may link to other recipes (`[jollof rice](/recipes/jollof-rice)`); the build fails if a `/recipes/` link points to a recipe that doesn't exist. Markdown is rendered to HTML inside `lib/content` only, so the Markdown library never reaches the browser bundle.
 

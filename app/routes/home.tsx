@@ -1,10 +1,13 @@
 import { AdPosition } from "~/components/ads/AdPosition";
-import { CategoryTiles } from "~/components/home/CategoryTiles";
+import {
+  CategoryTiles,
+  type CategoryTile,
+} from "~/components/home/CategoryTiles";
 import { HomeHero } from "~/components/home/HomeHero";
 import { HomeSection } from "~/components/home/HomeSection";
 import { NewsletterBand } from "~/components/home/NewsletterBand";
 import { RecipeGrid } from "~/components/home/RecipeGrid";
-import { RegionTiles } from "~/components/home/RegionTiles";
+import { RegionTiles, type RegionTile } from "~/components/home/RegionTiles";
 import {
   getCategories,
   getFeaturedRecipe,
@@ -37,8 +40,20 @@ export function loader() {
     },
     popular: getPopularRecipes(POPULAR_LIMIT, { exclude }).map(toRecipeSummary),
     quick: getQuickRecipes(QUICK_LIMIT, { exclude }).map(toRecipeSummary),
-    categories: getCategories(),
-    regions: getRegions(),
+    // Only what the tiles show, not each term's page intro.
+    categories: getCategories().map(
+      ({ slug, name, image, imageAlt }): CategoryTile => ({
+        slug,
+        name,
+        image,
+        imageAlt,
+      }),
+    ),
+    regions: getRegions().map(({ slug, name, dishes }): RegionTile => ({
+      slug,
+      name,
+      dishes,
+    })),
   };
 }
 

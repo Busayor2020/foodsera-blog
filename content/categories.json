@@ -2,42 +2,56 @@
   {
     "slug": "soups-and-stews",
     "name": "Soups & Stews",
+    "intro": "The heart of the Nigerian table. From party egusi to everyday efo riro, these are the pots that go with every swallow and every pot of white rice.",
+    "introDraft": true,
     "image": "/images/categories/soups-and-stews.svg",
     "imageAlt": "Egusi soup"
   },
   {
     "slug": "rice-dishes",
     "name": "Rice Dishes",
+    "intro": "Smoky party jollof, fried rice and coconut rice. The pots that feed a crowd at every owambe, plus quicker versions for a weeknight.",
+    "introDraft": true,
     "image": "/images/categories/rice-dishes.svg",
     "imageAlt": "Jollof rice"
   },
   {
     "slug": "swallow",
     "name": "Swallow",
+    "intro": "Pounded yam, eba, amala and fufu. How to make every swallow smooth and free of lumps, and which soup to serve it with.",
+    "introDraft": true,
     "image": "/images/categories/swallow.svg",
     "imageAlt": "Pounded yam"
   },
   {
     "slug": "small-chops-and-snacks",
     "name": "Small Chops & Snacks",
+    "intro": "Puff-puff, moi moi, suya and the other small chops that disappear first at every party, made at home.",
+    "introDraft": true,
     "image": "/images/categories/small-chops-and-snacks.svg",
     "imageAlt": "Puff-puff"
   },
   {
     "slug": "breakfast",
     "name": "Breakfast",
+    "intro": "Akara, yam and egg sauce, pap and more. Nigerian breakfasts for slow weekends and busy school mornings.",
+    "introDraft": true,
     "image": "/images/categories/breakfast.svg",
     "imageAlt": "Akara"
   },
   {
     "slug": "drinks",
     "name": "Drinks",
+    "intro": "Zobo, kunu, Chapman and other Nigerian drinks, chilled and ready for hot afternoons and parties.",
+    "introDraft": true,
     "image": "/images/categories/drinks.svg",
     "imageAlt": "Zobo drink"
   },
   {
     "slug": "desserts",
     "name": "Desserts",
+    "intro": "Chin chin, coconut candy, buns and other sweet things from Nigerian kitchens, for Christmas tins and everyday treats.",
+    "introDraft": true,
     "image": "/images/categories/desserts.svg",
     "imageAlt": "Chin chin"
   }

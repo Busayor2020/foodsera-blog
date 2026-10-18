@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import type { Region } from "~/lib/content/types";
 import { regionPath } from "~/lib/paths";
 
+export type RegionTile = Pick<Region, "slug" | "name" | "dishes">;
+
 // Tile colours from design/Home.dc.html, keyed by region. Presentation, so
 // they live here rather than in content. Text colours are checked for WCAG AA.
 const THEMES: Record<string, { tile: string; ring: string }> = {
@@ -19,7 +21,7 @@ const THEMES: Record<string, { tile: string; ring: string }> = {
 const FALLBACK = Object.values(THEMES);
 
 /** "Browse by region": a coloured tile for each region. */
-export function RegionTiles({ regions }: { regions: Region[] }) {
+export function RegionTiles({ regions }: { regions: RegionTile[] }) {
   return (
     <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(320px,100%),1fr))] gap-4">
       {regions.map((region, i) => {

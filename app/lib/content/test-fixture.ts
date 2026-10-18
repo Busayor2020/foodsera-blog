@@ -78,6 +78,12 @@ const DEFAULT_TERMS = {
   ],
 };
 
+/** Every term needs an intro. Tests that leave the key out get one. */
+function withIntro(term: unknown): unknown {
+  if (term === null || typeof term !== "object" || "intro" in term) return term;
+  return { ...term, intro: `All about ${String((term as { name?: unknown }).name)}.` };
+}
+
 export function makeFixture({
   recipes,
   images = [],
@@ -89,9 +95,10 @@ export function makeFixture({
   mkdirSync(join(contentDir, "recipes"), { recursive: true });
 
   for (const name of ["categories", "regions", "occasions"] as const) {
+    const list = terms[name] ?? DEFAULT_TERMS[name];
     writeFileSync(
       join(contentDir, `${name}.json`),
-      JSON.stringify(terms[name] ?? DEFAULT_TERMS[name]),
+      JSON.stringify(Array.isArray(list) ? list.map(withIntro) : list),
     );
   }
 

@@ -91,16 +91,27 @@ const nutrientAmount = z
   .string()
   .regex(/^\d+(?:\.\d+)?\s?(?:g|mg)$/, 'must look like "38g" or "980 mg"');
 
-export const termSchema = z.strictObject({ slug, name: text });
-export const termListSchema = z.array(termSchema).min(1);
+const seoTitle = text.max(70, "must be 70 characters or fewer");
+
+/** Fields every term page needs: its intro (also the meta description) and title. */
+const termPage = {
+  slug,
+  name: text,
+  intro: text,
+  /** A placeholder intro still to be rewritten. The build warns while any remain. */
+  introDraft: z.boolean().default(false),
+  /** Overrides the default "{name} Recipes | Foodsera" title tag. */
+  seoTitle: seoTitle.optional(),
+};
+
+export const termListSchema = z.array(z.strictObject(termPage)).min(1);
 
 /** A category, with the photo for its "Browse by category" tile. */
 export const categoryListSchema = z
   .array(
     z
       .strictObject({
-        slug,
-        name: text,
+        ...termPage,
         image: imagePath.optional(),
         imageAlt: text.optional(),
       })
@@ -110,7 +121,7 @@ export const categoryListSchema = z
 
 /** A region, with the dishes its homepage tile lists. */
 export const regionListSchema = z
-  .array(z.strictObject({ slug, name: text, dishes: text.optional() }))
+  .array(z.strictObject({ ...termPage, dishes: text.optional() }))
   .min(1);
 
 export interface KnownTerms {
@@ -136,7 +147,7 @@ export const recipeFrontmatterSchema = (terms: KnownTerms) =>
     title: text,
     shortTitle: text.optional(),
     teaser: text.optional(),
-    seoTitle: text.max(70, "must be 70 characters or fewer").optional(),
+    seoTitle: seoTitle.optional(),
     slug,
     description: text,
     category: termSlug("category", terms.categories),
