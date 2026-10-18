@@ -7,3 +7,7 @@
 # React Router
 /.react-router/
 /build/
+
+# Pulled WordPress content
+/content/.wp/
+/public/images/wp/
