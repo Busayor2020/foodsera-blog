@@ -81,7 +81,7 @@ wordpress/
 design/                 Claude Design handoff or exported bundle. READ ONLY. Never edit.
 ```
 
-Keep `lib/content` as the single place that knows where content comes from, so it can later be swapped for a headless CMS (for example the WordPress REST API) without touching components.
+Keep `lib/content` as the single place that knows where content comes from: the WordPress source plugs in here (see Headless WordPress).
 
 ## Design implementation
 
