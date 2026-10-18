@@ -346,6 +346,20 @@ describe("intro Markdown", () => {
     );
   });
 
+  it("doesn't report links to a recipe that has its own errors", () => {
+    const problems = problemsFor({
+      recipes: [
+        {
+          front: recipeFrontmatter("egusi-soup"),
+          body: "Serve with [jollof](/recipes/jollof-rice).",
+        },
+        { front: recipeFrontmatter("jollof-rice", { difficulty: "x" }) },
+      ],
+    });
+    expect(problems).toHaveLength(1);
+    expect(problems[0]).toMatch(/^jollof-rice.md difficulty:/);
+  });
+
   it("rejects raw HTML", () => {
     expect(
       withBody("Hello <script>alert(1)</script>").some((p) =>

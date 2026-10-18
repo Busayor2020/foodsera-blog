@@ -177,7 +177,9 @@ export function loadContent({
   const categoryBySlug = termIndex(categories);
   const regionBySlug = termIndex(regions);
   const occasionBySlug = termIndex(occasions);
-  const recipeSlugs = new Set(parsed.map((p) => p.data.slug));
+  // From file names, so a recipe with its own errors doesn't also make every
+  // link to it fail.
+  const recipeSlugs = new Set(files.map((f) => basename(f, ".md")));
   const featured = parsed.filter((p) => p.data.featured);
 
   const unknownTerm = (kind: string, value: string, terms: Term[]) =>
