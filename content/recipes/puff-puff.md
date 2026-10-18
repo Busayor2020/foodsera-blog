@@ -7,6 +7,7 @@ region: yoruba
 occasions: [party, christmas]
 heroImage: /images/recipes/puff-puff/hero.svg
 heroImageAlt: Bowl of golden puff-puff dusted with sugar
+heroCaption: Golden outside, soft and airy inside.
 prepMinutes: 15
 cookMinutes: 55
 servings: 8
@@ -78,6 +79,7 @@ tips:
   - { kind: avoid, text: "a runny batter. It makes flat, oily puff-puff. Add a spoon of flour if it spreads." }
   - { kind: avoid, text: crowding the pot. Too many at once cools the oil and they soak it up. }
 
+serveWithIntro: Serve warm, on their own or with a cold drink.
 serveWith:
   - { name: Zobo, note: Chilled hibiscus drink, image: /images/sides/zobo.svg, imageAlt: Glass of deep red zobo drink }
 
@@ -89,6 +91,11 @@ faqs:
   - q: Why is my puff-puff raw in the middle?
     a: The oil was too hot, so the outside browned before the middle cooked. Lower the heat a little and fry for longer.
 
+notes:
+  - For a richer puff-puff, swap a quarter of the water for milk.
+  - Makes about 30 balls the size of a ping-pong ball.
+
+nutritionNote: estimated, per serving of about 4 balls
 nutrition: { calories: 290, protein: 5g, fat: 11g, carbs: 44g, fibre: 1g, sodium: 150mg }
 ---
 

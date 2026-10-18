@@ -91,6 +91,7 @@ Recipe frontmatter, following the fields the design shows. The build must fail o
 ```yaml
 title: Egusi Soup with Ugu and Assorted Meat
 shortTitle: Egusi Soup        # optional: recipe card heading and breadcrumbs (cards use title)
+seoTitle: Egusi Soup Recipe (Nigerian Melon Seed Soup)   # optional, max 70 chars: overrides the title tag
 slug: egusi-soup              # plain ASCII kebab-case, same as the filename
 description: One or two sentences for cards and the meta description
 category: soups-and-stews     # slug from content/categories.json
@@ -98,6 +99,7 @@ region: yoruba                # yoruba | igbo | hausa-northern | niger-delta | e
 occasions: [party, weeknight] # slugs from content/occasions.json
 heroImage: /images/recipes/egusi-soup/hero.jpg
 heroImageAlt: Bowl of egusi soup with assorted meat and stockfish
+heroCaption: "Party-style egusi: soft lumps, bright ugu and plenty of assorted meat."   # optional
 prepMinutes: 25
 cookMinutes: 55
 servings: 6
@@ -108,7 +110,7 @@ publishedAt: 2026-10-01
 updatedAt: 2026-10-15
 featured: true                # optional: "Recipe of the week". At most one recipe.
 sample: true                  # optional: placeholder content. The build warns while any remain.
-rating: { value: 4.8, count: 126 }   # optional, see the aggregateRating rule under SEO
+rating: { value: 4.8, count: 126 }   # optional, sample: true recipes only (see SEO)
 ingredientsExplained:
   - { local: Iru, aka: "dawadawa, locust beans", meaning: Fermented locust beans with a deep, savoury aroma., substitute: A teaspoon of miso, or leave it out. }
 ingredients:
@@ -130,10 +132,14 @@ steps:
 tips:
   - { kind: do, text: leave the egusi alone for 3 to 4 minutes after it goes into the oil. }
   - { kind: avoid, text: letting the palm oil smoke. }
+serveWithIntro: Egusi needs a swallow. Pick your favourite, or serve with boiled yam or white rice.   # optional
 serveWith:
   - { name: Pounded yam, note: The classic pairing, image: /images/sides/pounded-yam.jpg, imageAlt: Smooth ball of pounded yam, recipe: pounded-yam }   # recipe: optional slug
 faqs:
   - { q: Can I freeze egusi soup?, a: Yes, for up to 3 months in an airtight container. }
+notes:                        # optional: the Notes box in the recipe card
+  - No bitterleaf? Leave it out. The soup is still complete with ugu alone.
+nutritionNote: estimated, per serving, soup only   # optional
 nutrition: { calories: 610, protein: 38g, fat: 46g, carbs: 12g, fibre: 4g, sodium: 980mg }   # optional, every field optional
 ```
 
@@ -152,9 +158,11 @@ Every string is normalised to Unicode NFC when it is loaded, so the same Yoruba,
 
 ## SEO (non-negotiable)
 
-- Every route exports `meta` with a unique title (`Egusi Soup | Foodsera`), description, canonical URL on `https://foodsera.com`, Open Graph and Twitter tags.
+- Every route exports `meta` with a unique title, description, canonical URL on `https://foodsera.com`, Open Graph and Twitter tags.
 - Recipe pages output JSON-LD `Recipe` schema: name, image, description, author, datePublished, dateModified, prepTime, cookTime, totalTime (ISO 8601 durations), recipeYield, recipeCategory, recipeCuisine "Nigerian", recipeIngredient, recipeInstructions as HowToStep, aggregateRating, nutrition when present. Add `BreadcrumbList` on every page below home.
-- `aggregateRating` comes only from genuine reader reviews, once the reviews backend exists. Never output it from hand-entered numbers in frontmatter, and never for a `sample: true` recipe. Until then the `rating` field is for layout only.
+- Recipe title tags default to `{shortTitle or title} Recipe | Foodsera` ("Egusi Soup Recipe | Foodsera"). The optional `seoTitle` frontmatter field replaces the whole tag. The h1 always shows `title`.
+- `aggregateRating` comes only from genuine reader reviews, once the reviews backend exists. Never output it from hand-entered numbers in frontmatter, and never for a `sample: true` recipe.
+- Frontmatter `rating` is allowed only on `sample: true` recipes, for layout testing; the build fails if any other recipe has one. Recipes without `sample: true` show "No reviews yet" (no stars or counts) in the meta row and the Reviews summary until genuine reviews exist.
 - Generate `sitemap.xml` at build time from all routes. `robots.txt` points to it.
 - Clean URLs: `/recipes/<slug>`, `/category/<slug>`, `/region/<slug>`, `/occasion/<slug>`. One canonical form, no trailing-slash duplicates.
 - Images: always set width and height, `loading="lazy"` except the hero (eager, `fetchpriority="high"`), WebP or AVIF with sensible sizes.

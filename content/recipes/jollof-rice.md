@@ -8,6 +8,7 @@ region: yoruba
 occasions: [party, christmas, weeknight]
 heroImage: /images/recipes/jollof-rice/hero.svg
 heroImageAlt: Plate of smoky red party jollof rice with fried plantain
+heroCaption: Every grain red and separate, with a little smoke from the bottom of the pot.
 prepMinutes: 20
 cookMinutes: 55
 servings: 8
@@ -122,6 +123,7 @@ tips:
   - { kind: avoid, text: stirring once the lid goes on. It breaks the grains and makes the rice mushy. }
   - { kind: avoid, text: "adding too much stock. You can sprinkle in more water later, but you cannot take it out." }
 
+serveWithIntro: Jollof is a meal on its own, but at a party it never comes alone.
 serveWith:
   - { name: Dodo, note: Sweet fried plantain, image: /images/sides/dodo.svg, imageAlt: Golden fried plantain slices }
   - { name: Moi moi, note: Steamed bean pudding, image: /images/sides/moi-moi.svg, imageAlt: Slice of orange moi moi }
@@ -134,6 +136,12 @@ faqs:
   - q: How do I get the smoky party taste at home?
     a: Let the rice at the bottom of the pot catch for the last few minutes on higher heat, or add a pinch of smoked paprika with the spices.
 
+notes:
+  - No parboiled rice? Use long-grain white rice, reduce the stock by a third and check it after 20 minutes.
+  - Keeps 3 days in the fridge and 2 months frozen. Reheat with a splash of water, covered.
+  - For a meat-free pot, use vegetable stock.
+
+nutritionNote: estimated, per serving, rice only
 nutrition: { calories: 480, protein: 9g, fat: 16g, carbs: 76g, fibre: 4g, sodium: 720mg }
 ---
 

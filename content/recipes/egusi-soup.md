@@ -8,6 +8,7 @@ region: yoruba
 occasions: [party, weeknight]
 heroImage: /images/recipes/egusi-soup/hero.svg
 heroImageAlt: Top-down view of a pot of egusi soup with ugu leaves and assorted meat
+heroCaption: "Party-style egusi: soft lumps, bright ugu and plenty of assorted meat."
 prepMinutes: 25
 cookMinutes: 55
 servings: 6
@@ -154,6 +155,7 @@ tips:
   - { kind: avoid, text: adding ugu too early. It turns dull and mushy after more than a few minutes. }
   - { kind: avoid, text: adding salt before the stockfish and crayfish go in. Both are already salty. }
 
+serveWithIntro: Egusi needs a swallow. Pick your favourite, or serve with boiled yam or white rice.
 serveWith:
   - { name: Pounded yam, note: The classic pairing, image: /images/sides/pounded-yam.svg, imageAlt: Smooth ball of pounded yam }
   - { name: Eba, note: "Quick, made from garri", image: /images/sides/eba.svg, imageAlt: Golden eba on a plate }
@@ -172,6 +174,12 @@ faqs:
   - q: What is the difference between frying and boiling egusi?
     a: Frying the paste in oil gives soft lumps and a richer taste. Boiling (adding egusi to the stock) gives a smoother, grainier soup. This recipe uses frying.
 
+notes:
+  - No bitterleaf? Leave it out. The soup is still complete with ugu alone.
+  - Keeps 3 days in the fridge and up to 3 months frozen. Loosen with hot stock when reheating.
+  - For a lighter soup, use 1/2 cup palm oil and more stock.
+
+nutritionNote: estimated, per serving, soup only
 nutrition: { calories: 610, protein: 38g, fat: 46g, carbs: 12g, fibre: 4g, sodium: 980mg }
 ---
 

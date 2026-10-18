@@ -116,6 +116,7 @@ export const recipeFrontmatterSchema = (terms: KnownTerms) =>
   .strictObject({
     title: text,
     shortTitle: text.optional(),
+    seoTitle: text.max(70, "must be 70 characters or fewer").optional(),
     slug,
     description: text,
     category: termSlug("category", terms.categories),
@@ -123,6 +124,7 @@ export const recipeFrontmatterSchema = (terms: KnownTerms) =>
     occasions: z.array(termSlug("occasion", terms.occasions)).default([]),
     heroImage: imagePath,
     heroImageAlt: text,
+    heroCaption: text.optional(),
     prepMinutes: minutes,
     cookMinutes: minutes,
     servings: z.number().int().positive(),
@@ -161,8 +163,11 @@ export const recipeFrontmatterSchema = (terms: KnownTerms) =>
     tips: z
       .array(z.strictObject({ kind: z.enum(["do", "avoid"]), text }))
       .default([]),
+    serveWithIntro: text.optional(),
     serveWith: z.array(serveWith).default([]),
     faqs: z.array(z.strictObject({ q: text, a: text })).default([]),
+    notes: z.array(text).default([]),
+    nutritionNote: text.optional(),
     nutrition: z
       .strictObject({
         calories: z.number().int().positive().optional(),
@@ -177,6 +182,13 @@ export const recipeFrontmatterSchema = (terms: KnownTerms) =>
   .refine((r) => r.updatedAt >= r.publishedAt, {
     message: "must not be earlier than publishedAt",
     path: ["updatedAt"],
+  })
+  // Hand-entered ratings are only for laying out sample content. Real
+  // recipes show ratings from genuine reader reviews (see CLAUDE.md, SEO).
+  .refine((r) => !r.rating || r.sample, {
+    message:
+      "is only allowed on sample: true recipes. Real ratings come from reader reviews",
+    path: ["rating"],
   });
 
 export type RecipeFrontmatter = z.output<

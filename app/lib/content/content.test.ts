@@ -50,6 +50,7 @@ describe("recipe schema", () => {
       one(
         {
           shortTitle: "Egusi",
+          sample: true,
           rating: { value: 4.8, count: 126 },
           tips: [{ kind: "do", text: "Be patient." }],
           nutrition: { calories: 610, protein: "38g", sodium: "980 mg" },
@@ -67,6 +68,39 @@ describe("recipe schema", () => {
         { images: ["/images/recipes/egusi-soup/step-1.svg"] },
       ),
     ).toEqual([]);
+  });
+
+  it("allows a rating only on sample recipes", () => {
+    expect(one({ rating: { value: 4.8, count: 126 } })).toContain(
+      "egusi-soup.md rating: is only allowed on sample: true recipes. Real ratings come from reader reviews",
+    );
+    expect(one({ sample: true, rating: { value: 4.8, count: 126 } })).toEqual([]);
+  });
+
+  it("accepts seoTitle, heroCaption, serveWithIntro, notes and nutritionNote", () => {
+    const options = makeFixture({
+      recipes: [
+        {
+          front: recipeFrontmatter("egusi-soup", {
+            seoTitle: "Egusi Soup Recipe (Nigerian Melon Seed Soup)",
+            heroCaption: "Party-style egusi.",
+            serveWithIntro: "Egusi needs a swallow.",
+            notes: ["No bitterleaf? Leave it out."],
+            nutritionNote: "estimated, per serving",
+          }),
+        },
+      ],
+    });
+    const recipe = getRecipe("egusi-soup", options);
+    expect(recipe?.seoTitle).toBe("Egusi Soup Recipe (Nigerian Melon Seed Soup)");
+    expect(recipe?.notes).toEqual(["No bitterleaf? Leave it out."]);
+    expect(getRecipe("egusi-soup", makeFixture({ recipes: [{ front: recipeFrontmatter("egusi-soup") }] }))?.notes).toEqual([]);
+  });
+
+  it("limits seoTitle to 70 characters", () => {
+    expect(one({ seoTitle: "x".repeat(71) })).toContain(
+      "egusi-soup.md seoTitle: must be 70 characters or fewer",
+    );
   });
 
   it("makes rating optional", () => {
@@ -411,6 +445,7 @@ describe("loaders", () => {
         front: recipeFrontmatter("old-rated", {
           publishedAt: "2026-01-01",
           updatedAt: "2026-01-01",
+          sample: true,
           rating: { value: 4.8, count: 126 },
         }),
       },
@@ -418,6 +453,7 @@ describe("loaders", () => {
         front: recipeFrontmatter("few-reviews", {
           publishedAt: "2026-02-01",
           updatedAt: "2026-02-01",
+          sample: true,
           rating: { value: 5, count: 2 },
         }),
       },
@@ -498,7 +534,11 @@ describe("loaders", () => {
   });
 
   it("lists sample recipes", () => {
-    expect(getSampleRecipeSlugs(content)).toEqual(["unrated-featured"]);
+    expect(getSampleRecipeSlugs(content)).toEqual([
+      "unrated-featured",
+      "few-reviews",
+      "old-rated",
+    ]);
   });
 
   it("makes summaries with only what cards need", () => {

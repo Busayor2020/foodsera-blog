@@ -71,7 +71,10 @@ export interface Nutrition {
   sodium?: string;
 }
 
-/** For layout only. Never output as aggregateRating (see CLAUDE.md, SEO). */
+/**
+ * Hand-entered, allowed only on sample recipes for layout. Never output as
+ * aggregateRating (see CLAUDE.md, SEO).
+ */
 export interface Rating {
   value: number;
   count: number;
@@ -81,12 +84,15 @@ export interface Recipe {
   slug: string;
   title: string;
   shortTitle?: string;
+  /** Overrides the default "{short title} Recipe | Foodsera" title tag. */
+  seoTitle?: string;
   description: string;
   category: Term;
   region: Term;
   occasions: Term[];
   heroImage: string;
   heroImageAlt: string;
+  heroCaption?: string;
   prepMinutes: number;
   cookMinutes: number;
   totalMinutes: number;
@@ -105,9 +111,14 @@ export interface Recipe {
   ingredients: IngredientGroup[];
   steps: Step[];
   tips: Tip[];
+  serveWithIntro?: string;
   serveWith: ServeWith[];
   faqs: Faq[];
+  /** The Notes box in the recipe card. */
+  notes: string[];
   nutrition?: Nutrition;
+  /** For example "estimated, per serving, soup only". */
+  nutritionNote?: string;
   /** The Markdown intro, rendered to HTML at build time. */
   introHtml: string;
 }
