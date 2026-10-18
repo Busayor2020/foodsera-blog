@@ -1,4 +1,3 @@
-import { useState, type FormEvent } from "react";
 import { Link } from "react-router";
 
 import { categoryPath, recipeIndexPath, searchPath } from "~/lib/paths";
@@ -6,6 +5,7 @@ import type { Term } from "~/lib/content/types";
 import { SITE_TAGLINE, SOCIAL_LINKS, type SocialLink } from "~/lib/site";
 
 import { Logo } from "./Logo";
+import { NewsletterForm } from "./NewsletterForm";
 import { SocialIcon } from "./SocialIcon";
 
 interface FooterProps {
@@ -29,7 +29,7 @@ export function Footer({
 }: FooterProps) {
   const social = socialLinks.filter((link) => link.href);
   return (
-    <footer className="bg-charcoal text-base text-footer-text focus-on-dark">
+    <footer className="bg-charcoal text-base text-footer-text focus-on-dark print:hidden">
       <div className="mx-auto grid max-w-page grid-cols-[repeat(auto-fit,minmax(min(210px,100%),1fr))] gap-10 px-5 pt-14 pb-8">
         <div className="flex flex-col gap-3.5">
           <Logo variant="reversed" />
@@ -109,52 +109,13 @@ export function Footer({
 }
 
 function Newsletter() {
-  const [subscribed, setSubscribed] = useState(false);
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // TODO(backend): send the address to the newsletter provider.
-    setSubscribed(true);
-  };
-
   return (
     <div className="flex flex-col gap-2.5">
       <ColumnTitle>Newsletter</ColumnTitle>
       <p className="font-serif text-h3 text-cream">
         Get a new Nigerian recipe every week
       </p>
-      {subscribed ? (
-        <p
-          role="status"
-          className="rounded-field bg-ugu px-3.5 py-3 text-white"
-        >
-          Thank you. Check your inbox to confirm.
-        </p>
-      ) : (
-        <form onSubmit={onSubmit} className="flex flex-col gap-2">
-          <label htmlFor="ft-email" className="text-sm text-footer-muted">
-            Email address
-          </label>
-          <input
-            id="ft-email"
-            name="email"
-            type="email"
-            required
-            autoComplete="email"
-            placeholder="you@example.com"
-            className="min-h-12 rounded-field bg-cream px-3.5 text-charcoal"
-          />
-          <button
-            type="submit"
-            className="min-h-12 rounded-field bg-plantain font-bold text-charcoal"
-          >
-            Subscribe
-          </button>
-          <span className="text-eyebrow text-footer-fine">
-            No spam. Unsubscribe anytime.
-          </span>
-        </form>
-      )}
+      <NewsletterForm variant="footer" />
     </div>
   );
 }

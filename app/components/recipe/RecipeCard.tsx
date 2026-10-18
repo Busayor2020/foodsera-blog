@@ -54,8 +54,8 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
                 />
               </svg>
               <span>
-                <strong>{recipe.rating.value.toFixed(1)}</strong>
-                <span className="sr-only"> out of 5</span>
+                <strong>{recipe.rating.value.toFixed(1)}</strong>{" "}
+                <span className="sr-only">out of 5</span>
               </span>
             </span>
           )}
