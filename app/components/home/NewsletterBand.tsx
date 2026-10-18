@@ -5,7 +5,7 @@ export function NewsletterBand() {
   return (
     <section
       aria-labelledby="news"
-      className="mx-auto flex w-[calc(100%-40px)] max-w-page flex-wrap items-center gap-x-12 gap-y-6 rounded-hero bg-ugu p-[clamp(28px,5vw,56px)] text-white"
+      className="mx-auto flex w-[calc(100%-40px)] max-w-page flex-wrap items-center gap-x-12 gap-y-6 rounded-hero bg-ugu p-[clamp(28px,5vw,56px)] text-white focus-on-dark"
     >
       <div className="flex flex-[1_1_380px] flex-col gap-2.5">
         <h2 id="news" className="text-band">

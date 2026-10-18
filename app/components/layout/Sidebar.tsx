@@ -77,7 +77,7 @@ export function Sidebar({ popular }: SidebarProps) {
 
       <section
         aria-labelledby="side-news"
-        className="flex flex-col gap-2.5 rounded-panel bg-ugu p-5 text-white"
+        className="flex flex-col gap-2.5 rounded-panel bg-ugu p-5 text-white focus-on-dark"
       >
         <h2 id="side-news" className="text-h3">
           Get a new Nigerian recipe every week
