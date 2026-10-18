@@ -17,6 +17,12 @@ export const AD_POSITIONS = [
   "recipe-sidebar-top",
   "recipe-sidebar-sticky",
   "recipe-anchor",
+  "term-after-intro",
+  "term-infeed",
+  "term-sidebar-top",
+  "term-sidebar-sticky",
+  "search-infeed",
+  "index-after-second-group",
 ] as const;
 
 export type AdPositionName = (typeof AD_POSITIONS)[number];

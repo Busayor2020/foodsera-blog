@@ -14,6 +14,9 @@ import {
   getRegions,
   getSiteNav,
   getSampleRecipeSlugs,
+  getSitemapPaths,
+  getTermPage,
+  MIN_RECIPES_TO_INDEX,
   toListRecipes,
   toRecipeSummary,
 } from "./index";
@@ -646,6 +649,85 @@ describe("getRelatedRecipes", () => {
       getRelatedRecipes(egusi, 4, { content }).map((r) => r.slug),
     ).toEqual(["same-both", "same-category", "same-region", "unrelated"]);
     expect(getRelatedRecipes(egusi, 2, { content })).toHaveLength(2);
+  });
+});
+
+describe("term pages", () => {
+  // Soups (yoruba x2, igbo x1): indexed. Rice: one recipe, so thin.
+  const content = makeFixture({
+    recipes: [
+      { front: recipeFrontmatter("egusi", { sample: true, rating: { value: 4.8, count: 100 } }) },
+      { front: recipeFrontmatter("efo", { occasions: ["weeknight"] }) },
+      { front: recipeFrontmatter("onugbu", { region: "igbo" }) },
+      { front: recipeFrontmatter("jollof", { category: "rice-dishes" }) },
+    ],
+  });
+
+  it("returns undefined for an unknown term", () => {
+    expect(getTermPage("category", "nope", content)).toBeUndefined();
+  });
+
+  it("lists a category's recipes, most popular first, with region chips", () => {
+    const page = getTermPage("category", "soups-and-stews", content);
+    expect(page).toMatchObject({
+      kind: "category",
+      term: { slug: "soups-and-stews", name: "Soups & Stews", intro: "All about Soups & Stews." },
+      path: "/category/soups-and-stews",
+      thin: false,
+      more: [],
+      regions: [
+        { slug: "yoruba", name: "Yoruba" },
+        { slug: "igbo", name: "Igbo" },
+      ],
+    });
+    expect(page?.recipes.map((r) => r.slug)).toEqual(["egusi", "efo", "onugbu"]);
+  });
+
+  it("has no region chips on region pages, or when only one region has recipes", () => {
+    expect(getTermPage("region", "yoruba", content)?.regions).toEqual([]);
+    const party = getTermPage("occasion", "party", content);
+    expect(party?.recipes.map((r) => r.slug)).toEqual(["egusi", "jollof", "onugbu"]);
+    expect(party?.regions.map((r) => r.slug)).toEqual(["yoruba", "igbo"]);
+    const weeknight = getTermPage("occasion", "weeknight", content);
+    expect(weeknight?.regions).toEqual([]);
+  });
+
+  it("marks pages with fewer than 3 recipes as thin and suggests popular recipes", () => {
+    expect(MIN_RECIPES_TO_INDEX).toBe(3);
+    const rice = getTermPage("category", "rice-dishes", content);
+    expect(rice?.thin).toBe(true);
+    expect(rice?.more.map((r) => r.slug)).toEqual(["egusi", "efo", "onugbu"]);
+    const igbo = getTermPage("region", "igbo", content);
+    expect(igbo?.thin).toBe(true);
+    expect(igbo?.recipes.map((r) => r.slug)).toEqual(["onugbu"]);
+  });
+
+  it("lists sitemap paths, leaving out thin term pages", () => {
+    expect(getSitemapPaths(content)).toEqual([
+      "/",
+      "/recipes",
+      "/recipes/efo",
+      "/recipes/egusi",
+      "/recipes/jollof",
+      "/recipes/onugbu",
+      "/category/soups-and-stews",
+      "/region/yoruba",
+      "/occasion/party",
+    ]);
+  });
+
+  it("indexes the expected pages with today's sample content", () => {
+    const paths = getSitemapPaths();
+    expect(paths.filter((p) => !p.startsWith("/recipes"))).toEqual([
+      "/",
+      "/category/soups-and-stews",
+      "/region/yoruba",
+      "/occasion/party",
+      "/occasion/christmas",
+      "/occasion/weeknight",
+    ]);
+    expect(paths).not.toContain("/search");
+    expect(paths).not.toContain("/404");
   });
 });
 

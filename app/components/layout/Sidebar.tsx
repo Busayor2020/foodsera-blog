@@ -75,53 +75,86 @@ export function Sidebar({ popular }: SidebarProps) {
         </div>
       </Form>
 
-      <section
-        aria-labelledby="side-news"
-        className="flex flex-col gap-2.5 rounded-panel bg-ugu p-5 text-white focus-on-dark"
-      >
-        <h2 id="side-news" className="text-h3">
-          Get a new Nigerian recipe every week
-        </h2>
-        <NewsletterForm variant="sidebar" />
-      </section>
-
-      {popular.length > 0 && (
-        <section aria-labelledby="side-pop" className="flex flex-col gap-3">
-          <h2 id="side-pop" className="text-h3">
-            Popular recipes
-          </h2>
-          <ol className="flex flex-col gap-2.5">
-            {popular.map((recipe) => (
-              <li key={recipe.slug}>
-                <Link
-                  to={recipePath(recipe.slug)}
-                  className="flex min-h-16 items-center gap-3 text-charcoal no-underline hover:text-charcoal"
-                >
-                  <img
-                    src={recipe.heroImage}
-                    alt=""
-                    width={RECIPE_HERO.width}
-                    height={RECIPE_HERO.height}
-                    loading="lazy"
-                    decoding="async"
-                    className="size-16 flex-none rounded-field object-cover"
-                  />
-                  <span className="flex flex-col">
-                    <span className="leading-[1.3] font-bold">
-                      {recipe.title}
-                    </span>
-                    <span className="text-sm text-muted">
-                      {formatMinutes(recipe.totalMinutes)}
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
+      <SidebarNewsletter />
+      <SidebarPopular recipes={popular} />
 
       <AdPosition name="recipe-sidebar-sticky" />
     </aside>
+  );
+}
+
+interface TermSidebarProps {
+  popular: RecipeSummary[];
+  /** False on thin pages, which show no ads. */
+  ads: boolean;
+}
+
+/** Desktop sidebar on category, region and occasion pages (design/Category.dc.html). */
+export function TermSidebar({ popular, ads }: TermSidebarProps) {
+  return (
+    <aside
+      aria-label="Sidebar"
+      className="hidden min-w-75 flex-[0_1_320px] flex-col gap-8 lg:flex print:hidden"
+    >
+      {ads && <AdPosition name="term-sidebar-top" />}
+      <SidebarPopular recipes={popular} />
+      <SidebarNewsletter />
+      {ads && <AdPosition name="term-sidebar-sticky" />}
+    </aside>
+  );
+}
+
+function SidebarNewsletter() {
+  return (
+    <section
+      aria-labelledby="side-news"
+      className="flex flex-col gap-2.5 rounded-panel bg-ugu p-5 text-white focus-on-dark"
+    >
+      <h2 id="side-news" className="text-h3">
+        Get a new Nigerian recipe every week
+      </h2>
+      <NewsletterForm variant="sidebar" />
+    </section>
+  );
+}
+
+/**
+ * "Popular recipes": the design says "Most cooked this month", but there is
+ * no cooking data to back that up.
+ */
+function SidebarPopular({ recipes }: { recipes: RecipeSummary[] }) {
+  if (recipes.length === 0) return null;
+  return (
+    <section aria-labelledby="side-pop" className="flex flex-col gap-3">
+      <h2 id="side-pop" className="text-h3">
+        Popular recipes
+      </h2>
+      <ol className="flex flex-col gap-2.5">
+        {recipes.map((recipe) => (
+          <li key={recipe.slug}>
+            <Link
+              to={recipePath(recipe.slug)}
+              className="flex min-h-16 items-center gap-3 text-charcoal no-underline hover:text-charcoal"
+            >
+              <img
+                src={recipe.heroImage}
+                alt=""
+                width={RECIPE_HERO.width}
+                height={RECIPE_HERO.height}
+                loading="lazy"
+                decoding="async"
+                className="size-16 flex-none rounded-field object-cover"
+              />
+              <span className="flex flex-col">
+                <span className="leading-[1.3] font-bold">{recipe.title}</span>
+                <span className="text-sm text-muted">
+                  {formatMinutes(recipe.totalMinutes)}
+                </span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ol>
+    </section>
   );
 }

@@ -171,6 +171,24 @@ export interface ListRecipe extends RecipeSummary {
   popularity: number;
 }
 
+export type TermKind = "category" | "region" | "occasion";
+
+/** Everything a category, region or occasion page shows. */
+export interface TermPageData {
+  kind: TermKind;
+  term: Pick<TermDetails, "slug" | "name" | "intro" | "seoTitle">;
+  /** For example "/category/soups-and-stews". */
+  path: string;
+  /** The term's recipes, most popular first. */
+  recipes: ListRecipe[];
+  /** Regions offered as filter chips: only those with recipes here. */
+  regions: Term[];
+  /** Too few recipes to index: noindex, no sitemap entry, no ads. */
+  thin: boolean;
+  /** On thin pages, popular recipes from elsewhere on the site. */
+  more: RecipeSummary[];
+}
+
 export interface SiteNav {
   categories: Term[];
   regions: Term[];

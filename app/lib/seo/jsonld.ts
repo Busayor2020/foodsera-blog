@@ -132,6 +132,22 @@ export function breadcrumbJsonLd(crumbs: Crumb[]): JsonLd {
   };
 }
 
+/**
+ * schema.org ItemList for a page that lists recipes (Google's summary page
+ * pattern): each item is just its position and URL.
+ */
+export function itemListJsonLd(paths: string[]): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: paths.map((path, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: absoluteUrl(path),
+    })),
+  };
+}
+
 /** The Organization logo: a 512x512 PNG made by scripts/brand-images.ts. */
 export const LOGO = { path: "/logo.png", width: 512, height: 512 };
 

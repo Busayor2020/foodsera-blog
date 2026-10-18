@@ -1,6 +1,12 @@
 import { join } from "node:path";
 
-import { categoryPath, occasionPath, recipePath, regionPath } from "../paths";
+import {
+  categoryPath,
+  occasionPath,
+  recipeIndexPath,
+  recipePath,
+  regionPath,
+} from "../paths";
 
 import { loadContent, type ContentStore, type LoadOptions } from "./load";
 import type {
@@ -12,6 +18,9 @@ import type {
   Region,
   SiteNav,
   Term,
+  TermDetails,
+  TermKind,
+  TermPageData,
 } from "./types";
 
 // The only module that knows where content comes from. Everything else asks
@@ -207,6 +216,98 @@ export function getRelatedRecipes(
     .sort((a, b) => closeness(b.r) - closeness(a.r) || a.popularity - b.popularity)
     .slice(0, limit)
     .map(({ r }) => r);
+}
+
+/** Term pages with fewer recipes than this get noindex, no sitemap entry and no ads. */
+export const MIN_RECIPES_TO_INDEX = 3;
+/** Region chips only appear when at least this many regions have recipes on the page. */
+const MIN_REGION_CHIPS = 2;
+const MORE_ON_THIN_PAGES = 4;
+
+const TERM_PATHS: Record<TermKind, (slug: string) => string> = {
+  category: categoryPath,
+  region: regionPath,
+  occasion: occasionPath,
+};
+
+function termRecipes(
+  { recipes }: ContentStore,
+  kind: TermKind,
+  slug: string,
+): Recipe[] {
+  if (kind === "category") return recipes.filter((r) => r.category.slug === slug);
+  if (kind === "region") return recipes.filter((r) => r.region.slug === slug);
+  return recipes.filter((r) => r.occasions.some((o) => o.slug === slug));
+}
+
+function termsOf(content: ContentStore, kind: TermKind): TermDetails[] {
+  if (kind === "category") return content.categories;
+  if (kind === "region") return content.regions;
+  return content.occasions;
+}
+
+/** The data for /category/<slug>, /region/<slug> or /occasion/<slug>. */
+export function getTermPage(
+  kind: TermKind,
+  slug: string,
+  options?: LoadOptions,
+): TermPageData | undefined {
+  const content = getContent(options);
+  const term = termsOf(content, kind).find((t) => t.slug === slug);
+  if (!term) return undefined;
+
+  const own = termRecipes(content, kind, slug);
+  const thin = own.length < MIN_RECIPES_TO_INDEX;
+  // Every recipe on a region page shares the region, so it has no chips.
+  const regions =
+    kind === "region"
+      ? []
+      : content.regions
+          .filter((region) => own.some((r) => r.region.slug === region.slug))
+          .map(({ slug, name }) => ({ slug, name }));
+
+  return {
+    kind,
+    term: {
+      slug: term.slug,
+      name: term.name,
+      intro: term.intro,
+      seoTitle: term.seoTitle,
+    },
+    path: TERM_PATHS[kind](slug),
+    recipes: toListRecipes(own),
+    regions: regions.length >= MIN_REGION_CHIPS ? regions : [],
+    thin,
+    more: thin
+      ? getPopularRecipes(MORE_ON_THIN_PAGES, {
+          exclude: own.map((r) => r.slug),
+          content: options,
+        }).map(toRecipeSummary)
+      : [],
+  };
+}
+
+/**
+ * Every URL for sitemap.xml: the home page, the recipe index, every recipe
+ * and every term page with enough recipes. Search and 404 are left out.
+ */
+export function getSitemapPaths(options?: LoadOptions): string[] {
+  const content = getContent(options);
+  const indexed = (kind: TermKind) =>
+    termsOf(content, kind)
+      .filter(
+        (t) =>
+          termRecipes(content, kind, t.slug).length >= MIN_RECIPES_TO_INDEX,
+      )
+      .map((t) => TERM_PATHS[kind](t.slug));
+  return [
+    "/",
+    recipeIndexPath,
+    ...content.recipes.map((r) => recipePath(r.slug)),
+    ...indexed("category"),
+    ...indexed("region"),
+    ...indexed("occasion"),
+  ];
 }
 
 /** The time limit for "Quick and easy" and the recipe index time filter. */

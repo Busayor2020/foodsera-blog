@@ -175,6 +175,10 @@
   /* Homepage sizes from design/Home.dc.html */
   --text-hero: clamp(36px, 5vw, 58px);
   --text-hero--line-height: 1.05;
+  --text-term: clamp(38px, 5vw, 56px);
+  --text-term--line-height: 1.05;
+  --text-search: clamp(34px, 4.6vw, 50px);
+  --text-search--line-height: 1.1;
   --text-band: clamp(30px, 4vw, 44px);
   --text-band--line-height: 1.1;
   --text-region: 28px;
