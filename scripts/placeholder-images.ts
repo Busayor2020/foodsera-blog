@@ -26,6 +26,11 @@ const TONES = {
   eba: ["#2F3A33", "#EFE7D7", "#EDC96A", "#D6AE4C", "#E3BE5A", "#C99B3C"],
   fufu: ["#3E3328", "#3E7D3A", "#F3EEE2", "#E2DACA", "#E8E1D2", "#D9D0BE"],
   semo: ["#2E2A35", "#EFE7D7", "#F1E6C6", "#DFD1A8", "#E9DCB6", "#D2C296"],
+  efo: ["#3A2C24", "#F3ECDF", "#2F6B3A", "#B8401A", "#D9541E", "#6B3A1E"],
+  akara: ["#2D3530", "#F2EADB", "#C7792A", "#9A5419", "#E9A74A", "#6E3E14"],
+  chinchin: ["#33363A", "#F2EADB", "#D59B47", "#B97C2E", "#E9BE6E", "#A86A22"],
+  beans: ["#3A2E26", "#EFE7D7", "#8A4A2A", "#6A3418", "#C2410C", "#E6A13A"],
+  yam: ["#2E3B33", "#F4ECDD", "#F0E2B6", "#D8C487", "#C2410C", "#E6C66A"],
 } as const;
 
 type Tone = keyof typeof TONES;
@@ -40,6 +45,7 @@ interface Placeholder {
 const HERO = { width: 1200, height: 900 };
 const STEP = { width: 800, height: 600 };
 const SIDE = { width: 600, height: 450 };
+const SQUARE = { width: 600, height: 600 };
 
 const recipe = (slug: string, hero: Tone, steps: Record<number, Tone>) => [
   { path: `recipes/${slug}/hero.svg`, tone: hero, ...HERO },
@@ -49,6 +55,12 @@ const recipe = (slug: string, hero: Tone, steps: Record<number, Tone>) => [
     ...STEP,
   })),
 ];
+
+const category = (slug: string, tone: Tone) => ({
+  path: `categories/${slug}.svg`,
+  tone,
+  ...SQUARE,
+});
 
 const side = (slug: string, tone: Tone) => ({
   path: `sides/${slug}.svg`,
@@ -78,6 +90,22 @@ const PLACEHOLDERS: Placeholder[] = [
   side("dodo", "dodo"),
   side("moi-moi", "moimoi"),
   side("zobo", "zobo"),
+  side("pap", "semo"),
+  side("white-rice", "rice"),
+  side("boiled-yam", "yam"),
+  side("white-bread", "paste"),
+  ...recipe("moi-moi", "moimoi", { 1: "beans", 2: "paste", 5: "moimoi" }),
+  ...recipe("akara", "akara", { 2: "paste", 5: "akara" }),
+  ...recipe("efo-riro", "efo", { 1: "simmer", 4: "lumps", 6: "efo" }),
+  ...recipe("catfish-pepper-soup", "pepper", { 2: "stock", 4: "pepper" }),
+  ...recipe("zobo", "zobo", { 2: "simmer", 4: "zobo" }),
+  category("soups-and-stews", "egusi"),
+  category("rice-dishes", "jollof"),
+  category("swallow", "poundo"),
+  category("small-chops-and-snacks", "puff"),
+  category("breakfast", "akara"),
+  category("drinks", "zobo"),
+  category("desserts", "chinchin"),
 ];
 
 /** CSS radial-gradient percentages are of the distance to the farthest corner. */
