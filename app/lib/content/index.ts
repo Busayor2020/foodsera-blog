@@ -179,3 +179,17 @@ export function getRelatedRecipes(
     .slice(0, limit)
     .map(({ r }) => r);
 }
+
+/** The time limit for "Quick and easy" and the recipe index time filter. */
+export const QUICK_MINUTES = 30;
+
+/** Recipes of 30 minutes or less, most popular first. */
+export function getQuickRecipes(
+  limit: number,
+  { exclude = [], content }: { exclude?: string[]; content?: LoadOptions } = {},
+): Recipe[] {
+  const quick = getAllRecipes(content).filter(
+    (r) => r.totalMinutes <= QUICK_MINUTES && !exclude.includes(r.slug),
+  );
+  return rankPopular(quick).slice(0, limit);
+}

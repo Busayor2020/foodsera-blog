@@ -101,6 +101,7 @@
   --color-ugu-ink: #3d4a3a;
   --color-leaf: #3e8a3e;
   --color-pepper: #a3161b;
+  --color-cocoa: #6b3a1e;
   --color-cream: #fbf5ea;
   --color-paper: #fffdf8;
   --color-sand: #f6ebd6;
@@ -171,6 +172,13 @@
   --text-card-title--line-height: 1.1;
   --text-title: clamp(34px, 5vw, 52px);
   --text-title--line-height: 1.1;
+  /* Homepage sizes from design/Home.dc.html */
+  --text-hero: clamp(36px, 5vw, 58px);
+  --text-hero--line-height: 1.05;
+  --text-band: clamp(30px, 4vw, 44px);
+  --text-band--line-height: 1.1;
+  --text-region: 28px;
+  --text-region--line-height: 1.1;
 
   --tracking-eyebrow: 0.08em;
   --tracking-label: 0.1em;

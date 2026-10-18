@@ -1,5 +1,6 @@
 ---
 title: Soft Puff-Puff
+teaser: "Golden, fluffy and just sweet enough. The first thing to go from any small chops tray."
 slug: puff-puff
 description: Sweet, fluffy fried dough balls with a golden outside and a soft, airy middle. The small chop every party tray needs.
 category: small-chops-and-snacks

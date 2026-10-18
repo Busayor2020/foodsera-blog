@@ -1,6 +1,7 @@
 ---
 title: Smoky Party Jollof Rice
 shortTitle: Party Jollof Rice
+teaser: "Red, smoky and every grain separate. The pot that makes it a party."
 slug: jollof-rice
 description: Long-grain rice cooked slowly in a rich tomato and pepper base until every grain is red, separate and lightly smoky from the bottom of the pot.
 category: rice-dishes

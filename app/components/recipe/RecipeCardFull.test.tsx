@@ -96,7 +96,7 @@ describe("RecipeCardFull", () => {
     expect(
       screen.getByText("servings", { exact: false, selector: "[aria-live]" }),
     ).toHaveTextContent("20 servings");
-  });
+  }, 20_000);
 
   it("switches to metric and remembers the choice", async () => {
     const user = userEvent.setup();

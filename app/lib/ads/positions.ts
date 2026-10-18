@@ -3,6 +3,10 @@
 // what renders there.
 
 export const AD_POSITIONS = [
+  "home-after-hero",
+  "home-popular-infeed",
+  "home-after-popular",
+  "home-after-regions",
   "recipe-after-hero",
   "recipe-after-explained",
   "recipe-steps-mid",

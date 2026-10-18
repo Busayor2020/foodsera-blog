@@ -97,7 +97,9 @@ describe("recipe page", () => {
     const placed = [...document.querySelectorAll("[data-ad-position]")].map(
       (el) => el.getAttribute("data-ad-position"),
     );
-    expect([...placed].sort()).toEqual([...AD_POSITIONS].sort());
+    expect([...placed].sort()).toEqual(
+      AD_POSITIONS.filter((name) => name.startsWith("recipe-")).sort(),
+    );
   });
 
   it("never puts the mid-method ad between a step's photo and its text", async () => {

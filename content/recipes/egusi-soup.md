@@ -1,6 +1,7 @@
 ---
 title: Egusi Soup with Ugu and Assorted Meat
 shortTitle: Egusi Soup
+teaser: "Soft melon seed lumps, rich palm oil and bright ugu. The party pot everyone asks you to bring, made easy."
 slug: egusi-soup
 description: Rich Nigerian melon seed soup with soft lumps, palm oil, assorted meat and fresh ugu leaves.
 category: soups-and-stews
