@@ -6,6 +6,17 @@ export interface Term {
   name: string;
 }
 
+export interface Category extends Term {
+  /** Photo for the homepage "Browse by category" tile. */
+  image?: string;
+  imageAlt?: string;
+}
+
+export interface Region extends Term {
+  /** For example "Efo riro, amala and ewedu, ofada stew". */
+  dishes?: string;
+}
+
 export type Difficulty = "easy" | "medium" | "hard";
 
 export interface Amount {
@@ -84,6 +95,8 @@ export interface Recipe {
   slug: string;
   title: string;
   shortTitle?: string;
+  /** One punchy line for the homepage hero. Falls back to description. */
+  teaser?: string;
   /** Overrides the default "{short title} Recipe | Foodsera" title tag. */
   seoTitle?: string;
   description: string;

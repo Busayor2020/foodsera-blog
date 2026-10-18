@@ -8,10 +8,12 @@ import type { z } from "zod";
 import {
   formatPath,
   recipeFrontmatterSchema,
+  categoryListSchema,
+  regionListSchema,
   termListSchema,
   type RecipeFrontmatter,
 } from "./schema";
-import type { Recipe, Term } from "./types";
+import type { Category, Recipe, Region, Term } from "./types";
 
 export interface ContentProblem {
   file: string;
@@ -54,8 +56,8 @@ export interface LoadOptions {
 
 export interface ContentStore {
   recipes: Recipe[];
-  categories: Term[];
-  regions: Term[];
+  categories: Category[];
+  regions: Region[];
   occasions: Term[];
 }
 
@@ -91,7 +93,10 @@ export function loadContent({
     }
   };
 
-  const loadTerms = (name: string): Term[] => {
+  const loadTerms = <T extends Term>(
+    name: string,
+    listSchema: z.ZodType<T[]>,
+  ): T[] => {
     const path = join(contentDir, `${name}.json`);
     const file = display(path);
     let raw: unknown;
@@ -104,7 +109,7 @@ export function loadContent({
       });
       return [];
     }
-    const result = termListSchema.safeParse(normalizeText(raw));
+    const result = listSchema.safeParse(normalizeText(raw));
     if (!result.success) {
       addIssues(file, result.error.issues);
       return [];
@@ -123,9 +128,19 @@ export function loadContent({
     return result.data;
   };
 
-  const categories = loadTerms("categories");
-  const regions = loadTerms("regions");
-  const occasions = loadTerms("occasions");
+  const categories = loadTerms("categories", categoryListSchema);
+  const regions = loadTerms("regions", regionListSchema);
+  const occasions = loadTerms("occasions", termListSchema);
+
+  categories.forEach((category, i) => {
+    if (category.image && !existsSync(join(publicDir, category.image))) {
+      problems.push({
+        file: display(join(contentDir, "categories.json")),
+        field: `[${i}].image`,
+        message: `file not found: ${display(join(publicDir, category.image))}`,
+      });
+    }
+  });
 
   const slugsOf = (terms: Term[]) => terms.map((t) => t.slug);
   const schema = recipeFrontmatterSchema({

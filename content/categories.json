@@ -1,9 +1,44 @@
 [
-  { "slug": "soups-and-stews", "name": "Soups & Stews" },
-  { "slug": "rice-dishes", "name": "Rice Dishes" },
-  { "slug": "swallow", "name": "Swallow" },
-  { "slug": "small-chops-and-snacks", "name": "Small Chops & Snacks" },
-  { "slug": "breakfast", "name": "Breakfast" },
-  { "slug": "drinks", "name": "Drinks" },
-  { "slug": "desserts", "name": "Desserts" }
+  {
+    "slug": "soups-and-stews",
+    "name": "Soups & Stews",
+    "image": "/images/categories/soups-and-stews.svg",
+    "imageAlt": "Egusi soup"
+  },
+  {
+    "slug": "rice-dishes",
+    "name": "Rice Dishes",
+    "image": "/images/categories/rice-dishes.svg",
+    "imageAlt": "Jollof rice"
+  },
+  {
+    "slug": "swallow",
+    "name": "Swallow",
+    "image": "/images/categories/swallow.svg",
+    "imageAlt": "Pounded yam"
+  },
+  {
+    "slug": "small-chops-and-snacks",
+    "name": "Small Chops & Snacks",
+    "image": "/images/categories/small-chops-and-snacks.svg",
+    "imageAlt": "Puff-puff"
+  },
+  {
+    "slug": "breakfast",
+    "name": "Breakfast",
+    "image": "/images/categories/breakfast.svg",
+    "imageAlt": "Akara"
+  },
+  {
+    "slug": "drinks",
+    "name": "Drinks",
+    "image": "/images/categories/drinks.svg",
+    "imageAlt": "Zobo drink"
+  },
+  {
+    "slug": "desserts",
+    "name": "Desserts",
+    "image": "/images/categories/desserts.svg",
+    "imageAlt": "Chin chin"
+  }
 ]

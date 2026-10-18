@@ -94,6 +94,25 @@ const nutrientAmount = z
 export const termSchema = z.strictObject({ slug, name: text });
 export const termListSchema = z.array(termSchema).min(1);
 
+/** A category, with the photo for its "Browse by category" tile. */
+export const categoryListSchema = z
+  .array(
+    z
+      .strictObject({
+        slug,
+        name: text,
+        image: imagePath.optional(),
+        imageAlt: text.optional(),
+      })
+      .refine(withImageAlt, imageAltRequired),
+  )
+  .min(1);
+
+/** A region, with the dishes its homepage tile lists. */
+export const regionListSchema = z
+  .array(z.strictObject({ slug, name: text, dishes: text.optional() }))
+  .min(1);
+
 export interface KnownTerms {
   categories: readonly string[];
   regions: readonly string[];
@@ -116,6 +135,7 @@ export const recipeFrontmatterSchema = (terms: KnownTerms) =>
   .strictObject({
     title: text,
     shortTitle: text.optional(),
+    teaser: text.optional(),
     seoTitle: text.max(70, "must be 70 characters or fewer").optional(),
     slug,
     description: text,

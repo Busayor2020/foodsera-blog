@@ -1,8 +1,32 @@
 [
-  { "slug": "yoruba", "name": "Yoruba" },
-  { "slug": "igbo", "name": "Igbo" },
-  { "slug": "hausa-northern", "name": "Hausa / Northern" },
-  { "slug": "niger-delta", "name": "Niger Delta" },
-  { "slug": "edo", "name": "Edo" },
-  { "slug": "efik-ibibio", "name": "Efik / Ibibio" }
+  {
+    "slug": "yoruba",
+    "name": "Yoruba",
+    "dishes": "Efo riro, amala and ewedu, ofada stew, gbegiri"
+  },
+  {
+    "slug": "igbo",
+    "name": "Igbo",
+    "dishes": "Ofe onugbu, oha soup, abacha, nkwobi"
+  },
+  {
+    "slug": "hausa-northern",
+    "name": "Hausa / Northern",
+    "dishes": "Suya, tuwo shinkafa, miyan kuka, masa"
+  },
+  {
+    "slug": "niger-delta",
+    "name": "Niger Delta",
+    "dishes": "Banga soup, fisherman soup, starch, plantain pottage"
+  },
+  {
+    "slug": "edo",
+    "name": "Edo",
+    "dishes": "Owo soup, black soup, groundnut soup"
+  },
+  {
+    "slug": "efik-ibibio",
+    "name": "Efik / Ibibio",
+    "dishes": "Afang, edikang ikong, atama soup, ekpang nkukwo"
+  }
 ]

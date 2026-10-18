@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   ContentError,
   getAllRecipes,
+  getCategories,
   getContentPaths,
   getFeaturedRecipe,
   getOccasions,
@@ -10,6 +11,7 @@ import {
   getRecipe,
   getRelatedRecipes,
   getRegions,
+  getSiteNav,
   getSampleRecipeSlugs,
   toRecipeSummary,
 } from "./index";
@@ -629,5 +631,92 @@ describe("getRelatedRecipes", () => {
       getRelatedRecipes(egusi, 4, { content }).map((r) => r.slug),
     ).toEqual(["same-both", "same-category", "same-region", "unrelated"]);
     expect(getRelatedRecipes(egusi, 2, { content })).toHaveLength(2);
+  });
+});
+
+describe("category and region fields", () => {
+  it("accepts a category image with alt text and region dishes", () => {
+    const options = makeFixture({
+      recipes: [],
+      images: ["/images/categories/soups-and-stews.svg"],
+      terms: {
+        categories: [
+          {
+            slug: "soups-and-stews",
+            name: "Soups & Stews",
+            image: "/images/categories/soups-and-stews.svg",
+            imageAlt: "Egusi soup",
+          },
+        ],
+        regions: [{ slug: "yoruba", name: "Yoruba", dishes: "Efo riro, amala" }],
+      },
+    });
+    expect(getCategories(options)[0].image).toBe("/images/categories/soups-and-stews.svg");
+    expect(getRegions(options)[0].dishes).toBe("Efo riro, amala");
+  });
+
+  it("rejects a category image that doesn't exist or has no alt text", () => {
+    const problems = problemsFor({
+      recipes: [],
+      terms: {
+        categories: [
+          { slug: "a", name: "A", image: "/images/categories/missing.svg", imageAlt: "A" },
+          { slug: "b", name: "B", image: "/images/categories/b.svg" },
+        ],
+      },
+      images: ["/images/categories/b.svg"],
+    });
+    expect(problems).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/^categories.json \[1\].imageAlt: is required when there is an image/),
+      ]),
+    );
+    const missing = problemsFor({
+      recipes: [],
+      terms: {
+        categories: [
+          { slug: "a", name: "A", image: "/images/categories/missing.svg", imageAlt: "A" },
+        ],
+      },
+    });
+    expect(missing).toEqual([
+      expect.stringMatching(/^categories.json \[0\].image: file not found/),
+    ]);
+  });
+
+  it("rejects unknown keys on regions", () => {
+    const problems = problemsFor({
+      recipes: [],
+      terms: { regions: [{ slug: "yoruba", name: "Yoruba", colour: "red" }] },
+    });
+    expect(problems.some((p) => p.startsWith("regions.json [0]: Unrecognized key"))).toBe(true);
+  });
+
+  it("keeps the menu data to slug and name", () => {
+    const nav = getSiteNav();
+    expect(Object.keys(nav.categories[0])).toEqual(["slug", "name"]);
+    expect(Object.keys(nav.regions[0])).toEqual(["slug", "name"]);
+  });
+});
+
+describe("the sample content", () => {
+  const recipes = getAllRecipes();
+
+  it("has at least two recipes of 30 minutes or less", () => {
+    expect(recipes.filter((r) => r.totalMinutes <= 30).length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("has at least one vegetarian recipe", () => {
+    expect(recipes.some((r) => r.vegetarian)).toBe(true);
+  });
+
+  it("spreads across categories and regions", () => {
+    expect(new Set(recipes.map((r) => r.category.slug)).size).toBeGreaterThanOrEqual(4);
+    expect(new Set(recipes.map((r) => r.region.slug)).size).toBeGreaterThanOrEqual(3);
+  });
+
+  it("gives every category a tile image and every region its dishes", () => {
+    expect(getCategories().every((c) => c.image && c.imageAlt)).toBe(true);
+    expect(getRegions().every((r) => r.dishes)).toBe(true);
   });
 });

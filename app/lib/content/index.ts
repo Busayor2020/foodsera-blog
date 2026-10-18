@@ -3,7 +3,9 @@ import { join } from "node:path";
 import { categoryPath, occasionPath, recipePath, regionPath } from "../paths";
 
 import { loadContent, type ContentStore, type LoadOptions } from "./load";
-import type { Recipe, RecipeSummary, SiteNav, Term } from "./types";
+import type { Category,
+  Recipe, RecipeSummary, Region,
+  SiteNav, Term } from "./types";
 
 // The only module that knows where content comes from. Everything else asks
 // these functions, so the source can later become a headless CMS.
@@ -45,11 +47,11 @@ export function getRecipe(
   return getAllRecipes(options).find((r) => r.slug === slug);
 }
 
-export function getCategories(options?: LoadOptions): Term[] {
+export function getCategories(options?: LoadOptions): Category[] {
   return getContent(options).categories;
 }
 
-export function getRegions(options?: LoadOptions): Term[] {
+export function getRegions(options?: LoadOptions): Region[] {
   return getContent(options).regions;
 }
 
@@ -59,7 +61,13 @@ export function getOccasions(options?: LoadOptions): Term[] {
 
 export function getSiteNav(options?: LoadOptions): SiteNav {
   const { categories, regions, occasions } = getContent(options);
-  return { categories, regions, occasions };
+  // Menus only need the slug and name, and this ships with every page.
+  const plain = (terms: Term[]) => terms.map(({ slug, name }) => ({ slug, name }));
+  return {
+    categories: plain(categories),
+    regions: plain(regions),
+    occasions: plain(occasions),
+  };
 }
 
 /** "Recipe of the week": the recipe marked featured, or else the newest. */

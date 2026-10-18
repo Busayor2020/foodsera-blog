@@ -91,6 +91,7 @@ Recipe frontmatter, following the fields the design shows. The build must fail o
 ```yaml
 title: Egusi Soup with Ugu and Assorted Meat
 shortTitle: Egusi Soup        # optional: recipe card heading and breadcrumbs (cards use title)
+teaser: Soft melon seed lumps, rich palm oil and bright ugu.   # optional: homepage hero line, falls back to description
 seoTitle: Egusi Soup Recipe (Nigerian Melon Seed Soup)   # optional, max 70 chars: overrides the title tag
 slug: egusi-soup              # plain ASCII kebab-case, same as the filename
 description: One or two sentences for cards and the meta description
@@ -142,6 +143,8 @@ notes:                        # optional: the Notes box in the recipe card
 nutritionNote: estimated, per serving, soup only   # optional
 nutrition: { calories: 610, protein: 38g, fat: 46g, carbs: 12g, fibre: 4g, sodium: 980mg }   # optional, every field optional
 ```
+
+`content/categories.json` entries are `{ slug, name, image?, imageAlt? }` (the image is the homepage tile photo and must exist in `public/`). `content/regions.json` entries are `{ slug, name, dishes? }` (dishes is the list on the homepage region tile). `content/occasions.json` entries are `{ slug, name }`.
 
 The Markdown body is the short intro story. Keep it skimmable. It may link to other recipes (`[jollof rice](/recipes/jollof-rice)`); the build fails if a `/recipes/` link points to a recipe that doesn't exist. Markdown is rendered to HTML inside `lib/content` only, so the Markdown library never reaches the browser bundle.
 
@@ -245,7 +248,7 @@ Work through these in order and tick each box here once its checks pass.
 - [x] 2. Content layer: zod schema, loaders, 3 sample recipes (egusi soup, jollof rice, puff-puff) with placeholder images
 - [x] 3. Recipe page, complete, with print view, servings adjuster and JSON-LD
 - [ ] 4. Homepage
-- [ ] 5. Category, region, occasion, search and recipe index pages. Search ignores diacritics and tone marks; term pages with fewer than 3 recipes get noindex, no sitemap entry and no ads (see Page features)
+- [ ] 5. Category, region, occasion, search and recipe index pages. The recipe index supports `?time=30` (recipes of 30 minutes or less), which the homepage "More quick recipes" link uses. Search ignores diacritics and tone marks; term pages with fewer than 3 recipes get noindex, no sitemap entry and no ads (see Page features)
 - [ ] 6. About, contact, privacy, cookies, terms
 - [ ] 7. Ads system in placeholder mode on every allowed page, matching the ad prototype
 - [ ] 8. SEO: meta on every route, sitemap, robots, rich results check
