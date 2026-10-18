@@ -2,7 +2,7 @@ import type { Recipe } from "~/lib/content/types";
 import { toIsoDuration } from "~/lib/format/duration";
 import { ingredientForSchema } from "~/lib/format/quantity";
 import { recipePath } from "~/lib/paths";
-import { SITE_NAME, SITE_URL } from "~/lib/site";
+import { SITE_NAME, SITE_URL, SOCIAL_LINKS } from "~/lib/site";
 
 import { absoluteUrl } from "./meta";
 
@@ -129,5 +129,43 @@ export function breadcrumbJsonLd(crumbs: Crumb[]): JsonLd {
       if (crumb.path) item.item = absoluteUrl(crumb.path);
       return item;
     }),
+  };
+}
+
+/** The Organization logo: a 512x512 PNG made by scripts/brand-images.ts. */
+export const LOGO = { path: "/logo.png", width: 512, height: 512 };
+
+/** schema.org Organization for the homepage. sameAs lists only configured social links. */
+export function organizationJsonLd(
+  socialLinks: { href: string }[] = SOCIAL_LINKS,
+): JsonLd {
+  const data: JsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    url: `${SITE_URL}/`,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl(LOGO.path),
+      width: LOGO.width,
+      height: LOGO.height,
+    },
+  };
+  const sameAs = socialLinks.map((link) => link.href).filter(Boolean);
+  if (sameAs.length > 0) data.sameAs = sameAs;
+  return data;
+}
+
+/** schema.org WebSite for the homepage. */
+export function websiteJsonLd(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: SITE_NAME,
+    url: `${SITE_URL}/`,
+    inLanguage: "en",
+    publisher: { "@id": `${SITE_URL}/#organization` },
   };
 }

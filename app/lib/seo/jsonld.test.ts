@@ -4,7 +4,16 @@ import { z } from "zod";
 import { getAllRecipes, getRecipe } from "~/lib/content";
 import type { Recipe } from "~/lib/content/types";
 
-import { breadcrumbJsonLd, recipeJsonLd, recipeTitle } from "./jsonld";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+import {
+  breadcrumbJsonLd,
+  organizationJsonLd,
+  recipeJsonLd,
+  recipeTitle,
+  websiteJsonLd,
+} from "./jsonld";
 
 // Google's Recipe structured-data rules, as a schema:
 // https://developers.google.com/search/docs/appearance/structured-data/recipe
@@ -217,5 +226,54 @@ describe("recipeTitle", () => {
   it("gives every recipe a different title", () => {
     const titles = getAllRecipes().map(recipeTitle);
     expect(new Set(titles).size).toBe(titles.length);
+  });
+});
+
+describe("organizationJsonLd", () => {
+  it("names Foodsera with its PNG logo", () => {
+    const data = organizationJsonLd([]);
+    expect(data).toEqual({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://foodsera.com/#organization",
+      name: "Foodsera",
+      url: "https://foodsera.com/",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://foodsera.com/logo.png",
+        width: 512,
+        height: 512,
+      },
+    });
+  });
+
+  it("lists only social links that have a URL", () => {
+    const data = organizationJsonLd([
+      { href: "https://instagram.com/foodsera" },
+      { href: "" },
+    ]);
+    expect(data.sameAs).toEqual(["https://instagram.com/foodsera"]);
+    expect(organizationJsonLd()).not.toHaveProperty("sameAs");
+  });
+
+  it("points at a logo file that exists and is at least 112px square", () => {
+    const png = readFileSync(join(process.cwd(), "public", "logo.png"));
+    // PNG width and height live at bytes 16 and 20 of the IHDR chunk.
+    expect(png.readUInt32BE(16)).toBeGreaterThanOrEqual(112);
+    expect(png.readUInt32BE(20)).toBe(png.readUInt32BE(16));
+  });
+});
+
+describe("websiteJsonLd", () => {
+  it("describes the site and links it to the organization", () => {
+    expect(websiteJsonLd()).toEqual({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://foodsera.com/#website",
+      name: "Foodsera",
+      url: "https://foodsera.com/",
+      inLanguage: "en",
+      publisher: { "@id": "https://foodsera.com/#organization" },
+    });
   });
 });
