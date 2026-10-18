@@ -12,7 +12,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
     <>
       <a
         href="#main"
-        className="absolute -left-[9999px] z-200 bg-charcoal px-3.5 py-2.5 text-white no-underline hover:text-white focus:top-2 focus:left-4"
+        className="absolute -left-[9999px] z-200 bg-charcoal px-3.5 py-2.5 text-white no-underline hover:text-white focus:top-2 focus:left-4 print:hidden"
       >
         Skip to content
       </a>

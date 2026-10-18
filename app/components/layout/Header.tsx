@@ -1,6 +1,6 @@
 import { ChevronDown, Menu, Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Form, Link, useLocation } from "react-router";
+import { Form, Link, useLocation, useMatches } from "react-router";
 
 import type { RecipeSummary, SiteNav } from "~/lib/content/types";
 import { categoryPath, searchPath } from "~/lib/paths";
@@ -15,6 +15,21 @@ interface HeaderProps {
   nav: SiteNav;
   /** "Recipe of the week", shown in the mega menu. */
   featured?: RecipeSummary;
+}
+
+interface NavHandle {
+  /** Lets a route pick the underlined nav item from its loader data. */
+  navSection?: (loaderData: unknown) => string | null | undefined;
+}
+
+/** The nav section the deepest route asks for, if any (recipe pages: their category). */
+function useRouteNavSection(): string | null | undefined {
+  const matches = useMatches();
+  for (const match of [...matches].reverse()) {
+    const handle = match.handle as NavHandle | undefined;
+    if (handle?.navSection) return handle.navSection(match.loaderData);
+  }
+  return undefined;
 }
 
 /** Which main-nav item is underlined for a given URL. */
@@ -47,7 +62,7 @@ export function Header({ nav, featured }: HeaderProps) {
   const close = () => setOpened(null);
 
   const scrolled = useScrolledPast(48);
-  const section = getNavSection(pathname);
+  const section = useRouteNavSection() ?? getNavSection(pathname);
 
   const megaButtonRef = useRef<HTMLButtonElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
@@ -92,9 +107,9 @@ export function Header({ nav, featured }: HeaderProps) {
     <>
       {/* The header is fixed, so this holds its full height in the page.
           Shrinking on scroll then never moves the content below. */}
-      <div aria-hidden="true" className="h-header-height" />
+      <div aria-hidden="true" className="h-header-height print:hidden" />
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b border-line bg-cream transition-shadow duration-200 ${scrolled ? "shadow-header" : ""}`}
+        className={`fixed inset-x-0 top-0 z-50 border-b border-line bg-cream transition-shadow duration-200 print:hidden ${scrolled ? "shadow-header" : ""}`}
       >
         <div
           className={`mx-auto flex max-w-header items-center gap-4 px-4 transition-[padding] duration-200 ${scrolled ? "py-1.5" : "py-3.5"}`}

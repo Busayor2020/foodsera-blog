@@ -98,6 +98,7 @@
   --color-ugu-deep: #2f5a34;
   --color-ugu-soft: #e3eedf;
   --color-ugu-line: #bfd6b8;
+  --color-ugu-ink: #3d4a3a;
   --color-leaf: #3e8a3e;
   --color-pepper: #a3161b;
   --color-cream: #fbf5ea;
@@ -161,6 +162,15 @@
   --text-h2--line-height: 1.15;
   --text-display: clamp(36px, 5vw, 54px);
   --text-display--line-height: 1.05;
+  /* Recipe page sizes from design/Main.dc.html */
+  --text-step: 23px;
+  --text-step--line-height: 1.25;
+  --text-4xl: 32px;
+  --text-4xl--line-height: 1.15;
+  --text-card-title: 34px;
+  --text-card-title--line-height: 1.1;
+  --text-title: clamp(34px, 5vw, 52px);
+  --text-title--line-height: 1.1;
 
   --tracking-eyebrow: 0.08em;
   --tracking-label: 0.1em;
@@ -247,6 +257,13 @@
     border-radius: var(--radius-xs);
   }
 
+  /* Smooth jumps (Jump to Recipe) only for readers who haven't asked for less motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     ::before,
@@ -255,6 +272,26 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+    }
+  }
+
+  /*
+   * Print. Recipe pages mark everything except the recipe card print:hidden;
+   * this sets the paper basics.
+   */
+  @media print {
+    @page {
+      margin: 14mm;
+    }
+    html,
+    body {
+      background: white;
+      color: black;
+      font-size: 12pt;
+    }
+    li,
+    figure {
+      break-inside: avoid;
     }
   }
 }
