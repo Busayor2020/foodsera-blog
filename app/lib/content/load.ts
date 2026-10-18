@@ -127,6 +127,13 @@ export function loadContent({
   const regions = loadTerms("regions");
   const occasions = loadTerms("occasions");
 
+  const slugsOf = (terms: Term[]) => terms.map((t) => t.slug);
+  const schema = recipeFrontmatterSchema({
+    categories: slugsOf(categories),
+    regions: slugsOf(regions),
+    occasions: slugsOf(occasions),
+  });
+
   // Parse each recipe file on its own first.
   const recipesDir = join(contentDir, "recipes");
   const files = existsSync(recipesDir)
@@ -159,7 +166,7 @@ export function loadContent({
       });
       continue;
     }
-    const result = recipeFrontmatterSchema.safeParse(front);
+    const result = schema.safeParse(front);
     if (!result.success) {
       addIssues(file, result.error.issues);
       continue;
@@ -182,9 +189,6 @@ export function loadContent({
   const recipeSlugs = new Set(files.map((f) => basename(f, ".md")));
   const featured = parsed.filter((p) => p.data.featured);
 
-  const unknownTerm = (kind: string, value: string, terms: Term[]) =>
-    `unknown ${kind} "${value}". Must be one of: ${terms.map((t) => t.slug).join(", ")}`;
-
   const recipes: Recipe[] = [];
   const slugsSeen = new Map<string, string>();
 
@@ -200,16 +204,9 @@ export function loadContent({
     if (other) problem("slug", `"${data.slug}" is also used by ${other}`);
     slugsSeen.set(data.slug, file);
 
+    // The schema has already checked these exist.
     const category = categoryBySlug.get(data.category);
-    if (!category)
-      problem("category", unknownTerm("category", data.category, categories));
     const region = regionBySlug.get(data.region);
-    if (!region) problem("region", unknownTerm("region", data.region, regions));
-    data.occasions.forEach((slug, i) => {
-      if (!occasionBySlug.has(slug)) {
-        problem(`occasions[${i}]`, unknownTerm("occasion", slug, occasions));
-      }
-    });
 
     const checkImage = (field: string, src: string | undefined) => {
       if (src && !existsSync(join(publicDir, src))) {

@@ -94,15 +94,33 @@ const nutrientAmount = z
 export const termSchema = z.strictObject({ slug, name: text });
 export const termListSchema = z.array(termSchema).min(1);
 
-export const recipeFrontmatterSchema = z
+export interface KnownTerms {
+  categories: readonly string[];
+  regions: readonly string[];
+  occasions: readonly string[];
+}
+
+/** A slug that must be one of the terms in content/<kind>s.json. */
+const termSlug = (kind: string, known: readonly string[]) =>
+  slug.refine((value) => known.includes(value), {
+    error: (issue) =>
+      `unknown ${kind} "${String(issue.input)}". Must be one of: ${known.join(", ")}`,
+  });
+
+/**
+ * Built from the known terms, so an unknown category, region or occasion is
+ * reported in the same pass as every other field problem.
+ */
+export const recipeFrontmatterSchema = (terms: KnownTerms) =>
+  z
   .strictObject({
     title: text,
     shortTitle: text.optional(),
     slug,
     description: text,
-    category: slug,
-    region: slug,
-    occasions: z.array(slug).default([]),
+    category: termSlug("category", terms.categories),
+    region: termSlug("region", terms.regions),
+    occasions: z.array(termSlug("occasion", terms.occasions)).default([]),
     heroImage: imagePath,
     heroImageAlt: text,
     prepMinutes: minutes,
@@ -161,7 +179,9 @@ export const recipeFrontmatterSchema = z
     path: ["updatedAt"],
   });
 
-export type RecipeFrontmatter = z.output<typeof recipeFrontmatterSchema>;
+export type RecipeFrontmatter = z.output<
+  ReturnType<typeof recipeFrontmatterSchema>
+>;
 
 /** Turns a zod issue path into "steps[4].image". */
 export function formatPath(path: readonly PropertyKey[]): string {
