@@ -9,12 +9,12 @@ import {
 } from "../paths";
 
 import { loadContent, type ContentStore, type LoadOptions } from "./load";
+import { toRecipeSummary } from "./summary";
 import type {
   Category,
   ListRecipe,
   Occasion,
   Recipe,
-  RecipeSummary,
   Region,
   SiteNav,
   Term,
@@ -27,6 +27,7 @@ import type {
 // these functions, so the source can later become a headless CMS.
 
 export { ContentError } from "./load";
+export { toRecipeSummary };
 
 let cache: ContentStore | undefined;
 
@@ -131,22 +132,6 @@ export function getPopularRecipes(
     (r) => !exclude.includes(r.slug),
   );
   return rankPopular(recipes).slice(0, limit);
-}
-
-export function toRecipeSummary(recipe: Recipe): RecipeSummary {
-  return {
-    slug: recipe.slug,
-    title: recipe.title,
-    shortTitle: recipe.shortTitle,
-    description: recipe.description,
-    category: recipe.category,
-    totalMinutes: recipe.totalMinutes,
-    servings: recipe.servings,
-    difficulty: recipe.difficulty,
-    rating: recipe.rating,
-    heroImage: recipe.heroImage,
-    heroImageAlt: recipe.heroImageAlt,
-  };
 }
 
 /** Cards for a filterable list, most popular first. */
