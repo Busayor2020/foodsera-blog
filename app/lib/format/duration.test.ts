@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { formatMinutes } from "./duration";
+import { formatMinutes, toIsoDuration } from "./duration";
 
 describe("formatMinutes", () => {
   it.each([
@@ -14,5 +14,17 @@ describe("formatMinutes", () => {
     [135, "2 hr 15 min"],
   ])("%i minutes is %s", (minutes, expected) => {
     expect(formatMinutes(minutes)).toBe(expected);
+  });
+});
+
+describe("toIsoDuration", () => {
+  it.each([
+    [0, "PT0M"],
+    [25, "PT25M"],
+    [60, "PT1H"],
+    [80, "PT1H20M"],
+    [135, "PT2H15M"],
+  ])("%i minutes is %s", (minutes, expected) => {
+    expect(toIsoDuration(minutes)).toBe(expected);
   });
 });
