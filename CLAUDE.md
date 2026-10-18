@@ -243,7 +243,7 @@ Work through these in order and tick each box here once its checks pass.
 
 - [x] 1. Foundation: ESLint, Prettier, Vitest scripts; Tailwind tokens from the design; fonts; root layout; Header, MegaMenu, MobileMenu, Footer, Breadcrumbs; 404
 - [x] 2. Content layer: zod schema, loaders, 3 sample recipes (egusi soup, jollof rice, puff-puff) with placeholder images
-- [ ] 3. Recipe page, complete, with print view, servings adjuster and JSON-LD
+- [x] 3. Recipe page, complete, with print view, servings adjuster and JSON-LD
 - [ ] 4. Homepage
 - [ ] 5. Category, region, occasion, search and recipe index pages. Search ignores diacritics and tone marks; term pages with fewer than 3 recipes get noindex, no sitemap entry and no ads (see Page features)
 - [ ] 6. About, contact, privacy, cookies, terms
