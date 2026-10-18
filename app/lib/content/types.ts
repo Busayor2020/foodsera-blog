@@ -163,6 +163,14 @@ export interface RecipeSummary {
   heroImageAlt: string;
 }
 
+/** A card on a filterable list, with what the filters and sorting need. */
+export interface ListRecipe extends RecipeSummary {
+  region: Term;
+  vegetarian: boolean;
+  /** Place in the site's popularity order. 0 is the most popular. */
+  popularity: number;
+}
+
 export interface SiteNav {
   categories: Term[];
   regions: Term[];

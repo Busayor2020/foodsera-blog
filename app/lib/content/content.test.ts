@@ -14,6 +14,7 @@ import {
   getRegions,
   getSiteNav,
   getSampleRecipeSlugs,
+  toListRecipes,
   toRecipeSummary,
 } from "./index";
 import { loadContent } from "./load";
@@ -562,6 +563,19 @@ describe("loaders", () => {
       heroImage: "/images/recipes/old-rated/hero.svg",
       heroImageAlt: "A pot of soup",
     });
+  });
+
+  it("makes list cards in popularity order, with region, diet and rank", () => {
+    const cards = toListRecipes(getAllRecipes(content));
+    expect(cards.map((c) => [c.slug, c.popularity])).toEqual([
+      ["old-rated", 0],
+      ["few-reviews", 1],
+      ["unrated-featured", 2],
+      ["unrated-new", 3],
+      ["unrated-old", 4],
+    ]);
+    expect(cards[0].region).toEqual({ slug: "yoruba", name: "Yoruba" });
+    expect(cards[0].vegetarian).toBe(false);
   });
 
   it("builds every content URL", () => {

@@ -5,6 +5,7 @@ import { categoryPath, occasionPath, recipePath, regionPath } from "../paths";
 import { loadContent, type ContentStore, type LoadOptions } from "./load";
 import type {
   Category,
+  ListRecipe,
   Occasion,
   Recipe,
   RecipeSummary,
@@ -137,6 +138,16 @@ export function toRecipeSummary(recipe: Recipe): RecipeSummary {
     heroImage: recipe.heroImage,
     heroImageAlt: recipe.heroImageAlt,
   };
+}
+
+/** Cards for a filterable list, most popular first. */
+export function toListRecipes(recipes: Recipe[]): ListRecipe[] {
+  return rankPopular(recipes).map((recipe, popularity) => ({
+    ...toRecipeSummary(recipe),
+    region: recipe.region,
+    vegetarian: recipe.vegetarian,
+    popularity,
+  }));
 }
 
 export interface ContentPaths {
