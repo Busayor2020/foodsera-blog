@@ -32,7 +32,10 @@ export function TermPage({ page }: { page: TermPageData }) {
           <p className="max-w-160 text-lg text-ink-soft">{term.intro}</p>
         </div>
         {photos.length === 2 && (
-          <div aria-hidden="true" className="flex flex-[0_1_300px] gap-2.5">
+          <div
+            aria-hidden="true"
+            className="flex flex-[0_1_300px] items-start gap-2.5"
+          >
             {photos.map((recipe, i) => (
               <img
                 key={recipe.slug}
@@ -72,7 +75,10 @@ function ThinTermRecipes({ page }: { page: TermPageData }) {
   return (
     <>
       {page.recipes.length > 0 && (
-        <RecipeGrid recipes={page.recipes} minCard={240} />
+        <>
+          <h2 className="sr-only">{page.term.name} recipes</h2>
+          <RecipeGrid recipes={page.recipes} minCard={240} />
+        </>
       )}
       <section
         aria-labelledby="on-the-way"

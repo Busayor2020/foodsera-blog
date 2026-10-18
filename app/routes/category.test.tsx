@@ -102,6 +102,10 @@ const adsInGrid = () =>
 describe("term page", () => {
   it("shows the name, intro, breadcrumbs and the first 9 recipes", async () => {
     await renderPage(termPage());
+    // Cards are h3s, so a heading above them keeps the outline in order.
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Soups & Stews recipes" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Soups & Stews",
     );

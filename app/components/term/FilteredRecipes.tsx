@@ -86,6 +86,8 @@ export function FilteredRecipes({ page }: { page: TermPageData }) {
 
   return (
     <>
+      {/* Cards use h3, so the list needs a heading above them. */}
+      <h2 className="sr-only">{page.term.name} recipes</h2>
       <div className="flex flex-col gap-3.5 rounded-panel border border-line bg-paper px-4.5 py-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-bold">Filter recipes</span>
