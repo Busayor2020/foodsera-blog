@@ -149,3 +149,25 @@ export function getSampleRecipeSlugs(options?: LoadOptions): string[] {
     .filter((r) => r.sample)
     .map((r) => r.slug);
 }
+
+/**
+ * "You might also like": same category first, then same region, with the
+ * popularity order breaking ties. Never includes the recipe itself.
+ */
+export function getRelatedRecipes(
+  recipe: Recipe,
+  limit: number,
+  { content }: { content?: LoadOptions } = {},
+): Recipe[] {
+  const ranked = rankPopular(
+    getAllRecipes(content).filter((r) => r.slug !== recipe.slug),
+  );
+  const closeness = (r: Recipe) =>
+    (r.category.slug === recipe.category.slug ? 2 : 0) +
+    (r.region.slug === recipe.region.slug ? 1 : 0);
+  return ranked
+    .map((r, popularity) => ({ r, popularity }))
+    .sort((a, b) => closeness(b.r) - closeness(a.r) || a.popularity - b.popularity)
+    .slice(0, limit)
+    .map(({ r }) => r);
+}

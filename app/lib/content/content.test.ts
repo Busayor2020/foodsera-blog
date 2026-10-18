@@ -8,6 +8,7 @@ import {
   getOccasions,
   getPopularRecipes,
   getRecipe,
+  getRelatedRecipes,
   getRegions,
   getSampleRecipeSlugs,
   toRecipeSummary,
@@ -598,5 +599,35 @@ describe("the real terms", () => {
       "weeknight",
       "lunch-box",
     ]);
+  });
+});
+
+describe("getRelatedRecipes", () => {
+  const content = makeFixture({
+    recipes: [
+      { front: recipeFrontmatter("egusi-soup") },
+      { front: recipeFrontmatter("same-both") },
+      {
+        front: recipeFrontmatter("same-category", { region: "igbo" }),
+      },
+      {
+        front: recipeFrontmatter("same-region", { category: "rice-dishes" }),
+      },
+      {
+        front: recipeFrontmatter("unrelated", {
+          category: "rice-dishes",
+          region: "igbo",
+        }),
+      },
+    ],
+  });
+
+  it("puts the closest recipes first and leaves out the recipe itself", () => {
+    const egusi = getRecipe("egusi-soup", content);
+    if (!egusi) throw new Error("fixture recipe missing");
+    expect(
+      getRelatedRecipes(egusi, 4, { content }).map((r) => r.slug),
+    ).toEqual(["same-both", "same-category", "same-region", "unrelated"]);
+    expect(getRelatedRecipes(egusi, 2, { content })).toHaveLength(2);
   });
 });
