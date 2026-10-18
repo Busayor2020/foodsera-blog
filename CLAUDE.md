@@ -444,7 +444,7 @@ Work through these in order and tick each box here once its checks pass.
 - [x] 2. Content layer: zod schema, loaders, 3 sample recipes (egusi soup, jollof rice, puff-puff) with placeholder images
 - [x] 3. Recipe page, complete, with print view, servings adjuster and JSON-LD
 - [x] 4. Homepage
-- [ ] 5. Category, region, occasion, search and recipe index pages. The recipe index supports `?time=30` (recipes of 30 minutes or less), which the homepage "More quick recipes" link uses. Search ignores diacritics and tone marks; term pages with fewer than 3 recipes get noindex, no sitemap entry and no ads (see Page features)
+- [x] 5. Category, region, occasion, search and recipe index pages. The recipe index supports `?time=30` (recipes of 30 minutes or less), which the homepage "More quick recipes" link uses. Search ignores diacritics and tone marks; term pages with fewer than 3 recipes get noindex, no sitemap entry and no ads (see Page features)
 - [ ] 6. About, contact, privacy, cookies, terms
 - [ ] 7a. WordPress plugin core: post type, taxonomies, SCF field groups in code, export endpoint, security hardening, WP-CLI import/export, plugin tests. Import the 8 sample recipes.
 - [ ] 7b. Front end on WordPress: `CONTENT_SOURCE` switch, `content:pull`, images with `srcset`, snapshot validated by zod, Markdown and WordPress parity test.
