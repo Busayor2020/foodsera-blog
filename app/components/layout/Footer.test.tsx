@@ -35,15 +35,15 @@ describe("Footer", () => {
     expect(screen.queryByRole("link", { name: /Foodsera on/ })).toBeNull();
   });
 
-  it("confirms a newsletter sign-up", async () => {
+  it("answers a newsletter sign-up honestly while there is no backend", async () => {
     const user = userEvent.setup();
     renderWithRouter(<Footer categories={NAV.categories} socialLinks={[]} />);
 
     await user.type(screen.getByLabelText("Email address"), "ada@example.com");
     await user.click(screen.getByRole("button", { name: "Subscribe" }));
 
-    expect(screen.getByRole("status")).toHaveTextContent(
-      "Thank you. Check your inbox to confirm.",
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "The newsletter hasn't started yet",
     );
   });
 });
