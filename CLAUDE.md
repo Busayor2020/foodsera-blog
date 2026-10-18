@@ -17,7 +17,7 @@ Foodsera (foodsera.com) is a Nigerian recipe blog funded by Google AdSense, buil
 - React Router v8 in framework mode (Vite plugin) with `ssr: false` and `prerender` in `react-router.config.ts`, so every route builds to static HTML. Static output goes to `build/client`.
   - Import from `react-router` and `react-router/dom`. `react-router-dom` no longer exists in v8. If unsure about a v8 API, check reactrouter.com before guessing.
 - Tailwind CSS v4 via `@tailwindcss/vite`, design tokens in `app/styles/app.css` using `@theme`
-- Content: Markdown files with YAML frontmatter in `content/`, read at build time with `gray-matter`, validated with `zod`
+- Content: Markdown files with YAML frontmatter in `content/`, read at build time with `gray-matter`, validated with `zod`, Markdown rendered with `marked` (build time only)
 - Search: `fuse.js` over a JSON index generated at build time
 - Icons: `lucide-react`
 - Tests: Vitest + React Testing Library
@@ -86,48 +86,67 @@ Keep `lib/content` as the single place that knows where content comes from, so i
 
 ## Content model
 
-Recipe frontmatter. The build must fail on invalid content.
+Recipe frontmatter, following the fields the design shows. The build must fail on invalid content, with a message naming the file and the field. Unknown keys are errors.
 
 ```yaml
-title: Egusi Soup
-slug: egusi-soup
+title: Egusi Soup with Ugu and Assorted Meat
+shortTitle: Egusi Soup        # optional: cards and the recipe card heading
+slug: egusi-soup              # plain ASCII kebab-case, same as the filename
 description: One or two sentences for cards and the meta description
-category: soups-and-stews
-region: yoruba            # yoruba | igbo | hausa-northern | niger-delta | edo | efik-ibibio
-occasions: [party, weeknight]
+category: soups-and-stews     # slug from content/categories.json
+region: yoruba                # yoruba | igbo | hausa-northern | niger-delta | edo | efik-ibibio
+occasions: [party, weeknight] # slugs from content/occasions.json
 heroImage: /images/recipes/egusi-soup/hero.jpg
 heroImageAlt: Bowl of egusi soup with assorted meat and stockfish
-prepMinutes: 20
-cookMinutes: 45
+prepMinutes: 25
+cookMinutes: 55
 servings: 6
-difficulty: medium        # easy | medium | hard
+difficulty: medium            # easy | medium | hard
 vegetarian: false
 author: Foodsera Kitchen
 publishedAt: 2026-10-01
 updatedAt: 2026-10-15
-rating: { value: 4.8, count: 32 }
+featured: true                # optional: "Recipe of the week". At most one recipe.
+sample: true                  # optional: placeholder content. The build warns while any remain.
+rating: { value: 4.8, count: 126 }   # optional, see the aggregateRating rule under SEO
 ingredientsExplained:
-  - { local: Ugu, meaning: Fluted pumpkin leaves, substitute: Spinach or kale }
+  - { local: Iru, aka: "dawadawa, locust beans", meaning: Fermented locust beans with a deep, savoury aroma., substitute: A teaspoon of miso, or leave it out. }
 ingredients:
-  - group: Soup
+  - group: Soup               # optional group heading
     items:
-      - { qty: 2, unit: cup, name: ground egusi (melon seeds), localMeasure: about 1 derica }
+      - name: ground egusi (melon seeds)
+        us: { qty: 2, unit: cups }        # US cups view
+        metric: { qty: 250, unit: g }     # Metric view
+        localMeasure: { qty: 1, unit: derica }   # optional
+      - { name: iru (locust beans), us: { qty: 2, unit: tbsp }, metric: { qty: 25, unit: g }, optional: true }
+      - { name: "Salt, to taste" }        # no amounts
 steps:
-  - { text: Wash and season the meat, then boil until tender., image: /images/recipes/egusi-soup/step-1.jpg }
-tips: [Fry the egusi in palm oil before adding stock for a nuttier taste.]
-serveWith: [pounded-yam, eba, fufu, semo]
+  - title: Fry the egusi into lumps
+    text: Scoop the paste into the oil in spoonfuls. Leave it alone for 3 to 4 minutes...
+    short: Spoon in the paste. Leave 3 to 4 minutes, turn gently, fry 8 to 10 minutes.  # recipe card
+    image: /images/recipes/egusi-soup/step-5.jpg    # optional; needs imageAlt
+    imageAlt: Egusi lumps frying in red palm oil
+    caption: Do not stir yet. The lumps need time to set.   # optional
+tips:
+  - { kind: do, text: leave the egusi alone for 3 to 4 minutes after it goes into the oil. }
+  - { kind: avoid, text: letting the palm oil smoke. }
+serveWith:
+  - { name: Pounded yam, note: The classic pairing, image: /images/sides/pounded-yam.jpg, imageAlt: Smooth ball of pounded yam, recipe: pounded-yam }   # recipe: optional slug
 faqs:
   - { q: Can I freeze egusi soup?, a: Yes, for up to 3 months in an airtight container. }
-nutrition: { calories: 450, protein: 28g }   # optional
+nutrition: { calories: 610, protein: 38g, fat: 46g, carbs: 12g, fibre: 4g, sodium: 980mg }   # optional, every field optional
 ```
 
-The Markdown body is the short intro story. Keep it skimmable.
+The Markdown body is the short intro story. Keep it skimmable. It may link to other recipes (`[jollof rice](/recipes/jollof-rice)`); the build fails if a `/recipes/` link points to a recipe that doesn't exist. Markdown is rendered to HTML inside `lib/content` only, so the Markdown library never reaches the browser bundle.
+
+Every string is normalised to Unicode NFC when it is loaded, so the same Yoruba, Igbo or Hausa word always has the same code points. Slugs stay plain ASCII (`efo-riro`, not `ẹfọ-riro`).
 
 ## Page features
 
 - Recipe page: breadcrumbs, quick facts bar, Jump to Recipe (smooth scroll to `#recipe`), Print (print stylesheet shows only the recipe card), Ingredients Explained, step photos, tips, recipe card with servings adjuster (scales quantities, shows friendly fractions like 1½) and ingredient checkboxes, serve-with, FAQ accordion, reviews UI, related recipes, desktop sidebar.
 - Category, region and occasion pages (occasion slugs: `party`, `christmas`, `sallah`, `weeknight`, `lunch-box`, linked from the menus' "By occasion" group): filter chips (time, difficulty, region, vegetarian) and sort, synced to URL search params so filtered views can be shared. Filtering runs on the client over prerendered data.
-- Search: `/search?q=` using the prebuilt Fuse index, with a helpful empty state.
+- Term pages with fewer than 3 recipes (category, region or occasion) get `noindex`, stay out of the sitemap and show no ads. They are still prerendered, because the menus link to every term.
+- Search: `/search?q=` using the prebuilt Fuse index, with a helpful empty state. Search ignores diacritics and tone marks on both the query and the index, so "efo riro" matches "Ẹfọ riro".
 - Recipe index: A to Z, grouped by category.
 - Contact form, newsletter and reviews need a backend. Build the UI with one submit handler marked `TODO(backend)`. Do not invent a backend.
 
@@ -135,6 +154,7 @@ The Markdown body is the short intro story. Keep it skimmable.
 
 - Every route exports `meta` with a unique title (`Egusi Soup | Foodsera`), description, canonical URL on `https://foodsera.com`, Open Graph and Twitter tags.
 - Recipe pages output JSON-LD `Recipe` schema: name, image, description, author, datePublished, dateModified, prepTime, cookTime, totalTime (ISO 8601 durations), recipeYield, recipeCategory, recipeCuisine "Nigerian", recipeIngredient, recipeInstructions as HowToStep, aggregateRating, nutrition when present. Add `BreadcrumbList` on every page below home.
+- `aggregateRating` comes only from genuine reader reviews, once the reviews backend exists. Never output it from hand-entered numbers in frontmatter, and never for a `sample: true` recipe. Until then the `rating` field is for layout only.
 - Generate `sitemap.xml` at build time from all routes. `robots.txt` points to it.
 - Clean URLs: `/recipes/<slug>`, `/category/<slug>`, `/region/<slug>`, `/occasion/<slug>`. One canonical form, no trailing-slash duplicates.
 - Images: always set width and height, `loading="lazy"` except the hero (eager, `fetchpriority="high"`), WebP or AVIF with sensible sizes.
@@ -217,7 +237,7 @@ Work through these in order and tick each box here once its checks pass.
 - [ ] 2. Content layer: zod schema, loaders, 3 sample recipes (egusi soup, jollof rice, puff-puff) with placeholder images
 - [ ] 3. Recipe page, complete, with print view, servings adjuster and JSON-LD
 - [ ] 4. Homepage
-- [ ] 5. Category, region, occasion, search and recipe index pages
+- [ ] 5. Category, region, occasion, search and recipe index pages. Search ignores diacritics and tone marks; term pages with fewer than 3 recipes get noindex, no sitemap entry and no ads (see Page features)
 - [ ] 6. About, contact, privacy, cookies, terms
 - [ ] 7. Ads system in placeholder mode on every allowed page, matching the ad prototype
 - [ ] 8. SEO: meta on every route, sitemap, robots, rich results check
